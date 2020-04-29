@@ -1,0 +1,519 @@
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/poppins-bold-webfont.woff2") format("woff2");
+  src: url("../fonts/poppins-bold-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/poppins-medium-webfont.woff2") format("woff2");
+  src: url("../fonts/poppins-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/poppins-regular-webfont.woff2") format("woff2");
+  src: url("../fonts/poppins-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/poppins-semibold-webfont.woff2") format("woff2");
+  src: url("../fonts/poppins-semibold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "raleway";
+  src: url("../fonts/raleway-black-webfont.woff2") format("woff2");
+  src: url("../fonts/raleway-black-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "raleway";
+  src: url("../fonts/raleway-bold-webfont.woff2") format("woff2");
+  src: url("../fonts/raleway-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "source-sans";
+  src: url("../fonts/sourcesanspro-bold-webfont.woff2") format("woff2");
+  src: url("../fonts/sourcesanspro-bold-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "source-sans";
+  src: url("../fonts/sourcesanspro-regular-webfont.woff2") format("woff2");
+  src: url("../fonts/sourcesanspro-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: source-sans, sans-serif;
+  color: #502900;
+}
+
+h1, h2, h3, h4 {
+  font-family: raleway, sans-serif;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-family: poppins, sans-serif;
+}
+
+a {
+  color: primary;
+}
+
+.btn {
+  font-family: poppins, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0px;
+  padding: 20px 40px;
+}
+.btn:hover {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.btn-primary {
+  background-color: #F27C00;
+  border-color: #F27C00;
+  color: #FFFFFF;
+}
+.btn-primary:hover {
+  background-color: #F27C00;
+}
+
+.btn-secondary {
+  background-color: #502900;
+  border-color: #502900;
+  color: #FFFFFF;
+}
+.btn-secondary:hover {
+  color: #502900;
+}
+.btn-secondary:focus, .btn-secondary:active {
+  color: #F27C00;
+}
+
+.btn-third {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+.btn-third:hover {
+  color: #FFFFFF;
+}
+
+a.navbar-brand {
+  background: url("/static/img/coronacircles.png") center no-repeat;
+  height: 67px;
+  width: 300px;
+  background-size: contain;
+  text-indent: -9999px;
+  margin-left: -15px;
+}
+
+ul.navbar-nav {
+  text-transform: uppercase;
+}
+ul.navbar-nav li {
+  margin-right: 20px;
+}
+ul.navbar-nav li a {
+  color: #502900;
+  font-family: raleway;
+}
+ul.navbar-nav li a:hover {
+  color: #F27C00;
+  text-decoration: none;
+}
+
+.carousel.slide .carousel-inner {
+  background-color: #F27C00;
+  color: #FFFFFF;
+  font-size: 24px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.carousel.slide .carousel-inner .row {
+  display: table;
+}
+.carousel.slide .carousel-inner .left {
+  background-image: url("/static/img/ccircle.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  min-height: 450px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 600px;
+}
+.carousel.slide .carousel-inner .left h1 {
+  font-size: 64px;
+  text-align: center;
+}
+.carousel.slide .carousel-inner .right {
+  min-height: 450px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 600px;
+}
+
+/* Event List */
+.events {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background: #F4B93D;
+}
+.events .right {
+  text-align: center;
+  background-image: url("/static/img/ccircle.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding-top: 20%;
+}
+.events .right h4 {
+  margin-bottom: 20px;
+}
+
+.event-list {
+  list-style: none;
+  font-family: "Lato", sans-serif;
+  margin: 0px;
+  margin-top: 40px;
+  padding: 0px;
+}
+.event-list > li {
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 5px #333333;
+  box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7);
+  padding: 0px;
+  margin: 0px 0px 20px;
+}
+.event-list > li > time {
+  display: inline-block;
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #F27C00;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.event-list > li:nth-child(even) > time {
+  background-color: #502900;
+}
+.event-list > li > time > span {
+  display: none;
+}
+.event-list > li > time > .day {
+  display: block;
+  font-size: 56pt;
+  font-weight: 100;
+  line-height: 1;
+}
+.event-list > li time > .month {
+  display: block;
+  font-size: 24pt;
+  font-weight: 900;
+  line-height: 1;
+}
+.event-list > li > img {
+  width: 100%;
+}
+.event-list > li > .info {
+  padding-top: 5px;
+  text-align: center;
+}
+.event-list > li > .info > .title {
+  font-size: 17pt;
+  font-weight: 700;
+  margin: 0px;
+}
+.event-list > li > .info > .desc {
+  font-size: 13pt;
+  font-weight: 300;
+  margin: 0px;
+}
+.event-list > li > .info > ul {
+  display: table;
+  list-style: none;
+  margin: 10px 0px 0px;
+  padding: 0px;
+  width: 100%;
+  text-align: center;
+}
+.event-list > li > .social > ul {
+  display: table;
+  list-style: none;
+  margin: 10px 0px 0px;
+  padding: 0px;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+}
+.event-list > li > .info > ul > li, .event-list > li > .social > ul > li {
+  display: table-cell;
+  cursor: pointer;
+  color: #1e1e1e;
+  font-size: 11pt;
+  font-weight: 300;
+  padding: 3px 0px;
+}
+.event-list > li > .info > ul > li > a {
+  display: block;
+  width: 100%;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+.event-list > li > .social > ul > li {
+  padding: 0px;
+}
+.event-list > li > .social > ul > li > a {
+  padding: 3px 0px;
+}
+.event-list > li > .info > ul > li:hover, .event-list > li > .social > ul > li:hover {
+  color: #1e1e1e;
+  background-color: #c8c8c8;
+}
+
+.facebook a, .twitter a, .google-plus a {
+  display: block;
+  width: 100%;
+  color: #4b6ea8 !important;
+}
+
+.twitter a {
+  color: #4fd5f8 !important;
+}
+
+.google-plus a {
+  color: #dd4b39 !important;
+}
+
+.facebook:hover a {
+  color: white !important;
+  background-color: #4b6ea8 !important;
+}
+
+.twitter:hover a {
+  color: white !important;
+  background-color: #4fd5f8 !important;
+}
+
+.google-plus:hover a {
+  color: white !important;
+  background-color: #dd4b39 !important;
+}
+
+/* Host */
+.host {
+  background-color: #F27C00;
+  background-image: url("/static/img/ccircle.png");
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  min-height: 450px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-size: 24px;
+}
+.host h1 {
+  margin-bottom: 40px;
+}
+.host ul li {
+  margin-bottom: 20px;
+}
+.host ul li::marker {
+  font-size: 32px;
+}
+.host a.btn {
+  position: absolute;
+  bottom: 0px;
+}
+
+/* Testimonials */
+.testimonials h1 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.testimonials .author {
+  font-weight: bold;
+  display: block;
+}
+.testimonials li.media {
+  font-size: 14px;
+  border-bottom: 1px solid #502900;
+  padding-bottom: 20px;
+  height: 150px;
+  overflow: hidden;
+  color: #502900;
+}
+.testimonials li.media:last-child {
+  border-bottom: none;
+}
+.testimonials li.media .media-body p {
+  margin-bottom: 0px;
+}
+.testimonials img {
+  border-radius: 30px;
+  height: 60px;
+}
+
+/* Contact */
+.contact {
+  background-color: #502900;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 40px;
+}
+.contact h1 {
+  margin-bottom: 20px;
+}
+.contact a {
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.contact a:hover {
+  color: #F27C00;
+  text-decoration: none;
+}
+
+/* Footer */
+footer {
+  background: #F9DB9D;
+}
+footer a {
+  color: #502900;
+  text-transform: uppercase;
+}
+footer a:hover {
+  text-decoration: none;
+  color: #F27C00;
+}
+footer > .container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+footer input#mce-EMAIL {
+  border: none;
+}
+footer input#mce-EMAIL::placeholder {
+  color: #502900;
+}
+footer .input-group {
+  border: #502900 1px solid;
+}
+footer .btn {
+  padding: 7px 30px;
+  font-size: 15px;
+  border: #502900 1px solid;
+}
+footer .btn:hover {
+  border-left: #502900 1px solid;
+}
+footer p {
+  margin-bottom: 8px;
+}
+footer ul.footermenu {
+  list-style: none;
+  padding-left: 0px;
+}
+footer ul.footermenu li a {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: inherit;
+}
+footer .social-bar {
+  height: 50px;
+  background: #502900;
+  color: #FFFFFF;
+  padding: 8px;
+}
+footer .social-bar p {
+  vertical-align: middle;
+  display: inline;
+}
+footer .social-bar a {
+  color: #FFFFFF;
+}
+footer .social-bar a:hover {
+  color: #F27C00;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .event-list > li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 120px;
+    padding: 0px;
+  }
+  .event-list > li > time, .event-list > li > img {
+    display: inline-block;
+  }
+  .event-list > li > time, .event-list > li > img {
+    width: 120px;
+    float: left;
+  }
+  .event-list > li > .info {
+    background-color: whitesmoke;
+    overflow: hidden;
+  }
+  .event-list > li > time, .event-list > li > img {
+    width: 120px;
+    height: 120px;
+    padding: 0px;
+    margin: 0px;
+  }
+  .event-list > li > .info {
+    position: relative;
+    height: 120px;
+    text-align: left;
+    padding-right: 40px;
+  }
+  .event-list > li > .info > .title, .event-list > li > .info > .desc {
+    padding: 0px 10px;
+  }
+  .event-list > li > .info > ul {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+  }
+  .event-list > li > .social {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: block;
+    width: 40px;
+  }
+  .event-list > li > .social > ul {
+    border-left: 1px solid #e6e6e6;
+  }
+  .event-list > li > .social > ul > li {
+    display: block;
+    padding: 0px;
+  }
+  .event-list > li > .social > ul > li > a {
+    display: block;
+    width: 40px;
+    padding: 10px 0px 9px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

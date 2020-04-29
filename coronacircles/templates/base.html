@@ -1,0 +1,97 @@
+{% load cms_tags menu_tags djcms_custom_menu_tags sekizai_tags static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{% page_attribute 'meta_description' %}"> 
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>{% block title %}{% endblock title %} - Corona Circles</title>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
+        {% render_block "css" %}
+    </head>
+    <body>
+        {% cms_toolbar %}
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">Corona Circles</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        {% show_menu 0 100 100 100 %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-5 newsletter">
+              {% static_placeholder "Newsletter" %}
+              <form action="YOUR_MAILCHIMP_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input type="text" name="b_f7fcffd059cde2df667ed71e0_b59497a580" tabindex="-1" value="">
+                </div>
+                <div class="mc-field-group">
+                  <div class="form-group">
+                    <label for="mce-EMAIL" class="sr-only">Email Address</label>
+                    <div class="input-group">
+                      <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" placeholder="Email Address">
+                      <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit">Subscribe</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="mce-responses">
+                  <div class="response text-warning" id="mce-error-response" style="display:none"></div>
+                  <div class="response text-success" id="mce-success-response" style="display:none"></div>
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-12 col-md-4 offset-md-2">
+              {% static_placeholder "Footer right" %}
+            </div>
+            <div class="col-md-1">
+              {% show_djcms_custom_menu 'Footer' 0 100 100 100 "menu/footer.html" %}
+            </div>
+          </div>
+        </div>
+        <div class="social-bar">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <p>&copy; Corona Circles</p>
+              </div>
+              <div class="col-sm-6">
+                <ul class="float-right list-inline">
+                    <li class="list-inline-item ml-3">
+                        {% static_placeholder "facebook link" %}
+                    </li>
+                    <li class="list-inline-item ml-3">
+                        {% static_placeholder "twitter link" %}
+                    </li>
+                    <li class="list-inline-item ml-3">
+                        {% static_placeholder "instagram link" %}
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </footer>
+    {% render_block "js" %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+    </body>
+</html>

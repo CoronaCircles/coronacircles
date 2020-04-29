@@ -1,0 +1,512 @@
+$primary: #F27C00
+$secondary: #502900
+$third: #FFFFFF
+$fourth: #F4B93D
+$fifth: #F9DB9D
+
+
+@font-face
+  font-family: 'poppins'
+  src: url('../fonts/poppins-bold-webfont.woff2') format('woff2'),
+  src: url('../fonts/poppins-bold-webfont.woff') format('woff')
+  font-weight: bold
+  font-style: normal
+
+
+@font-face
+  font-family: 'poppins'
+  src: url('../fonts/poppins-medium-webfont.woff2') format('woff2'),
+  src: url('../fonts/poppins-medium-webfont.woff') format('woff')
+  font-weight: 500
+  font-style: normal
+
+@font-face
+  font-family: 'poppins'
+  src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),
+  src: url('../fonts/poppins-regular-webfont.woff') format('woff')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'poppins'
+  src: url('../fonts/poppins-semibold-webfont.woff2') format('woff2'),
+  src: url('../fonts/poppins-semibold-webfont.woff') format('woff')
+  font-weight: 600
+  font-style: normal
+
+@font-face
+  font-family: 'raleway'
+  src: url('../fonts/raleway-black-webfont.woff2') format('woff2'),
+  src: url('../fonts/raleway-black-webfont.woff') format('woff')
+  font-weight: bold
+  font-style: normal
+
+@font-face
+  font-family: 'raleway'
+  src: url('../fonts/raleway-bold-webfont.woff2') format('woff2'),
+  src: url('../fonts/raleway-bold-webfont.woff') format('woff')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'source-sans'
+  src: url('../fonts/sourcesanspro-bold-webfont.woff2') format('woff2'),
+  src: url('../fonts/sourcesanspro-bold-webfont.woff') format('woff')
+  font-weight: bold
+  font-style: normal
+
+@font-face
+  font-family: 'source-sans'
+  src: url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2'),
+  src: url('../fonts/sourcesanspro-regular-webfont.woff') format('woff')
+  font-weight: normal
+  font-style: normal
+
+body
+  font-family: source-sans, sans-serif
+  color: $secondary
+
+h1 , h2, h3, h4
+  font-family: raleway, sans-serif
+  text-transform: uppercase
+
+h5
+  font-family: poppins, sans-serif
+
+a
+  color: primary
+
+.btn
+  font-family: poppins, sans-serif
+  font-weight: bold
+  text-transform: uppercase
+  border-radius: 0px
+  padding: 20px 40px
+
+  &:hover
+    background-color: $third
+    border-color: $third
+
+.btn-primary
+  background-color: $primary
+  border-color: $primary
+  color: $third
+
+  &:hover
+    background-color: $primary
+
+.btn-secondary
+  background-color: $secondary
+  border-color: $secondary
+  color: $third
+
+  &:hover
+    color: $secondary
+
+  &:focus, &:active
+    color: $primary
+
+.btn-third
+  background-color: $third
+  border-color: $third
+  color: $third
+
+  &:hover
+    color: $third
+
+a.navbar-brand
+  background: url("/static/img/coronacircles.png") center no-repeat
+  height: 67px
+  width: 300px
+  background-size: contain
+  text-indent: -9999px
+  margin-left: -15px
+
+ul.navbar-nav
+  text-transform: uppercase
+  
+  li
+    margin-right: 20px
+    
+    a
+      color: $secondary
+      font-family: raleway
+        
+      &:hover
+        color: $primary
+        text-decoration: none
+
+.carousel.slide .carousel-inner
+  background-color: $primary
+  color: $third
+  font-size: 24px
+  padding-top: 30px
+  padding-bottom: 30px
+
+  .row
+    display: table
+
+  .left
+    background-image: url("/static/img/ccircle.png")
+    background-repeat: no-repeat
+    background-position: center
+    background-size: contain
+    min-height: 450px
+    padding-top: 40px
+    padding-bottom: 40px
+    display: table-cell
+    vertical-align: middle
+    height: 600px
+    
+    h1
+      font-size: 64px
+      text-align: center
+
+  .right
+    min-height: 450px
+    padding-top: 40px
+    padding-bottom: 40px
+    display: table-cell
+    vertical-align: middle
+    height: 600px
+
+
+
+/* Event List */
+
+.events 
+  padding-top: 100px
+  padding-bottom: 100px
+  background: $fourth
+
+  .right
+    text-align: center
+    background-image: url("/static/img/ccircle.png")
+    background-repeat: no-repeat
+    background-position: center
+    background-size: contain
+    padding-top: 20%
+
+    h4
+      margin-bottom: 20px
+
+.event-list
+  list-style: none
+  font-family: 'Lato', sans-serif
+  margin: 0px
+  margin-top: 40px
+  padding: 0px
+
+  > li
+    background-color: $third
+    box-shadow: 0px 0px 5px rgb(51, 51, 51)
+    box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7)
+    padding: 0px
+    margin: 0px 0px 20px
+
+    > time
+      display: inline-block
+      width: 100%
+      color: $third
+      background-color: $primary
+      padding: 5px
+      text-align: center
+      text-transform: uppercase
+
+    &:nth-child(even) > time
+      background-color: $secondary
+
+    > time >
+      span
+        display: none
+
+      .day
+        display: block
+        font-size: 56pt
+        font-weight: 100
+        line-height: 1
+
+    time > .month
+      display: block
+      font-size: 24pt
+      font-weight: 900
+      line-height: 1
+
+    >
+      img
+        width: 100%
+
+      .info
+        padding-top: 5px
+        text-align: center
+
+        >
+          .title
+            font-size: 17pt
+            font-weight: 700
+            margin: 0px
+
+          .desc
+            font-size: 13pt
+            font-weight: 300
+            margin: 0px
+
+          ul
+            display: table
+            list-style: none
+            margin: 10px 0px 0px
+            padding: 0px
+            width: 100%
+            text-align: center
+
+      .social > ul
+        display: table
+        list-style: none
+        margin: 10px 0px 0px
+        padding: 0px
+        width: 100%
+        text-align: center
+        margin: 0px
+
+      .info > ul > li, .social > ul > li
+        display: table-cell
+        cursor: pointer
+        color: rgb(30, 30, 30)
+        font-size: 11pt
+        font-weight: 300
+        padding: 3px 0px
+
+      .info > ul > li > a
+        display: block
+        width: 100%
+        color: rgb(30, 30, 30)
+        text-decoration: none
+
+      .social > ul > li
+        padding: 0px
+
+        > a
+          padding: 3px 0px
+
+      .info > ul > li:hover, .social > ul > li:hover
+        color: rgb(30, 30, 30)
+        background-color: rgb(200, 200, 200)
+
+.facebook a, .twitter a, .google-plus a
+  display: block
+  width: 100%
+  color: rgb(75, 110, 168) !important
+
+.twitter a
+  color: rgb(79, 213, 248) !important
+
+.google-plus a
+  color: rgb(221, 75, 57) !important
+
+.facebook:hover a
+  color: rgb(255, 255, 255) !important
+  background-color: rgb(75, 110, 168) !important
+
+.twitter:hover a
+  color: rgb(255, 255, 255) !important
+  background-color: rgb(79, 213, 248) !important
+
+.google-plus:hover a
+  color: rgb(255, 255, 255) !important
+  background-color: rgb(221, 75, 57) !important
+
+/* Host */
+
+.host
+  background-color: $primary
+  background-image: url("/static/img/ccircle.png")
+  background-repeat: no-repeat
+  color: $third
+  min-height: 450px
+  padding-top: 100px
+  padding-bottom: 100px
+  font-size: 24px
+
+  h1
+    margin-bottom: 40px
+
+  ul li
+    margin-bottom: 20px
+    &::marker
+      font-size: 32px
+
+  a.btn
+    position: absolute
+    bottom: 0px
+
+/* Testimonials */
+
+.testimonials
+  h1
+    margin-top: 40px
+    margin-bottom: 40px
+
+  .author
+    font-weight: bold
+    display: block
+
+  li.media
+    font-size: 14px
+    border-bottom: 1px solid $secondary
+    padding-bottom: 20px
+    height: 150px
+    overflow: hidden
+    color: $secondary
+
+    &:last-child
+      border-bottom: none
+    
+    .media-body p
+      margin-bottom: 0px
+
+  img
+    border-radius: 30px
+    height: 60px
+
+/* Contact */
+
+.contact
+  background-color: $secondary
+  color: $third
+  text-align: center
+  padding: 40px
+
+  h1
+    margin-bottom: 20px
+
+  a
+    font-weight: bold
+    color: $third
+
+    &:hover
+      color: $primary
+      text-decoration: none
+
+
+/* Footer */
+
+footer
+  background: $fifth
+
+  a
+    color: $secondary
+    text-transform: uppercase
+    &:hover
+      text-decoration: none
+      color: $primary
+
+  & > .container
+    padding-top: 40px
+    padding-bottom: 40px
+  input#mce-EMAIL
+    border: none
+
+    &::placeholder
+      color: $secondary
+
+  .input-group
+    border: $secondary 1px solid
+  .btn
+    padding: 7px 30px
+    font-size: 15px
+    border: $secondary 1px solid
+    
+    &:hover
+      border-left: $secondary 1px solid
+
+  p
+    margin-bottom: 8px
+
+  ul.footermenu
+    list-style: none
+    padding-left: 0px
+
+    li a
+      font-weight: bold
+      margin-bottom: 8px
+      display: inherit
+
+  .social-bar
+    height: 50px
+    background: $secondary
+    color: $third
+    padding: 8px
+
+    p
+      vertical-align: middle
+      display: inline
+
+    a
+      color: $third
+
+      &:hover
+        color: $primary
+        text-decoration: none
+
+/* Responsive */
+
+@media (min-width: 768px)
+  .event-list > li
+    position: relative
+    display: block
+    width: 100%
+    height: 120px
+    padding: 0px
+
+    >
+      time, img
+        display: inline-block
+
+      time, img
+        width: 120px
+        float: left
+
+      .info
+        background-color: rgb(245, 245, 245)
+        overflow: hidden
+
+      time, img
+        width: 120px
+        height: 120px
+        padding: 0px
+        margin: 0px
+
+      .info
+        position: relative
+        height: 120px
+        text-align: left
+        padding-right: 40px
+
+        >
+          .title, .desc
+            padding: 0px 10px
+
+          ul
+            position: absolute
+            left: 0px
+            bottom: 0px
+
+      .social
+        position: absolute
+        top: 0px
+        right: 0px
+        display: block
+        width: 40px
+
+        > ul
+          border-left: 1px solid rgb(230, 230, 230)
+
+          > li
+            display: block
+            padding: 0px
+
+            > a
+              display: block
+              width: 40px
+              padding: 10px 0px 9px
+

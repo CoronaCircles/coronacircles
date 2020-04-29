@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% load cms_tags i18n %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+{% block content %}
+</div>
+ <header>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active">
+      	<div class="container">
+      		<div class="row">
+		        <div class="col-md-6 col-sm-12 left">{% placeholder "First Slide Headline" %}</div>
+		        <div class="col-md-6 col-sm-12 right">{% placeholder "First Slide Text" %}</div>
+		       </div>
+	      </div>
+      </div>
+      <div class="carousel-item">
+      	<div class="container">
+      		<div class="row">
+		        <div class="col-md-6 col-sm-12 left">{% placeholder "Second Slide Headline" %}</div>
+		        <div class="col-md-6 col-sm-12 right">{% placeholder "Second Slide Text" %}</div>
+		       </div>
+	      </div>
+      </div>
+      <div class="carousel-item">
+      	<div class="container">
+      		<div class="row">
+		        <div class="col-md-6 col-sm-12 left">{% placeholder "Third Slide Headline" %}</div>
+		        <div class="col-md-6 col-sm-12 right">{% placeholder "Third Slide Text" %}</div>
+		       </div>
+	      </div>
+      </div>
+      <div class="carousel-item">
+      	<div class="container">
+      		<div class="row">
+		        <div class="col-md-6 col-sm-12 left">{% placeholder "Fourth Slide Headline" %}</div>
+		        <div class="col-md-6 col-sm-12 right">{% placeholder "Fourth Slide Text" %}</div>
+		       </div>
+	      </div>
+      </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans "Previous" %}</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans "Next" %}</span>
+    </a>
+  </div>
+</header>
+<div class="events">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				{% placeholder "Events Headline" %}
+			</div>
+			<div class="col-md-8 col-sm-12">
+				<ul class="event-list">
+					<li>
+						<time datetime="2014-07-20">
+							<span class="day">4</span>
+							<span class="month">Jul</span>
+							<span class="year">2014</span>
+							<span class="time">ALL DAY</span>
+						</time>
+						<img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
+						<div class="info">
+							<h2 class="title">Independence Day</h2>
+							<p class="desc">United States Holiday</p>
+						</div>
+						<div class="social">
+							<ul>
+								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li>
+						<time datetime="2014-07-20 0000">
+							<span class="day">8</span>
+							<span class="month">Jul</span>
+							<span class="year">2014</span>
+							<span class="time">12:00 AM</span>
+						</time>
+						<div class="info">
+							<h2 class="title">One Piece Unlimited World Red</h2>
+							<p class="desc">PS Vita</p>
+							<ul>
+								<li style="width:50%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
+								<li style="width:50%;"><span class="fa fa-money"></span> $39.99</li>
+							</ul>
+						</div>
+						<div class="social">
+							<ul>
+								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li>
+						<time datetime="2014-07-20 2000">
+							<span class="day">20</span>
+							<span class="month">Jan</span>
+							<span class="year">2014</span>
+							<span class="time">8:00 PM</span>
+						</time>
+						<img alt="My 24th Birthday!" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" />
+						<div class="info">
+							<h2 class="title">Mouse0270's 24th Birthday!</h2>
+							<p class="desc">Bar Hopping in Erie, Pa.</p>
+							<ul>
+								<li style="width:33%;">1 <span class="glyphicon glyphicon-ok"></span></li>
+								<li style="width:34%;">3 <span class="fa fa-question"></span></li>
+								<li style="width:33%;">103 <span class="fa fa-envelope"></span></li>
+							</ul>
+						</div>
+						<div class="social">
+							<ul>
+								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li>
+						<time datetime="2014-07-31 1600">
+							<span class="day">31</span>
+							<span class="month">Jan</span>
+							<span class="year">2014</span>
+							<span class="time">4:00 PM</span>
+						</time>
+						<img alt="Disney Junior Live On Tour!" src="http://www.thechaifetzarena.com/images/main/DL13_PiratePrincess_thumb.jpg" />
+						<div class="info">
+							<h2 class="title">Disney Junior Live On Tour!</h2>
+							<p class="desc"> Pirate and Princess Adventure</p>
+							<ul>
+								<li style="width:33%;">$49.99 <span class="fa fa-male"></span></li>
+								<li style="width:34%;">$29.99 <span class="fa fa-child"></span></li>
+							</ul>
+						</div>
+						<div class="social">
+							<ul>
+								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-sm-12 right">
+				<h4>{% placeholder "show more" %}</h4>
+				<a class="btn btn-secondary btn-lg" href="/circles">{% trans "Show Circles" %}</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="host">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10">
+				{% placeholder "Host" %}
+			</div>
+			<div class="col-sm-12 col-md-2">
+				<a class="btn btn-secondary btn-block btn-lg">{% trans "Host" %}</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container testimonials">
+	<div class="row">
+		<div class="col-sm-12">
+			{% placeholder "Testimonials Headline" %}
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<ul class="list-unstyled">
+			  <li class="media">
+			    {% placeholder "Testimonial 1 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 1 Text" %}
+			      <span class="author">{% placeholder "Testimonial 1 Author" %}</span>
+			    </div>
+			  </li>
+			  <li class="media my-4">
+			    {% placeholder "Testimonial 2 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 2 Text" %}
+			    	<span class="author">{% placeholder "Testimonial 2 Author" %}</span>
+			    </div>
+			  </li>
+			  <li class="media">
+			    {% placeholder "Testimonial 3 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 3 Text" %}
+			      <span class="author">{% placeholder "Testimonial 3 Author" %}</span>
+			    </div>
+			  </li>
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<ul class="list-unstyled">
+			  <li class="media">
+			    {% placeholder "Testimonial 4 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 4 Text" %}
+			      <span class="author">{% placeholder "Testimonial 4 Author" %}</span>
+			    </div>
+			  </li>
+			  <li class="media my-4">
+			    {% placeholder "Testimonial 5 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 5 Text" %}
+			    <span class="author">{% placeholder "Testimonial 5 Author" %}</span>
+			    </div>
+			  </li>
+			  <li class="media">
+			    {% placeholder "Testimonial 6 Image" %}
+			    <div class="media-body ml-3">
+			    	{% placeholder "Testimonial 6 Text" %}
+			      <span class="author">{% placeholder "Testimonial 6 Author" %}</span>
+			    </div>
+			  </li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 center">
+				{% placeholder "Contact" %}
+			</div>
+		</div>
+	</div>
+</div>
+	{% placeholder "content" %}
+{% endblock content %}
