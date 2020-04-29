@@ -1,0 +1,5 @@
+<form target="{% url 'circles:join' event.id %}" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Teilnehmen</button>
+</form>

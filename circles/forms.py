@@ -9,3 +9,10 @@ class EventHostForm(forms.ModelForm):
     class Meta:
         fields = ["start", "email"]
         model = Event
+
+
+class JoinForm(forms.Form):
+    email = forms.EmailField(label="E-Mail-Adresse")
+
+    class Meta:
+        fields = ["email"]

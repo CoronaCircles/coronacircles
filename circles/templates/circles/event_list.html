@@ -4,6 +4,8 @@
 
     <div>
       {{ event.start }}
+
+      <a href="{% url 'circles:join' event.id %}">Teilnehmen</a>
     </div>
 
   {% endfor %}
