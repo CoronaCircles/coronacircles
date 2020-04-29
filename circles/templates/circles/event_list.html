@@ -1,0 +1,12 @@
+
+{% if events %}
+  {% for event in events %}
+
+    <div>
+      {{ event.start }}
+    </div>
+
+  {% endfor %}
+{% else %}
+  <p>Leider gibt es keine Events. Du kannst aber <a href="{% url 'circles:host' %}">eines erstellen</a>.</p>
+{% endif %}

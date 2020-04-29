@@ -1,0 +1,5 @@
+<form target="{% url 'circles:host' %}" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Speichern</button>
+</form>
