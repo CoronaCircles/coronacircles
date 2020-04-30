@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 class Event(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
-    start = models.DateTimeField()
+    start = models.DateTimeField("Start-Zeitpunkt")
 
     # host = models.ForeignKey(
     #     get_user_model(), related_name="hosted_events", on_delete=models.CASCADE

@@ -1,5 +1,13 @@
+<h2>An Event am {{ event.start }} teilnehmen</h2>
+
+<p>
+  Gib deine E-Mail-Adresse an. Wenn das Event anfängt,
+  bekommst du einen Link zugeschickt, mit dem du teilnehmen kannst.
+</p>
+
 <form target="{% url 'circles:join' event.id %}" method="POST">
   {% csrf_token %}
-  {{ form }}
+  {{ form.as_p }}
+  <a href="{% url 'circles:list' %}">Abbrechen</a>
   <button type="submit">Teilnehmen</button>
 </form>
