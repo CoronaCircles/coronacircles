@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.core import mail
 
 from circles.models import Event
 
@@ -29,8 +30,12 @@ class EventHostTestCase(TestCase):
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(Event.objects.count(), 1)
         event = Event.objects.get()
+
         # user was added as host
         self.assertEqual(event.host.email, "max@mustermann.com")
+
+        # email is sent
+        self.assertEqual(len(mail.outbox), 1)
 
     # TODO: Test for existing user
 
@@ -60,8 +65,13 @@ class EventJoinTestCase(TestCase):
         self.assertContains(
             response, "Du wurdest als Teilnehmer/in eingetragen.", status_code=200
         )
+
+        # user is added as participant
         self.assertEqual(self.event.participants.count(), 1)
         self.assertEqual(self.event.participants.get().email, "max@mustermann.com")
+
+        # email is sent
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_post_event_past(self):
         yesterday = timezone.now() - datetime.timedelta(days=1)

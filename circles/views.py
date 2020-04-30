@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from django.core.mail import send_mail
 
 from .models import Event
 from .forms import EventHostForm, JoinForm
@@ -37,6 +38,14 @@ class EventHost(CreateView):
         event = form.instance
         event.host = user
         event.save()
+
+        send_mail(
+            "Event erstellt",
+            f"Dein Event um {event.start} wurde erstellt. Wir schicken dir einen Link, wenn es anfängt.",
+            "from@example.com",
+            [email],
+        )
+
         return render(self.request, "circles/hosted.html", {"event": event})
 
 
@@ -75,6 +84,11 @@ class EventJoin(FormView):
         if user not in event.participants.all():
             event.participants.add(user)
 
-        # TODO: Send mail
+        send_mail(
+            "Event beigetreten",
+            f"Du bist einem Event um {event.start} beigetreten. Wir schicken dir einen Link, wenn es anfängt.",
+            "from@example.com",
+            [email],
+        )
 
         return render(self.request, "circles/joined.html", {"event": event})
