@@ -13,9 +13,10 @@ class Event(models.Model):
     # )
     participants = models.ManyToManyField(get_user_model(), related_name="events")
 
+    @property
     def is_full(self):
-        """determines wether event is already full (7 participants)"""
-        return len(self.participants) >= 7  # TODO: untested
+        """determines wether event is already full (6 participants, 7 including host)"""
+        return self.participants.count() >= 6
 
     def __str__(self) -> str:
         return str(self.start)
