@@ -4,6 +4,7 @@ import pytz
 from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 from circles.models import Event
 
@@ -18,7 +19,7 @@ class EventHostTestCase(TestCase):
         self.assertContains(response, "Neues Event erstellen", status_code=200)
 
     def test_post(self):
-        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+        tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
         response = self.client.post(
             self.url, {"start": tomorrow, "email": "max@mustermann.com",},
         )
@@ -45,9 +46,8 @@ class EventJoinTestCase(TestCase):
     def setUp(self):
         self.host = User(email="host@example.com", username="host@example.com")
         self.host.save()
-        self.event = Event(
-            host=self.host, start=datetime.datetime(2020, 5, 1, 20, 0, tzinfo=pytz.UTC)
-        )
+        tomorrow = timezone.now() + datetime.timedelta(days=1)
+        self.event = Event(host=self.host, start=tomorrow)
         self.event.save()
         self.url = reverse("circles:join", args=[self.event.pk])
 
@@ -60,4 +60,12 @@ class EventJoinTestCase(TestCase):
         self.assertContains(
             response, "Du wurdest als Teilnehmer/in eingetragen.", status_code=200
         )
-        self.assertContains(response, "1. Mai 2020")
+
+    def test_post_event_past(self):
+        yesterday = timezone.now() - datetime.timedelta(days=1)
+        past_event = Event(host=self.host, start=yesterday)
+        past_event.save()
+        url = reverse("circles:join", args=[past_event.pk])
+
+        response = self.client.post(url, {"email": "max@mustermann.com",})
+        self.assertContains(response, "Du kannst nicht beitreten.", status_code=400)

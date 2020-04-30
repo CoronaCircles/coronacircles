@@ -18,12 +18,16 @@ User = get_user_model()
 
 
 class EventList(ListView):
+    """Listing of upcoming events"""
+
     model = Event
     context_object_name = "events"
     queryset = Event.objects.upcoming()
 
 
 class EventHost(CreateView):
+    """Create/Host a new event"""
+
     model = Event
     form_class = EventHostForm
 
@@ -44,7 +48,9 @@ class EventDeleteView(DeleteView):
 
 
 class EventJoin(FormView):
-    """Asks user for mail. Sends mail with details for event"""
+    """Allows to join the event
+    
+    Asks user for mail. Sends mail with details for event"""
 
     template_name = "circles/join_form.html"
     form_class = JoinForm
@@ -56,9 +62,13 @@ class EventJoin(FormView):
         return data
 
     def form_valid(self, form):
-        # TODO: Check if event is in the past
-        # TODO: Check if event is full
         event = Event.objects.get(pk=self.kwargs["id"])
+
+        if event.is_full or event.is_past:
+            return render(
+                self.request, "circles/full_or_past.html", {"event": event}, status=400
+            )
+
         email = form.cleaned_data["email"]
         user, _ = User.objects.get_or_create(email=email, username=email)
         event.participants.add(user)
@@ -66,5 +76,4 @@ class EventJoin(FormView):
 
         return render(self.request, "circles/joined.html", {"event": event})
 
-    # TODO: Send mail
     # TODO: What if user is already participant or host?

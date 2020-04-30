@@ -1,0 +1,10 @@
+{% if event.is_full %}
+    <p>Sorry, das Event ist schon voll.</p>
+{% elif event.is_past %}
+    <p>Sorry, das Event liegt in der Vergangenheit.</p>
+{% else %}
+
+{% endif %}
+
+<p>Du kannst nicht beitreten.</p>
+<a href="{% url 'circles:list' %}">Zurück</a>
