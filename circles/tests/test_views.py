@@ -18,11 +18,11 @@ class EventHostTestCase(TestCase):
         self.assertContains(response, "Neues Event erstellen", status_code=200)
 
     def test_post(self):
+        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         response = self.client.post(
-            self.url, {"start": "5.1.2020 20:00", "email": "max@mustermann.com",},
+            self.url, {"start": tomorrow, "email": "max@mustermann.com",},
         )
         self.assertContains(response, "wurde erstellt.", status_code=200)
-        self.assertContains(response, "5. Januar 2020")
 
         # user and event were created
         self.assertEqual(User.objects.count(), 1)
@@ -32,6 +32,13 @@ class EventHostTestCase(TestCase):
         self.assertEqual(event.host.email, "max@mustermann.com")
 
     # TODO: Test for existing user
+
+    def test_post_past_date(self):
+        yesterday = datetime.date.today() - datetime.timedelta(days=1)
+        response = self.client.post(
+            self.url, {"start": yesterday, "email": "max@mustermann.com",},
+        )
+        self.assertContains(response, "Muss in der Zukunft sein", status_code=200)
 
 
 class EventJoinTestCase(TestCase):
