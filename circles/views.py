@@ -21,7 +21,6 @@ User = get_user_model()
 class EventList(ListView):
     """Listing of upcoming events"""
 
-    model = Event
     context_object_name = "events"
     queryset = Event.objects.upcoming()
 

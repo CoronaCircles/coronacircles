@@ -38,3 +38,16 @@ class EventTestCase(TestCase):
         self.event.save()
 
         self.assertTrue(self.event.is_full)
+
+
+class EventQuerySetTestCase(TestCase):
+    def test_upcoming(self):
+        self.host = User(email="host@example.com", username="host@example.com")
+        self.host.save()
+        Event(
+            host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        ).save()
+        Event(
+            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        ).save()
+        self.assertEqual(Event.objects.upcoming().count(), 1)

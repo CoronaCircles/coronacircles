@@ -12,6 +12,26 @@ from circles.models import Event
 User = get_user_model()
 
 
+class EventListTestCase(TestCase):
+    url = reverse("circles:list")
+
+    def setUp(self):
+        self.host = User(email="host@example.com", username="host@example.com")
+        self.host.save()
+        Event(
+            host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        ).save()
+        Event(
+            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        ).save()
+
+    def test_get(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Kommende Events", status_code=200)
+        # only upcoming events
+        self.assertEqual(response.context["events"].count(), 1)
+
+
 class EventHostTestCase(TestCase):
     url = reverse("circles:host")
 
