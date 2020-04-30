@@ -7,8 +7,7 @@ from django.views.generic import (
 )
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
-
+from django.shortcuts import get_object_or_404, render
 
 from .models import Event
 from .forms import EventHostForm, JoinForm
@@ -51,8 +50,6 @@ class EventJoin(FormView):
     """Asks user for mail. Sends mail with details for event"""
 
     template_name = "circles/join_form.html"
-    success_url = "/joined"  # TODO
-
     form_class = JoinForm
 
     def get_context_data(self, **kwargs):
@@ -69,4 +66,8 @@ class EventJoin(FormView):
         user, _ = User.objects.get_or_create(email=email, username=email)
         event.participants.add(user)
         # TODO: Send mail
-        return super().form_valid(form)
+
+        return render(self.request, "circles/joined.html", {"event": event})
+
+    # TODO: Send mail
+    # TODO: What if user is already participant or host?
