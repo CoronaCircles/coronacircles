@@ -71,3 +71,9 @@ class EventJoinTestCase(TestCase):
 
         response = self.client.post(url, {"email": "max@mustermann.com",})
         self.assertContains(response, "Du kannst nicht beitreten.", status_code=400)
+
+    def test_post_same_user_twice(self):
+        """Test that a user is not added twice as participant"""
+        self.client.post(self.url, {"email": "max@mustermann.com"})
+        self.client.post(self.url, {"email": "max@mustermann.com"})
+        self.assertEqual(self.event.participants.count(), 1)

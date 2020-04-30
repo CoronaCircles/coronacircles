@@ -25,12 +25,12 @@ class Event(models.Model):
     objects = EventManager()
 
     @property
-    def is_full(self):
+    def is_full(self) -> bool:
         """determines wether event is already full (6 participants, 7 including host)"""
         return self.participants.count() >= 6
 
     @property
-    def is_past(self):
+    def is_past(self) -> bool:
         """determines wether event is in the past"""
         return self.start < timezone.now()
 

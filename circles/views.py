@@ -71,9 +71,10 @@ class EventJoin(FormView):
 
         email = form.cleaned_data["email"]
         user, _ = User.objects.get_or_create(email=email, username=email)
-        event.participants.add(user)
+
+        if user not in event.participants.all():
+            event.participants.add(user)
+
         # TODO: Send mail
 
         return render(self.request, "circles/joined.html", {"event": event})
-
-    # TODO: What if user is already participant or host?
