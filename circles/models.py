@@ -8,9 +8,9 @@ class Event(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     start = models.DateTimeField("Start-Zeitpunkt")
 
-    # host = models.ForeignKey(
-    #     get_user_model(), related_name="hosted_events", on_delete=models.CASCADE
-    # )
+    host = models.ForeignKey(
+        get_user_model(), related_name="hosted_events", on_delete=models.CASCADE
+    )
     participants = models.ManyToManyField(get_user_model(), related_name="events")
 
     @property
