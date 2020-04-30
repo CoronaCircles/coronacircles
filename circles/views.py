@@ -8,6 +8,7 @@ from django.views.generic import (
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
 
 from .models import Event
 from .forms import EventHostForm, JoinForm
@@ -19,6 +20,7 @@ User = get_user_model()
 class EventList(ListView):
     model = Event
     context_object_name = "events"
+    queryset = Event.objects.upcoming()
 
 
 class EventHost(CreateView):
@@ -49,13 +51,13 @@ class EventJoin(FormView):
 
     def get_context_data(self, **kwargs):
         event = get_object_or_404(Event, pk=self.kwargs["id"])
-        # TODO: Check if event is in the past
-        # TODO: Check if event is full
         data = super().get_context_data(**kwargs)
         data["event"] = event
         return data
 
     def form_valid(self, form):
+        # TODO: Check if event is in the past
+        # TODO: Check if event is full
         event = Event.objects.get(pk=self.kwargs["id"])
         email = form.cleaned_data["email"]
         user, _ = User.objects.get_or_create(email=email, username=email)

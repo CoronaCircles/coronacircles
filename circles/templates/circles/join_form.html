@@ -1,13 +1,22 @@
 <h2>An Event am {{ event.start }} teilnehmen</h2>
 
-<p>
-  Gib deine E-Mail-Adresse an. Wenn das Event anfängt,
-  bekommst du einen Link zugeschickt, mit dem du teilnehmen kannst.
-</p>
+{% if event.is_full %}
+  <p>Sorry, das Event ist bereits voll.</p>
+  <a href="{% url 'circles:list' %}">Zurück</a>
+{% elif event.is_past %}
+  <p>Sorry, das Event liegt bereits in der Vergangenheit.</p>
+  <a href="{% url 'circles:list' %}">Zurück</a>
+{% else %}
+  <p>
+    Gib deine E-Mail-Adresse an.<br>
+    Wenn das Event anfängt,
+    bekommst du einen Link zugeschickt, mit dem du teilnehmen kannst.
+  </p>
 
-<form target="{% url 'circles:join' event.id %}" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <a href="{% url 'circles:list' %}">Abbrechen</a>
-  <button type="submit">Teilnehmen</button>
-</form>
+  <form target="{% url 'circles:join' event.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'circles:list' %}">Abbrechen</a>
+    <button type="submit">Teilnehmen</button>
+  </form>
+{% endif %}

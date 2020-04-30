@@ -19,6 +19,12 @@ class EventTestCase(TestCase):
         )
         self.event.save()
 
+    def test_is_past(self):
+        event = Event(
+            host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        )
+        self.assertTrue(event.is_past)
+
     def test_is_full(self):
         self.assertFalse(self.event.is_full)
 
