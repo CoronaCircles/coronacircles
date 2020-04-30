@@ -60,6 +60,8 @@ class EventJoinTestCase(TestCase):
         self.assertContains(
             response, "Du wurdest als Teilnehmer/in eingetragen.", status_code=200
         )
+        self.assertEqual(self.event.participants.count(), 1)
+        self.assertEqual(self.event.participants.get().email, "max@mustermann.com")
 
     def test_post_event_past(self):
         yesterday = timezone.now() - datetime.timedelta(days=1)
