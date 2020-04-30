@@ -24,7 +24,6 @@ class EventList(ListView):
 class EventHost(CreateView):
     model = Event
     form_class = EventHostForm
-    success_url = "/hosted"  # TODO: Use reverse
 
     def form_valid(self, form):
         email = form.cleaned_data["email"]
@@ -32,11 +31,7 @@ class EventHost(CreateView):
         event = form.instance
         event.host = user
         event.save()
-        return super().form_valid(form)
-
-
-class EventHostSuccess(TemplateView):
-    template_name = "circles/success.html"
+        return render(self.request, "circles/hosted.html", {"event": event})
 
 
 class EventDeleteView(DeleteView):

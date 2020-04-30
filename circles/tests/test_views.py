@@ -19,12 +19,10 @@ class EventHostTestCase(TestCase):
 
     def test_post(self):
         response = self.client.post(
-            self.url,
-            {"start": "5.1.2020 20:00", "email": "max@mustermann.com",},
-            follow=True,
+            self.url, {"start": "5.1.2020 20:00", "email": "max@mustermann.com",},
         )
-        self.assertRedirects(response, "/hosted")
-        self.assertContains(response, "Dein Event wurde erstellt.")
+        self.assertContains(response, "wurde erstellt.", status_code=200)
+        self.assertContains(response, "5. Januar 2020")
 
         # user and event were created
         self.assertEqual(User.objects.count(), 1)
