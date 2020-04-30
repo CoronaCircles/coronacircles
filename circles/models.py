@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
 class EventQuerySet(models.QuerySet):
@@ -77,7 +78,7 @@ class Event(models.Model):
                 (
                     "An Event teilnemen",
                     f"Dein Event startet um {self.start}. Mit diesem Link kannst du teilnehmen: {self.join_url}",
-                    "from@example.com",
+                    settings.DEFAULT_FROM_EMAIL,
                     [addr],
                 )
             )
