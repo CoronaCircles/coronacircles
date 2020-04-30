@@ -22,7 +22,7 @@ class EventList(ListView):
     """Listing of upcoming events"""
 
     context_object_name = "events"
-    queryset = Event.objects.upcoming()
+    queryset = Event.objects.upcoming().prefetch_related("participants")
 
 
 class EventHost(CreateView):

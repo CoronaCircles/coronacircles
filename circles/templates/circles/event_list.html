@@ -4,7 +4,12 @@
 
     <div>
       {{ event.start }}
-      <a href="{% url 'circles:join' event.id %}">Teilnehmen</a>
+
+      ({{ event.participant_count }} TN)
+
+      {% if not event.is_full %}
+        <a href="{% url 'circles:join' event.id %}">Teilnehmen</a>
+      {% endif %}
     </div>
 
   {% endfor %}

@@ -27,13 +27,17 @@ class Event(models.Model):
     @property
     def is_full(self) -> bool:
         """determines wether event is already full (6 participants, 7 including host)"""
-        return self.participants.count() >= 6
+        return self.participant_count >= 7
 
     @property
     def is_past(self) -> bool:
         """determines wether event is in the past"""
         return self.start < timezone.now()
 
+    @property
+    def participant_count(self) -> int:
+        """current number of participants including host"""
+        return self.participants.count() + 1
     def __str__(self) -> str:
         return str(self.start)
 
