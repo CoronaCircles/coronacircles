@@ -10,6 +10,7 @@ COPY ./ /opt/services/coronacircles/
 
 # install our dependencies
 RUN pip install pipenv
+RUN pipenv lock
 RUN pipenv install --system
 
 # expose the port 8000
