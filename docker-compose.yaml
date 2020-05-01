@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+    command: python manage.py migrate
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/opt/services/coronacircles
