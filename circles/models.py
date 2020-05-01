@@ -77,8 +77,8 @@ class Event(models.Model):
         for addr in addrs:
             messages.append(
                 (
-                    _("You are participating in a CoronaCircle"),
-                    f_("Your circle is starting on {self.start}. Click here to join the circle: {self.join_url}"),
+                    "You are participating in a CoronaCircle",
+                    f"Your circle is starting on {self.start}. Click here to join the circle: {self.join_url}",
                     settings.DEFAULT_FROM_EMAIL,
                     [addr],
                 )

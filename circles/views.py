@@ -42,8 +42,8 @@ class EventHost(CreateView):
         event.save()
 
         send_mail(
-            _("You are hosting a Circle"),
-            f_("Your circle on {event.start} was created. We will send you a link by email before the circle is starting."),
+            "You are hosting a Circle",
+            f"Your circle on {event.start} was created. We will send you a link by email before the circle is starting.",
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=True,
@@ -88,8 +88,8 @@ class EventJoin(FormView):
             event.participants.add(user)
 
         send_mail(
-            _("You are participating in a circle"),
-            f_("You have joined the circle happening on {event.start}. We will send you a link by email before the circle is starting."),
+            "You are participating in a circle",
+            f"You have joined the circle happening on {event.start}. We will send you a link by email before the circle is starting.",
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=True,
