@@ -55,6 +55,10 @@
   font-style: normal;
 }
 body {
+  height: 100%;
+}
+
+body {
   font-family: source-sans, sans-serif;
   color: #502900;
   background: #F4B93D;
@@ -156,11 +160,19 @@ ul.navbar-nav li a:hover {
 
 /* Main */
 main {
-  padding: 100px 0px;
+  padding: 100px 0px 270px 0px;
+  min-height: 100%;
+  position: relative;
+  clear: both;
 }
 
 body#event-list main {
-  padding: 0px;
+  padding-top: 0px;
+  padding-bottom: 270px;
+}
+
+body#form main {
+  position: static;
 }
 
 /*  Slider  */
@@ -421,6 +433,9 @@ body#event-list main {
 /* Footer */
 footer {
   background: #F9DB9D;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 footer a {
   color: #502900;
