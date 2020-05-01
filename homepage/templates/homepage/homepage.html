@@ -1,11 +1,38 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block content %}    
-  {% include "./_carousel.html" %}
+{% block body %}start{% endblock body %}
 
-  {% comment %} TODO: include events {% endcomment %}
+{% block content %}
 
-  {% include "./_testimonials.html" %}
+{% include "./_carousel.html" %}
 
-  {% comment %} TODO: include contacts {% endcomment %}
+<div class="events">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12"><h2>{% trans "Upcoming Circles" %}</h2></div>
+
+			<div class="col-md-8 col-sm-12">
+        {% if events %}
+          <ul class="event-list">
+            {% for event in events %}
+              {% include "circles/_event.html" %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>{% trans "No circles at the moment, would you like to host one?" %}</p>
+        {% endif %}
+      </div>
+      
+      <div class="col-md-4 col-sm-12 right">
+				<h4>{% trans "show more" %}</h4>
+				<a class="btn btn-secondary btn-lg" href="{% url 'circles:list' %}">{% trans "Show Circles" %}</a>
+			</div>
+
+    </div>
+  </div>
+</div>
+
+{% include "./_testimonials.html" %}
+
 {% endblock content %}
