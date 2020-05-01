@@ -2,6 +2,7 @@ import uuid
 import datetime
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth import get_user_model
@@ -26,22 +27,22 @@ class EventManager(models.Manager.from_queryset(EventQuerySet)):
 
 class Event(models.Model):
     uuid = models.UUIDField(
-        "UUID für Konferenz-URL", default=uuid.uuid4,  # editable=False
+        _("UUID for meeting-URL"), default=uuid.uuid4,  # editable=False
     )
 
-    created_at = models.DateTimeField("Erstelldatum", default=timezone.now)
-    start = models.DateTimeField("Start-Zeitpunkt")
+    created_at = models.DateTimeField(_("Creation Date"), default=timezone.now)
+    start = models.DateTimeField(_("Date"))
 
-    mails_sent = models.BooleanField("Ob E-Mail verschickt wurde", default=False)
+    mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
 
     host = models.ForeignKey(
         get_user_model(),
         related_name="hosted_events",
         on_delete=models.CASCADE,
-        verbose_name="Gastgeber",
+        verbose_name=_("Host"),
     )
     participants = models.ManyToManyField(
-        get_user_model(), related_name="events", verbose_name="Teilnehmer/innen"
+        get_user_model(), related_name="events", verbose_name=_("Participants")
     )
 
     objects = EventManager()
@@ -76,8 +77,8 @@ class Event(models.Model):
         for addr in addrs:
             messages.append(
                 (
-                    "An Event teilnemen",
-                    f"Dein Event startet um {self.start}. Mit diesem Link kannst du teilnehmen: {self.join_url}",
+                    _("You are participating in a CoronaCircle"),
+                    f_("Your circle is starting on {self.start}. Click here to join the circle: {self.join_url}"),
                     settings.DEFAULT_FROM_EMAIL,
                     [addr],
                 )

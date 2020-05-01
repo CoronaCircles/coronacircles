@@ -8,6 +8,7 @@ from django.views.generic import (
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
@@ -41,8 +42,8 @@ class EventHost(CreateView):
         event.save()
 
         send_mail(
-            "Event erstellt",
-            f"Dein Event um {event.start} wurde erstellt. Wir schicken dir einen Link, wenn es anfängt.",
+            _("You are hosting a Circle"),
+            f_("Your circle on {event.start} was created. We will send you a link by email before the circle is starting."),
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=True,
@@ -87,8 +88,8 @@ class EventJoin(FormView):
             event.participants.add(user)
 
         send_mail(
-            "Event beigetreten",
-            f"Du bist einem Event um {event.start} beigetreten. Wir schicken dir einen Link, wenn es anfängt.",
+            _("You are participating in a circle"),
+            f_("You have joined the circle happening on {event.start}. We will send you a link by email before the circle is starting."),
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=True,
