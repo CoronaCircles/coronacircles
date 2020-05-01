@@ -15,7 +15,7 @@
 			<div class="col-md-8 col-sm-12">
         {% if events %}
           <ul class="event-list">
-            {% for event in events %}
+            {% for event in events|slice:":4" %}
               {% include "circles/_event.html" %}
             {% endfor %}
           </ul>
@@ -26,13 +26,39 @@
       
       <div class="col-md-4 col-sm-12 right">
 				<h4>{% trans "show more" %}</h4>
-				<a class="btn btn-secondary btn-lg" href="{% url 'circles:list' %}">{% trans "Show Circles" %}</a>
+				<a class="btn btn-secondary btn-lg" href="{% url 'circles:list' %}">{% trans "Show All Circles" %}</a>
 			</div>
 
     </div>
   </div>
 </div>
-
-{% include "./_testimonials.html" %}
+<div class="host">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-10">
+        <h1>{% trans "Host a Corona Circle" %}</h1>
+        {% trans "<p>Inviting to a CoronaCircle is easy</p><p>You should have good experience with talking circles such as the Corona Circles.<br />As a host your tasts are:</p><ul><li>to welcome everyone and to bring their awareness the suggestions and the procedure as they are formulated for you in the confirmation mail</li><li>mark the beginning of each round</li><li>watch the time (and start the integrated timer as soon as a person starts talking)</li></ul>" %}
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <a href="{% url "circles:host" %}" class="btn btn-secondary btn-block btn-lg">{% trans "Host" %}</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="testimonials">
+  {% include "./_testimonials.html" %}
+</div>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 center">
+        <h1>{% trans "Contact" %}</h1>
+        <p><a href="mailto:hello@coronacircles.com">{% trans "Contact" %}</a> {% trans "the CoronaCircle Team" %}
+        </br>
+        {% trans "Share your experiences, questions, and ideas with us!" %}</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

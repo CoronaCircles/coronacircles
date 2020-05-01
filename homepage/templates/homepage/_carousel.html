@@ -12,8 +12,8 @@
           <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
             <div class="container">
               <div class="row">
-                <div class="col-md-6 col-sm-12 left">{{ item.headline }}</div>
-                <div class="col-md-6 col-sm-12 right">{{ item.text }}</div>
+                <div class="col-md-6 col-sm-12 left"><h1>{{ item.headline }}</h1></div>
+                <div class="col-md-6 col-sm-12 right">{{ item.text|safe|escape }}</div>
               </div>
             </div>
           </div>
