@@ -45,6 +45,7 @@ class EventHost(CreateView):
             f"Dein Event um {event.start} wurde erstellt. Wir schicken dir einen Link, wenn es anfängt.",
             settings.DEFAULT_FROM_EMAIL,
             [email],
+            fail_silently=True,
         )
 
         return render(self.request, "circles/hosted.html", {"event": event})
@@ -90,6 +91,7 @@ class EventJoin(FormView):
             f"Du bist einem Event um {event.start} beigetreten. Wir schicken dir einen Link, wenn es anfängt.",
             settings.DEFAULT_FROM_EMAIL,
             [email],
+            fail_silently=True,
         )
 
         return render(self.request, "circles/joined.html", {"event": event})
