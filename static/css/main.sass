@@ -255,6 +255,14 @@ body#form main
     &:nth-child(even) > time
       background-color: $secondary
 
+    &:nth-child(even) .info .btn
+      background: $secondary
+      border-color: $secondary
+
+      &:hover
+        background: $primary
+        border-color: $primary
+
     > time >
       span
         display: none
@@ -271,19 +279,23 @@ body#form main
       font-weight: 900
       line-height: 1
 
-    >
-      img
-        width: 100%
+    > img
+      width: 100%
 
-      .info
-        padding-top: 5px
-        text-align: center
+    .info
+      padding-top: 5px
+      text-align: center
 
-        >
-          .title
-            font-size: 17pt
-            font-weight: 700
-            margin: 0px
+      a.btn
+        position: absolute
+        right: 0px
+        bottom: 0px
+        padding: 47px
+
+        > .title
+          font-size: 17pt
+          font-weight: 700
+          margin: 0px
 
           .desc
             font-size: 13pt
@@ -522,7 +534,6 @@ footer
         position: relative
         height: 120px
         text-align: left
-        padding-right: 40px
 
         >
           .title, .desc

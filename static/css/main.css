@@ -255,6 +255,14 @@ body#form main {
 .event-list > li:nth-child(even) > time {
   background-color: #502900;
 }
+.event-list > li:nth-child(even) .info .btn {
+  background: #502900;
+  border-color: #502900;
+}
+.event-list > li:nth-child(even) .info .btn:hover {
+  background: #F27C00;
+  border-color: #F27C00;
+}
 .event-list > li > time > span {
   display: none;
 }
@@ -273,21 +281,27 @@ body#form main {
 .event-list > li > img {
   width: 100%;
 }
-.event-list > li > .info {
+.event-list > li .info {
   padding-top: 5px;
   text-align: center;
 }
-.event-list > li > .info > .title {
+.event-list > li .info a.btn {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 47px;
+}
+.event-list > li .info a.btn > .title {
   font-size: 17pt;
   font-weight: 700;
   margin: 0px;
 }
-.event-list > li > .info > .desc {
+.event-list > li .info a.btn > .title .desc {
   font-size: 13pt;
   font-weight: 300;
   margin: 0px;
 }
-.event-list > li > .info > ul {
+.event-list > li .info a.btn > .title ul {
   display: table;
   list-style: none;
   margin: 10px 0px 0px;
@@ -295,7 +309,7 @@ body#form main {
   width: 100%;
   text-align: center;
 }
-.event-list > li > .social > ul {
+.event-list > li .info .social > ul {
   display: table;
   list-style: none;
   margin: 10px 0px 0px;
@@ -304,7 +318,7 @@ body#form main {
   text-align: center;
   margin: 0px;
 }
-.event-list > li > .info > ul > li, .event-list > li > .social > ul > li {
+.event-list > li .info .info > ul > li, .event-list > li .info .social > ul > li {
   display: table-cell;
   cursor: pointer;
   color: #1e1e1e;
@@ -312,19 +326,19 @@ body#form main {
   font-weight: 300;
   padding: 3px 0px;
 }
-.event-list > li > .info > ul > li > a {
+.event-list > li .info .info > ul > li > a {
   display: block;
   width: 100%;
   color: #1e1e1e;
   text-decoration: none;
 }
-.event-list > li > .social > ul > li {
+.event-list > li .info .social > ul > li {
   padding: 0px;
 }
-.event-list > li > .social > ul > li > a {
+.event-list > li .info .social > ul > li > a {
   padding: 3px 0px;
 }
-.event-list > li > .info > ul > li:hover, .event-list > li > .social > ul > li:hover {
+.event-list > li .info .info > ul > li:hover, .event-list > li .info .social > ul > li:hover {
   color: #1e1e1e;
   background-color: #c8c8c8;
 }
@@ -526,7 +540,6 @@ footer .social-bar a:hover {
     position: relative;
     height: 120px;
     text-align: left;
-    padding-right: 40px;
   }
   .event-list > li > .info > .title, .event-list > li > .info > .desc {
     padding: 0px 10px;
