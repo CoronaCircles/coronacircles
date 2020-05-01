@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
+
+{% block body %}event-list{% endblock body %}
 
 {% block content %}
 <div class="events">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12"><h2>Kommende Events</h2></div>
+			<div class="col-sm-12"><h2>{% trans "Upcoming Circles" %}</h2></div>
 
 			<div class="col-md-8 col-sm-12">
         {% if events %}
@@ -14,12 +17,12 @@
             {% endfor %}
           </ul>
         {% else %}
-          <p>Zur Zeit gibt es keine Events.</p>
+          <p>{% trans "No circles at the moment, would you like to host one?" %}</p>
         {% endif %}
       </div>
       
       <div class="col-md-4 col-sm-12 right">
-				<a class="btn btn-secondary btn-lg" href="{% url 'circles:host' %}">Hosten</a>
+				<a class="btn btn-secondary btn-lg" href="{% url 'circles:host' %}">{% trans "Host" %}</a>
 			</div>
 
     </div>

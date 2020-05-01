@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container">
@@ -6,14 +7,14 @@
     <div class="col-sm-12">
 
       {% if event.is_full %}
-        <p>Sorry, das Event ist schon voll.</p>
+        <p>{% trans "Sorry, this circle is already full" %}</p>
       {% elif event.is_past %}
-        <p>Sorry, das Event liegt in der Vergangenheit.</p>
+        <p>{% trans "Sorry, this circle already took place" %}</p>
       {% else %}
 
       {% endif %}
-      <p>Du kannst nicht beitreten.</p>
-      <a href="{% url 'circles:list' %}">Zurück</a>
+      <p>{% trans "You can not join" %}</p>
+      <a href="{% url 'circles:list' %}">{% trans "Back" %}</a>
       
     </div>
   </div>

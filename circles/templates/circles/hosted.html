@@ -1,14 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
 
-      <p>
-        Herzlichen Glückwunsch! Dein Event um {{ event.start }} wurde erstellt.
-        Du hast eine Bestätigungsmail bekommen.
-      </p>
+      	<h1>{% trans "Congratulations!" %}</h1>
+        <p>{% blocktrans with date=event.start %}Your circle at <b>{{ date }}</b> was created.{% endblocktrans %}
+        </br>
+        {% trans "We have sent a confirmation email to the adress you just provided" %}</p>
       
     </div>
   </div>

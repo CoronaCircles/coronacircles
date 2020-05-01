@@ -1,30 +1,33 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container">
   <div class="row">
 		<div class="col-sm-12">
 
-      <h2>An Event am {{ event.start }} teilnehmen</h2>
+      <h2>{% blocktrans with date=event.start %}
+            Participate in circle at {{ date }}
+          {% endblocktrans %}
+      </h2>
 
       {% if event.is_full %}
-        <p>Sorry, das Event ist bereits voll.</p>
-        <a href="{% url 'circles:list' %}">Zurück</a>
+        <p>{% trans "Sorry, this circle is already full" %}</p>
+        <a href="{% url 'circles:list' %}">{% trans "Back" %}</a>
       {% elif event.is_past %}
-        <p>Sorry, das Event liegt bereits in der Vergangenheit.</p>
-        <a href="{% url 'circles:list' %}">Zurück</a>
+        <p>{% trans "Sorry, this circle already happened" %}</p>
+        <a href="{% url 'circles:list' %}">{% trans "Back" %}</a>
       {% else %}
         <p>
-          Gib deine E-Mail-Adresse an.<br>
-          Wenn das Event anfängt,
-          bekommst du einen Link zugeschickt, mit dem du teilnehmen kannst.
+          {% trans "Please provide your E-Mail Address." %}<br>
+          {% trans "You will receive an e-mail containing a link to join the circle, before the circle is starting" %}
         </p>
 
         <form target="{% url 'circles:join' event.id %}" method="POST">
           {% csrf_token %}
           {{ form.as_p }}
-          <a href="{% url 'circles:list' %}">Abbrechen</a>
-          <button type="submit">Teilnehmen</button>
+          <a href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
+          <button type="submit">{% trans "Participate" %}</button>
         </form>
       {% endif %}
       
