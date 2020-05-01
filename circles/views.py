@@ -25,6 +25,7 @@ class EventList(ListView):
     """Listing of upcoming events"""
 
     context_object_name = "events"
+    template_name = "circles/list.html"
     queryset = Event.objects.upcoming().prefetch_related("participants")
 
 
