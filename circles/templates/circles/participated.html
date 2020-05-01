@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>{% trans "You are participating" %}</h2>
+      <p>
+      	{% blocktrans with date=event.start %}
+        	In the circle happening at <b>{{ date }}</b>
+      	{% endblocktrans %}
+  		</p>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

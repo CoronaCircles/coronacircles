@@ -15,7 +15,7 @@ from django.conf import settings
 
 
 from .models import Event
-from .forms import EventHostForm, JoinForm
+from .forms import Host, Participate
 
 
 User = get_user_model()
@@ -32,7 +32,8 @@ class EventHost(CreateView):
     """Create/Host a new event"""
 
     model = Event
-    form_class = EventHostForm
+    template_name = "circles/host.html"
+    form_class = Host
 
     def form_valid(self, form):
         email = form.cleaned_data["email"]
@@ -64,8 +65,8 @@ class EventJoin(FormView):
     
     Asks user for mail. Sends mail with details for event"""
 
-    template_name = "circles/join_form.html"
-    form_class = JoinForm
+    template_name = "circles/participate.html"
+    form_class = Participate
 
     def get_context_data(self, **kwargs):
         event = get_object_or_404(Event, pk=self.kwargs["id"])
@@ -95,4 +96,4 @@ class EventJoin(FormView):
             fail_silently=True,
         )
 
-        return render(self.request, "circles/joined.html", {"event": event})
+        return render(self.request, "circles/participated.html", {"event": event})
