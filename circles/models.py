@@ -31,7 +31,7 @@ class Event(models.Model):
     )
 
     created_at = models.DateTimeField(_("Creation Date"), default=timezone.now)
-    start = models.DateTimeField(_("Date"))
+    start = models.DateTimeField(_("Date and Time"))
 
     mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
 
