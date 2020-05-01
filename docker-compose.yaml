@@ -1,0 +1,11 @@
+version: '2'
+services:
+  django:
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/opt/services/coronacircles
+    ports:
+      - "127.0.0.1:8000:8000"
