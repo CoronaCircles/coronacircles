@@ -1,0 +1,22 @@
+{% if testimonials %}
+	<div class="container testimonials">
+		<div class="row">
+			<div class="col-sm-12">Testimonials Headline</div>
+
+			<div class="col-sm-12 col-md-6">
+				<ul class="list-unstyled">
+					{% for testimonial in testimonials %}
+						<li class="media">
+							<img src="{{ testimonial.image.url }}">
+							<div class="media-body ml-3">
+								{{ testimonial.text }}
+								<span class="author">{{ testimonial.author }}</span>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+		</div>
+	</div>
+{% endif %}

@@ -48,9 +48,7 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = []
-LOCAL_APPS = [
-    "circles",
-]
+LOCAL_APPS = ["circles", "homepage"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
