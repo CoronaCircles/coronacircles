@@ -1,10 +1,21 @@
-{% if event.is_full %}
-    <p>Sorry, das Event ist schon voll.</p>
-{% elif event.is_past %}
-    <p>Sorry, das Event liegt in der Vergangenheit.</p>
-{% else %}
+{% extends "base.html" %}
 
-{% endif %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-<p>Du kannst nicht beitreten.</p>
-<a href="{% url 'circles:list' %}">Zurück</a>
+      {% if event.is_full %}
+        <p>Sorry, das Event ist schon voll.</p>
+      {% elif event.is_past %}
+        <p>Sorry, das Event liegt in der Vergangenheit.</p>
+      {% else %}
+
+      {% endif %}
+      <p>Du kannst nicht beitreten.</p>
+      <a href="{% url 'circles:list' %}">Zurück</a>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}

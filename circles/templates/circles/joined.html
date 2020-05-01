@@ -1,2 +1,14 @@
-<h2>Du wurdest als Teilnehmer/in eingetragen.</h2>
-<p>Für das Event um {{ event.start }}</p>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>Du wurdest als Teilnehmer/in eingetragen.</h2>
+      <p>Für das Event um {{ event.start }}</p>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

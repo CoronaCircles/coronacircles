@@ -1,4 +1,16 @@
-<p>
-  Herzlichen Glückwunsch! Dein Event um {{ event.start }} wurde erstellt.
-  Du hast eine Bestätigungsmail bekommen.
-</p>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <p>
+        Herzlichen Glückwunsch! Dein Event um {{ event.start }} wurde erstellt.
+        Du hast eine Bestätigungsmail bekommen.
+      </p>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}

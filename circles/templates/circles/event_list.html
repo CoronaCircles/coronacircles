@@ -1,22 +1,28 @@
-<h2>Kommende Events</h2>
-{% if events %}
-  {% for event in events %}
+{% extends "base.html" %}
 
-    <div>
-      {{ event.start }}
+{% block content %}
+<div class="events">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12"><h2>Kommende Events</h2></div>
 
-      ({{ event.participant_count }} TN)
+			<div class="col-md-8 col-sm-12">
+        {% if events %}
+          <ul class="event-list">
+            {% for event in events %}
+              {% include "circles/_event.html" %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>Zur Zeit gibt es keine Events.</p>
+        {% endif %}
+      </div>
+      
+      <div class="col-md-4 col-sm-12 right">
+				<a class="btn btn-secondary btn-lg" href="{% url 'circles:host' %}">Hosten</a>
+			</div>
 
-      {% if not event.is_full %}
-        <a href="{% url 'circles:join' event.id %}">Teilnehmen</a>
-      {% endif %}
     </div>
-
-  {% endfor %}
-{% else %}
-  <p>Zur Zeit gibt es keine Events.</p>
-{% endif %}
-
-<div>
-  <a href="{% url 'circles:host' %}">Neues Event erstellen</a>
+  </div>
 </div>
+{% endblock content %}
