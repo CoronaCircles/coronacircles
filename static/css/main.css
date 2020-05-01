@@ -91,7 +91,8 @@ a {
   color: #FFFFFF;
 }
 .btn-primary:hover {
-  background-color: #F27C00;
+  background-color: #502900;
+  border-color: #502900;
 }
 
 .btn-secondary {
@@ -113,6 +114,15 @@ a {
 }
 .btn-third:hover {
   color: #FFFFFF;
+}
+
+.btn-outline-secondary {
+  border-color: #502900;
+  color: #502900;
+}
+.btn-outline-secondary:hover {
+  background-color: #502900;
+  border-color: #502900;
 }
 
 /*  Header  */

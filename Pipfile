@@ -16,6 +16,8 @@ whitenoise = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 pillow = "*"
+django-crispy-forms = "*"
+django-bootstrap-datepicker-plus = "*"
 
 [requires]
 python_version = "3.8"

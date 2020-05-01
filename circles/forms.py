@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from bootstrap_datepicker_plus import DatePickerInput
 
 from .models import Event
 
@@ -18,9 +19,18 @@ class EventHostForm(forms.ModelForm):
         fields = ["start", "email"]
         model = Event
 
+        widgets = {
+            'start': DatePickerInput(format='%Y-%m-%d'), # specify date-frmat
+        }
+
 
 class JoinForm(forms.Form):
     email = forms.EmailField(label=_("E-mail address"))
 
     class Meta:
         fields = ["email"]
+        
+        widgets = {
+            'start': DatePickerInput(format='%Y-%m-%d'), # specify date-frmat
+        }
+

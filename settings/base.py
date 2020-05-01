@@ -47,8 +47,14 @@ DJANGO_APPS = [
     "django.contrib.humanize",
     "django.forms",
 ]
-THIRD_PARTY_APPS = []
+
+THIRD_PARTY_APPS = [
+    "crispy_forms",
+    "bootstrap_datepicker_plus",
+]
+
 LOCAL_APPS = ["circles", "homepage"]
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -167,3 +173,7 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # ADMIN_URL = r"^admin/"
 # ADMINS = [("Name", "admin@example.com")]
 # MANAGERS = ADMINS
+
+# APP SETTINGS
+# ------------------------------------------------------------------------------
+CRISPY_TEMPLATE_PACK = "bootstrap4"
