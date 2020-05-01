@@ -65,6 +65,7 @@ $fifth: #F9DB9D
 body
   font-family: source-sans, sans-serif
   color: $secondary
+  background: $fourth
 
 h1 , h2, h3, h4
   font-family: raleway, sans-serif
@@ -114,6 +115,13 @@ a
   &:hover
     color: $third
 
+
+
+/*  Header  */
+
+.navbar
+  background: #fff
+
 a.navbar-brand
   background: url("/static/img/coronacircles.png") center no-repeat
   height: 67px
@@ -135,6 +143,19 @@ ul.navbar-nav
       &:hover
         color: $primary
         text-decoration: none
+
+
+/* Main */
+
+main
+  padding: 100px 0px
+
+body#start main
+body#event-list main
+  padding: 0px
+
+
+/*  Slider  */
 
 .carousel.slide .carousel-inner
   background-color: $primary

@@ -57,6 +57,7 @@
 body {
   font-family: source-sans, sans-serif;
   color: #502900;
+  background: #F4B93D;
 }
 
 h1, h2, h3, h4 {
@@ -114,6 +115,11 @@ a {
   color: #FFFFFF;
 }
 
+/*  Header  */
+.navbar {
+  background: #fff;
+}
+
 a.navbar-brand {
   background: url("/static/img/coronacircles.png") center no-repeat;
   height: 67px;
@@ -138,6 +144,16 @@ ul.navbar-nav li a:hover {
   text-decoration: none;
 }
 
+/* Main */
+main {
+  padding: 100px 0px;
+}
+
+body#event-list main {
+  padding: 0px;
+}
+
+/*  Slider  */
 .carousel.slide .carousel-inner {
   background-color: #F27C00;
   color: #FFFFFF;
