@@ -27,7 +27,7 @@ class EventListTestCase(TestCase):
 
     def test_get(self):
         response = self.client.get(self.url)
-        self.assertContains(response, "Kommende Events", status_code=200)
+        self.assertContains(response, "Upcoming Circles", status_code=200)
         # only upcoming events
         self.assertEqual(response.context["events"].count(), 1)
 
@@ -37,14 +37,14 @@ class EventHostTestCase(TestCase):
 
     def test_get(self):
         response = self.client.get(self.url)
-        self.assertContains(response, "Neues Event erstellen", status_code=200)
+        self.assertContains(response, "Host a circle", status_code=200)
 
     def test_post(self):
         tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
         response = self.client.post(
             self.url, {"start": tomorrow, "email": "max@mustermann.com",},
         )
-        self.assertContains(response, "wurde erstellt.", status_code=200)
+        self.assertContains(response, "was created", status_code=200)
 
         # user and event were created
         self.assertEqual(User.objects.count(), 1)
@@ -64,7 +64,7 @@ class EventHostTestCase(TestCase):
         response = self.client.post(
             self.url, {"start": yesterday, "email": "max@mustermann.com",},
         )
-        self.assertContains(response, "Muss in der Zukunft sein", status_code=200)
+        self.assertContains(response, "Has to be in the future", status_code=200)
 
 
 class EventJoinTestCase(TestCase):
@@ -78,13 +78,11 @@ class EventJoinTestCase(TestCase):
 
     def test_get(self):
         response = self.client.get(self.url)
-        self.assertContains(response, "teilnehmen", status_code=200)
+        self.assertContains(response, "Participate in circle", status_code=200)
 
     def test_post(self):
         response = self.client.post(self.url, {"email": "max@mustermann.com",})
-        self.assertContains(
-            response, "Du wurdest als Teilnehmer/in eingetragen.", status_code=200
-        )
+        self.assertContains(response, "You are participating", status_code=200)
 
         # user is added as participant
         self.assertEqual(self.event.participants.count(), 1)
@@ -100,7 +98,7 @@ class EventJoinTestCase(TestCase):
         url = reverse("circles:join", args=[past_event.pk])
 
         response = self.client.post(url, {"email": "max@mustermann.com",})
-        self.assertContains(response, "Du kannst nicht beitreten.", status_code=400)
+        self.assertContains(response, "You can not join", status_code=400)
 
     def test_post_same_user_twice(self):
         """Test that a user is not added twice as participant"""
