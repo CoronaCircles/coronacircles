@@ -174,14 +174,14 @@ ul.navbar-nav li a:hover {
 main {
   padding: 100px 0px 360px 0px;
   min-height: 100%;
-  position: relative;
-  clear: both;
 }
 
 body#start main,
 body#event-list main {
   padding-top: 0px;
   padding-bottom: 266px;
+  position: relative;
+  clear: both;
 }
 
 /*  Slider  */
@@ -441,12 +441,17 @@ body#form .input-group.date .input-group-text {
   border-color: #502900;
 }
 
+body#form .input-group input.is-invalid {
+  border: 2px solid #F27C00;
+}
+
 .bootstrap-datetimepicker-widget {
   color: #502900;
 }
 
 .form-group input {
   border-color: #502900;
+  border-radius: 0px;
 }
 
 /* Testimonials */
@@ -565,6 +570,11 @@ footer .social-bar a {
 footer .social-bar a:hover {
   color: #F27C00;
   text-decoration: none;
+}
+
+body#form footer {
+  position: absolute;
+  bottom: 0px;
 }
 
 /* Responsive */

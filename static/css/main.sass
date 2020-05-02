@@ -174,13 +174,13 @@ ul.navbar-nav
 main
   padding: 100px 0px 360px 0px
   min-height: 100%
-  position: relative
-  clear: both
 
 body#start main,
 body#event-list main
   padding-top: 0px
   padding-bottom: 266px
+  position: relative
+  clear: both
 
 
 /*  Slider  */
@@ -434,11 +434,15 @@ body#form .input-group.date .input-group-text
   color: $third
   border-color: $secondary
 
+body#form .input-group input.is-invalid
+  border: 2px solid $primary
+
 .bootstrap-datetimepicker-widget
   color: $secondary
 
 .form-group input
   border-color: $secondary
+  border-radius: 0px
 
 /* Testimonials */
 
@@ -558,6 +562,10 @@ footer
       &:hover
         color: $primary
         text-decoration: none
+
+body#form footer
+  position: absolute
+  bottom: 0px
 
 /* Responsive */
 
