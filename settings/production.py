@@ -151,6 +151,3 @@ LOGGING = {
         },
     },
 }
-
-
-SITE_ID = 3
