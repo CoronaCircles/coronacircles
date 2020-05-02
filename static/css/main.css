@@ -518,6 +518,7 @@ footer a:hover {
 footer > .container {
   padding-top: 40px;
   padding-bottom: 40px;
+  min-height: 216px;
 }
 footer input#mce-EMAIL {
   border: none;
