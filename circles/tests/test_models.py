@@ -28,17 +28,20 @@ class EventTestCase(TestCase):
 
     def test_is_full(self):
         self.assertFalse(self.event.is_full)
-
         # create 6 participants
         for i in range(1, 7):
             email = f"test{i}@example.com"
             user = User(email=email, username=email)
             user.save()
             self.event.participants.add(user)
-
         self.event.save()
-
         self.assertTrue(self.event.is_full)
+
+    def test_ical(self):
+        self.assertEqual(
+            self.event.ical,
+            b"BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Corona Circle\r\nDTSTART;VALUE=DATE-TIME:20200501T200000Z\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+        )
 
 
 class EventQuerySetTestCase(TestCase):

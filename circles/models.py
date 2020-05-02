@@ -11,6 +11,8 @@ from django.conf import settings
 from django.template import Template, Context
 from django.core import mail
 
+from icalendar import Calendar, Event as IEvent
+
 
 class EventQuerySet(models.QuerySet):
     def upcoming(self):
@@ -69,6 +71,16 @@ class Event(models.Model):
     def join_url(self) -> str:
         """url to join in Jitsi etc."""
         return f"https://meet.allmende.io/coronacircles-{self.uuid}"
+
+    @property
+    def ical(self) -> Calendar:
+        """Get ical representation of event"""
+        cal = Calendar()
+        event = IEvent()
+        event.add("summary", "Corona Circle")
+        event.add("dtstart", self.start)
+        cal.add_component(event)
+        return cal.to_ical()
 
     def __str__(self) -> str:
         return str(self.start)
