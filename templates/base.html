@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- facebook sharing
     Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
-    <meta property="og:url"           content="{{ request.META.HTTP_HOST }}" />
+    <meta property="og:url"           content="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="CoronaCircles" />
     <meta property="og:description"   content="Online sharing circles to counter social distancing" />
-    <meta property="og:image"         content="{{ request.META.HTTP_HOST }}{% static 'img/coronacircles.png' %}" />
+    <meta property="og:image"         content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/coronacircles.png' %}" />
     
     <title>{% block title %}{% endblock title %} Corona Circles</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
