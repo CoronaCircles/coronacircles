@@ -108,7 +108,7 @@ class MailTemplate(models.Model):
     body_template = models.TextField(_("Body Template"))
 
     def __str__(self) -> str:
-        return self.choices
+        return self.type
 
     def render(
         self, context: dict, to_email: [str], connection=None
