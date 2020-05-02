@@ -421,8 +421,9 @@ body#event-list .right {
 /* Host */
 #host {
   background-color: #F27C00;
-  background-image: url("/static/img/ccircle.png");
+  background-image: url("/static/img/circles_back.png");
   background-repeat: no-repeat;
+  background-size: contain;
   color: #FFFFFF;
   min-height: 450px;
   padding-top: 100px;
@@ -441,6 +442,20 @@ body#event-list .right {
 #host a.btn {
   position: absolute;
   bottom: 0px;
+}
+
+body#form .input-group input {
+  border-color: #502900;
+}
+
+body#form .input-group.date .input-group-text {
+  background-color: #F27C00;
+  color: #502900;
+  border-color: #502900;
+}
+
+.form-group input {
+  border-color: #502900;
 }
 
 /* Testimonials */
