@@ -19,7 +19,7 @@ if READ_DOT_ENV_FILE:
 DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "Europe/Berlin"
 LANGUAGE_CODE = "en-us"
-SITE_ID = 1
+SITE_ID = env("DJANGO_SITE_ID", default=1)
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -182,8 +182,4 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # ------------------------------------------------------------------------------
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Default',
-    }
-}
+CKEDITOR_CONFIGS = {"default": {"toolbar": "Default",}}
