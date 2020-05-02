@@ -325,8 +325,6 @@ body#event-list main {
   width: 100%;
 }
 .event-list > li .info {
-  padding-top: 20px;
-  padding-left: 130px;
   text-align: center;
 }
 .event-list > li .info > .title {
@@ -415,7 +413,7 @@ body#event-list main {
   background-color: #F27C00;
   background-image: url("/static/img/circles_back.png");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: bottom;
   color: #FFFFFF;
   min-height: 450px;
@@ -574,6 +572,10 @@ footer .social-bar a:hover {
     padding-bottom: 530px;
   }
 
+  .event-list > li .info {
+    height: 150px;
+    padding-top: 17px;
+  }
   .event-list > li .info a.btn {
     width: 100%;
   }
@@ -605,6 +607,8 @@ footer .social-bar a:hover {
     position: relative;
     height: 120px;
     text-align: left;
+    padding-top: 20px;
+    padding-left: 130px;
   }
   .event-list > li .info a.btn {
     position: absolute;
