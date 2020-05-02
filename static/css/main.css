@@ -227,31 +227,25 @@ body#event-list main {
   padding-bottom: 30px;
 }
 .carousel.slide .carousel-inner .row {
-  display: table;
+  height: 600px;
 }
 .carousel.slide .carousel-inner .left {
   background-image: url("/static/img/ccircle.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  min-height: 450px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  display: table-cell;
-  vertical-align: middle;
-  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .carousel.slide .carousel-inner .left h1 {
   font-size: 64px;
   text-align: center;
 }
 .carousel.slide .carousel-inner .right {
-  min-height: 450px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  display: table-cell;
-  vertical-align: middle;
-  height: 600px;
+  display: flex-box;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Event List */
