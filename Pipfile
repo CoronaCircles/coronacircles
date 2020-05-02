@@ -18,6 +18,7 @@ psycopg2-binary = "*"
 pillow = "*"
 django-crispy-forms = "*"
 django-bootstrap-datepicker-plus = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"

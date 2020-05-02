@@ -39,6 +39,8 @@ WSGI_APPLICATION = "wsgi.application"
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
     "django.contrib.admin",
+    "django.contrib.sites",
+    "django.contrib.flatpages",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -49,6 +51,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "ckeditor",
     "crispy_forms",
     "bootstrap_datepicker_plus",
 ]
