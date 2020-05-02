@@ -6,19 +6,22 @@ from django.core import mail
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
 
-from circles.models import Event
+from circles.models import Event, MailTemplate
 
 User = get_user_model()
 
 
 class CheckSeminarsTestCase(TestCase):
     def setUp(self):
+        # users
         self.host = User(email="host@example.com", username="host@example.com")
         self.host.save()
         self.participant = User(
             email="participant@example.com", username="participant@example.com"
         )
         self.participant.save()
+
+        # events
         past_event = Event(
             host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
         )
@@ -26,6 +29,14 @@ class CheckSeminarsTestCase(TestCase):
         past_event.participants.add(self.participant)
         Event(
             host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC)
+        ).save()
+
+        # mail template
+        MailTemplate(
+            type="join",
+            language_code="en",
+            subject_template="test",
+            body_template="test",
         ).save()
 
     def test_check_mails_sent(self):

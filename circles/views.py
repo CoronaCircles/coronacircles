@@ -14,7 +14,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 
-from .models import Event
+from .models import Event, MailTemplate
 from .forms import Host, Participate
 
 
@@ -43,13 +43,12 @@ class EventHost(CreateView):
         event.host = user
         event.save()
 
-        send_mail(
-            "You are hosting a Circle",
-            f"Your circle on {event.start} was created. We will send you a link by email before the circle is starting.",
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=True,
-        )
+        MailTemplate.send_mails(
+            type="host_confirmation",
+            language_code="en",
+            context={"event": self},
+            to_emails=[email],
+        )  # TODO: take request language into consideration
 
         return render(self.request, "circles/hosted.html", {"event": event})
 
@@ -89,12 +88,11 @@ class EventJoin(FormView):
         if user not in event.participants.all():
             event.participants.add(user)
 
-        send_mail(
-            "You are participating in a circle",
-            f"You have joined the circle happening on {event.start}. We will send you a link by email before the circle is starting.",
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=True,
-        )
+        MailTemplate.send_mails(
+            type="join_confirmation",
+            language_code="en",
+            context={"event": self},
+            to_emails=[email],
+        )  # TODO: take request language into consideration
 
         return render(self.request, "circles/participated.html", {"event": event})

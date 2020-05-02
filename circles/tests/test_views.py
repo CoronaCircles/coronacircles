@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.core import mail
 
-from circles.models import Event
+from circles.models import Event, MailTemplate
 
 User = get_user_model()
 
@@ -34,6 +34,15 @@ class EventListTestCase(TestCase):
 
 class EventHostTestCase(TestCase):
     url = reverse("circles:host")
+
+    def setUp(self):
+        # mail template
+        MailTemplate(
+            type="host_confirmation",
+            language_code="en",
+            subject_template="test",
+            body_template="test",
+        ).save()
 
     def test_get(self):
         response = self.client.get(self.url)
@@ -75,6 +84,14 @@ class EventJoinTestCase(TestCase):
         self.event = Event(host=self.host, start=tomorrow)
         self.event.save()
         self.url = reverse("circles:participate", args=[self.event.pk])
+
+        # mail template
+        MailTemplate(
+            type="join_confirmation",
+            language_code="en",
+            subject_template="test",
+            body_template="test",
+        ).save()
 
     def test_get(self):
         response = self.client.get(self.url)

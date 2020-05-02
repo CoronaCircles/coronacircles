@@ -75,17 +75,9 @@ class Event(models.Model):
     def mail_participants(self):
         """Sends mails to all participants including host with the join url"""
         addrs = [p.email for p in self.participants.all()] + [self.host.email]
-        messages = []
-        for addr in addrs:
-            messages.append(
-                (
-                    "You are participating in a CoronaCircle",
-                    f"Your circle is starting on {self.start}. Click here to join the circle: {self.join_url}",
-                    settings.DEFAULT_FROM_EMAIL,
-                    [addr],
-                )
-            )
-        send_mass_mail(messages)
+        MailTemplate.send_mails(
+            type="join", language_code="en", context={"event": self}, to_emails=addrs
+        )  # TODO: take users language into consideration
         self.mails_sent = True
         self.save()
 
@@ -118,7 +110,9 @@ class MailTemplate(models.Model):
     def __str__(self) -> str:
         return self.choices
 
-    def render(self, context, to_email, connection=None) -> mail.EmailMessage:
+    def render(
+        self, context: dict, to_email: [str], connection=None
+    ) -> mail.EmailMessage:
         """render this email template to email message"""
         from_email = settings.DEFAULT_FROM_EMAIL
         subject = render_template(self.subject_template, context)
@@ -133,13 +127,19 @@ class MailTemplate(models.Model):
 
     @classmethod
     def get_mails(
-        cls, type, language_code, context, to_emails, connection=None
+        cls,
+        type: str,
+        language_code: str,
+        context: dict,
+        to_emails: [str],
+        connection=None,
     ) -> [mail.EmailMessage]:
         """get multiple emails from template for type and language to all to_emails"""
         try:
             template = cls.objects.get(type=type, language_code=language_code)
         except cls.DoesNotExist:
             try:
+                # fallback to en language
                 template = cls.objects.get(type=type, language_code="en")
             except cls.DoesNotExist:
                 return []
@@ -155,8 +155,14 @@ class MailTemplate(models.Model):
         return emails
 
     @classmethod
-    def send_mails(cls, type, language_code, context, to_emails):
-        """send multiple emails using one connection"""
+    def send_mails(
+        cls, type: str, language_code: str, context: dict, to_emails: [str]
+    ) -> int:
+        """send multiple emails using one connection
+        
+        returns: Number of messages sent
+        """
+        counter = 0
         with mail.get_connection() as connection:
             for email in cls.get_mails(
                 type=type,
@@ -165,4 +171,5 @@ class MailTemplate(models.Model):
                 to_emails=to_emails,
                 connection=connection,
             ):
-                email.send(fail_silently=True)
+                counter += email.send(fail_silently=True)
+        return counter

@@ -82,10 +82,11 @@ class MailTemplateTestCase(TestCase):
         self.assertEqual(len(mails), 2)
 
     def test_send_mails(self):
-        MailTemplate.send_mails(
+        count = MailTemplate.send_mails(
             "join_confirmation",
             "de",
             {"testvariable": "This is a test"},
             ["max@example.com", "clara@example.com"],
         )
+        self.assertEqual(count, 2)
         self.assertEqual(len(mail.outbox), 2)
