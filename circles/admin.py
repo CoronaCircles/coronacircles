@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event
+from .models import Event, MailTemplate
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -7,3 +7,10 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
+
+
+class MailTemplateAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(MailTemplate, MailTemplateAdmin)

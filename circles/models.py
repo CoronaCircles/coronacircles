@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.template import Template, Context
+from django.core import mail
 
 
 class EventQuerySet(models.QuerySet):
@@ -89,3 +91,78 @@ class Event(models.Model):
 
     class Meta:
         ordering = ("start",)
+
+
+def render_template(template: str, context: dict) -> str:
+    """helper to render a template str with context"""
+    if template is None:
+        return ""
+    return Template(template).render(Context(context))
+
+
+class MailTemplate(models.Model):
+    type = models.CharField(
+        _("Type"),
+        max_length=255,
+        choices=(
+            ("join_confirmation", _("Join Confirmation")),
+            ("host_confirmation", _("Host Confirmation")),
+            ("join", _("Join")),
+        ),
+    )
+    language_code = models.CharField(_("Language Code"), max_length=255)
+
+    subject_template = models.CharField(_("Subject Template"), max_length=255)
+    body_template = models.TextField(_("Body Template"))
+
+    def __str__(self) -> str:
+        return self.choices
+
+    def render(self, context, to_email, connection=None) -> mail.EmailMessage:
+        """render this email template to email message"""
+        from_email = settings.DEFAULT_FROM_EMAIL
+        subject = render_template(self.subject_template, context)
+        body = render_template(self.body_template, context)
+        return mail.EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=from_email,
+            to=to_email.split(","),
+            connection=connection,
+        )
+
+    @classmethod
+    def get_mails(
+        cls, type, language_code, context, to_emails, connection=None
+    ) -> [mail.EmailMessage]:
+        """get multiple emails from template for type and language to all to_emails"""
+        try:
+            template = cls.objects.get(type=type, language_code=language_code)
+        except cls.DoesNotExist:
+            try:
+                template = cls.objects.get(type=type, language_code="en")
+            except cls.DoesNotExist:
+                return []
+
+        emails = []
+        for to_email in to_emails:
+            emails.append(
+                template.render(
+                    context=context, to_email=to_email, connection=connection
+                )
+            )
+
+        return emails
+
+    @classmethod
+    def send_mails(cls, type, language_code, context, to_emails):
+        """send multiple emails using one connection"""
+        with mail.get_connection() as connection:
+            for email in cls.get_mails(
+                type=type,
+                language_code=language_code,
+                context=context,
+                to_emails=to_emails,
+                connection=connection,
+            ):
+                email.send(fail_silently=True)
