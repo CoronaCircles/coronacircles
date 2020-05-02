@@ -51,7 +51,7 @@
           {% trans "You will receive an e-mail containing a link to join the circle, before the circle is starting" %}
         </p>
 
-        <form target="{% url 'circles:join' event.id %}" method="POST">
+        <form target="{% url 'circles:participate' event.id %}" method="POST">
           {% csrf_token %}
           {{ form|crispy }}
           <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>

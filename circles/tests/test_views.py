@@ -74,7 +74,7 @@ class EventJoinTestCase(TestCase):
         tomorrow = timezone.now() + datetime.timedelta(days=1)
         self.event = Event(host=self.host, start=tomorrow)
         self.event.save()
-        self.url = reverse("circles:join", args=[self.event.pk])
+        self.url = reverse("circles:participate", args=[self.event.pk])
 
     def test_get(self):
         response = self.client.get(self.url)
@@ -95,7 +95,7 @@ class EventJoinTestCase(TestCase):
         yesterday = timezone.now() - datetime.timedelta(days=1)
         past_event = Event(host=self.host, start=yesterday)
         past_event.save()
-        url = reverse("circles:join", args=[past_event.pk])
+        url = reverse("circles:participate", args=[past_event.pk])
 
         response = self.client.post(url, {"email": "max@mustermann.com",})
         self.assertContains(response, "You can not join", status_code=400)

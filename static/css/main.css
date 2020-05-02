@@ -458,6 +458,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .main {
+    padding-bottom: 530px; }
+
   .event-list > li .info a.btn {
     width: 100%; } }
 @media (min-width: 768px) {
