@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+from django.utils.translation import gettext_lazy as _
 
 import environ
 
@@ -18,7 +19,7 @@ if READ_DOT_ENV_FILE:
 # ------------------------------------------------------------------------------
 DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "Europe/Berlin"
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
@@ -106,12 +107,22 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
+# LANGUAGES
+# ------------------------------------------------------------------------------
+LANGUAGES = [
+  ('de', _('German')),
+  ('en', _('English')),
+]
+
 
 # STATIC
 # ------------------------------------------------------------------------------

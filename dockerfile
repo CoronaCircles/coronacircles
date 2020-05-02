@@ -9,9 +9,11 @@ WORKDIR /opt/services/coronacircles
 COPY ./ /opt/services/coronacircles/
 
 # install our dependencies
+RUN apt-get update && apt-get install -y gettext libgettextpo-dev
 RUN pip install pipenv
 RUN pipenv lock
 RUN pipenv install --system
+RUN django python manage.py compilemessages
 
 # expose the port 8000
 EXPOSE 8000
