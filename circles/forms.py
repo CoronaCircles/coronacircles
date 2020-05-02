@@ -20,7 +20,12 @@ class Host(forms.ModelForm):
         model = Event
 
         widgets = {
-            'start': DateTimePickerInput(format='%m/%d/%Y %H:%M'), # specify date-frmat
+            'start': DateTimePickerInput(
+                options={
+                    "format": "MM/DD/YYYY HH:mm", # specify date-frmat
+                    "sideBySide": True,
+                }
+            ),
         }
 
 
