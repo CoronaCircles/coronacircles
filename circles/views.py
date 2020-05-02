@@ -46,7 +46,7 @@ class EventHost(CreateView):
         MailTemplate.send_mails(
             type="host_confirmation",
             language_code="en",
-            context={"event": self},
+            context={"event": event},
             to_emails=[email],
         )  # TODO: take request language into consideration
 
@@ -91,7 +91,7 @@ class EventJoin(FormView):
         MailTemplate.send_mails(
             type="join_confirmation",
             language_code="en",
-            context={"event": self},
+            context={"event": event},
             to_emails=[email],
         )  # TODO: take request language into consideration
 
