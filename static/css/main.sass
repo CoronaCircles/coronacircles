@@ -328,8 +328,6 @@ body#event-list main
       width: 100%
 
     .info
-      padding-top: 20px
-      padding-left: 130px
       text-align: center
 
       > .title
@@ -412,7 +410,7 @@ body#event-list main
   background-color: $primary
   background-image: url("/static/img/circles_back.png")
   background-repeat: no-repeat
-  background-size: contain
+  background-size: cover
   background-position: bottom
   color: $third
   min-height: 450px
@@ -564,8 +562,14 @@ footer
   .main
     padding-bottom: 530px
 
-  .event-list > li  .info a.btn
-    width: 100%
+  .event-list > li .info 
+    height: 150px
+    padding-top: 17px
+
+    a.btn
+      width: 100%
+
+
 
 
 @media (min-width: 768px)
@@ -595,6 +599,8 @@ footer
       position: relative
       height: 120px
       text-align: left
+      padding-top: 20px
+      padding-left: 130px
 
       a.btn
         position: absolute
