@@ -10,6 +10,8 @@
         <p>{% blocktrans with date=event.start %}Your circle at <b>{{ date }}</b> was created.{% endblocktrans %}
         </br>
         {% trans "We have sent a confirmation email to the adress you just provided" %}</p>
+        <a href="mailto:?subject=Invitation to join my CoronaCircle!&body=Hey, I am hosting a CoronaCircle on {{ request.META.HTTP_HOST }}. It is basically an online meeting, where we share our thoughts and feelings and I would like to invite you to join us here: {{ request.META.HTTP_HOST }}{% url 'circles:participate' event.id %}" class="btn btn-secondary">{% trans "Invite people to join your Circle by email" %}</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.META.HTTP_HOST }}{% url 'circles:participate' event.id %}F&amp;src=sdkpreparse" class="btn btn-primary" class="btn btn-primary">{% trans "Invite people to join your Circle on Facebook" %}</a>
       
     </div>
   </div>
