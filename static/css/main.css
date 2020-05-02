@@ -185,23 +185,11 @@ body#event-list main {
 }
 
 /*  Slider  */
-.carousel.slide a.carousel-control-next,
-.carousel.slide a.carousel-control-prev {
-  opacity: 1;
-}
 .carousel.slide .carousel-control-next-icon,
 .carousel.slide .carousel-control-prev-icon {
   background-image: url("/static/img/arrow.png");
   width: 60px;
   height: 60px;
-}
-.carousel.slide .carousel-control-next-icon:hover,
-.carousel.slide .carousel-control-prev-icon:hover {
-  background-image: url("/static/img/arrow_hover.png");
-}
-.carousel.slide .carousel-control-next-icon:focus,
-.carousel.slide .carousel-control-prev-icon:focus {
-  background-image: url("/static/img/arrow_pressed.png");
 }
 .carousel.slide .carousel-control-next-icon {
   transform: rotate(180deg);
@@ -573,6 +561,20 @@ body#form footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .carousel.slide a.carousel-control-next,
+.carousel.slide a.carousel-control-prev {
+    opacity: 0.4;
+  }
+  .carousel.slide a.carousel-control-next:hover,
+.carousel.slide a.carousel-control-prev:hover {
+    opacity: 1;
+  }
+  .carousel.slide .carousel-control-next-icon,
+.carousel.slide .carousel-control-prev-icon {
+    width: 40px;
+    height: 40px;
+  }
+
   .main {
     padding-bottom: 530px;
   }

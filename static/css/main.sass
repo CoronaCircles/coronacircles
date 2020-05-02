@@ -187,21 +187,11 @@ body#event-list main
 
 .carousel.slide 
 
-  a.carousel-control-next, 
-  a.carousel-control-prev
-    opacity: 1
-
   .carousel-control-next-icon, 
   .carousel-control-prev-icon
     background-image: url("/static/img/arrow.png")
     width: 60px
     height: 60px
-
-    &:hover
-      background-image: url("/static/img/arrow_hover.png")
-
-    &:focus
-      background-image: url("/static/img/arrow_pressed.png")
 
   .carousel-control-next-icon
     transform: rotate(180deg)
@@ -563,6 +553,19 @@ body#form footer
 /* Responsive */
 
 @media (max-width: 768px)
+  
+  .carousel.slide
+    a.carousel-control-next, 
+    a.carousel-control-prev
+      opacity: 0.4
+
+      &:hover
+        opacity: 1
+
+    .carousel-control-next-icon, 
+    .carousel-control-prev-icon
+      width: 40px
+      height: 40px
 
   .main
     padding-bottom: 530px
