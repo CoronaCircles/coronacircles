@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <footer class="footer">
   <div class="container">
     <div class="row">
@@ -24,11 +26,19 @@
         </form>
       </div>
       <div class="col-sm-12 col-md-4 offset-md-1">
-        PLACEHOLDER_FOOTER_RIGHT
+        <ul class="footermenu">
+          <li><a href="/#contact">{% trans "CONTACT US" %}</a></li>
+          <li><a href="mailto:hello@coronacircles.com">hello@coronacircles.com</a></li>
+          <li><a href="tel:0123456789">+ 49 123 456 789</a></li>
+        </ul>
+        <b></b>
       </div>
       <div class="col-md-2">
         <ul class="footermenu">
-          <li><a>TESTMENUENTRY</a></li>
+          <li><a href="/about">{% trans "About us" %}</a></li>
+          <li><a href="/support">{% trans "Support us" %}</a></li>
+          <li><a href="/privacy">{% trans "Privacy" %}</a></li>
+          <li><a href="/terms">{% trans "Terms & Conditions" %}</a></li>
         </ul>
       </div>
     </div>
@@ -43,13 +53,13 @@
         <div class="col-sm-6">
           <ul class="float-right list-inline">
               <li class="list-inline-item ml-3">
-                  FACEBOOK
+                  <a href="https://facebook.com"><i class="fa fa-facebook-f"></i></a>
               </li>
               <li class="list-inline-item ml-3">
-                  TWITTER
+                  <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
               </li>
               <li class="list-inline-item ml-3">
-                  INSTAGRAM
+                  <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
               </li>
           </ul>
         </div>

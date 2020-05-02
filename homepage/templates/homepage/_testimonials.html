@@ -1,7 +1,9 @@
+{% load i18n %}
+
 {% if testimonials %}
-	<div class="container testimonials">
+	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">Testimonials Headline</div>
+			<div class="col-sm-12"><h1>{% trans "Testimonials" %}</h1></div>
 
 			<div class="col-sm-12 col-md-6">
 				<ul class="list-unstyled">
@@ -9,7 +11,7 @@
 						<li class="media">
 							<img src="{{ testimonial.image.url }}">
 							<div class="media-body ml-3">
-								{{ testimonial.text }}
+								"{{ testimonial.text|safe|escape|truncatewords:60 }}"
 								<span class="author">{{ testimonial.author }}</span>
 							</div>
 						</li>

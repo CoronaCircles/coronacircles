@@ -6,7 +6,7 @@ from bootstrap_datepicker_plus import DateTimePickerInput
 from .models import Event
 
 
-class EventHostForm(forms.ModelForm):
+class Host(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail address"))
 
     def clean_start(self):
@@ -24,7 +24,7 @@ class EventHostForm(forms.ModelForm):
         }
 
 
-class JoinForm(forms.Form):
+class Participate(forms.Form):
     email = forms.EmailField(label=_("E-mail address"))
 
     class Meta:

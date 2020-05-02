@@ -9,7 +9,7 @@
       <h2>{% trans "You are participating" %}</h2>
       <p>
       	{% blocktrans with date=event.start %}
-        	In the circle happening at {{ event.start }}  
+        	In the circle happening at <b>{{ date }}</b>
       	{% endblocktrans %}
   		</p>
 
