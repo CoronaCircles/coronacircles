@@ -28,17 +28,20 @@ class EventTestCase(TestCase):
 
     def test_is_full(self):
         self.assertFalse(self.event.is_full)
-
         # create 6 participants
         for i in range(1, 7):
             email = f"test{i}@example.com"
             user = User(email=email, username=email)
             user.save()
             self.event.participants.add(user)
-
         self.event.save()
-
         self.assertTrue(self.event.is_full)
+
+    def test_ical(self):
+        self.assertEqual(
+            self.event.ical,
+            b"BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Corona Circle\r\nDTSTART;VALUE=DATE-TIME:20200501T200000Z\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+        )
 
 
 class EventQuerySetTestCase(TestCase):
@@ -72,21 +75,11 @@ class MailTemplateTestCase(TestCase):
         self.assertEqual(mail.subject, "Event beigetreten")
         self.assertEqual(mail.to, ["max@example.com"])
 
-    def test_get_mails(self):
-        mails = MailTemplate.get_mails(
+    def test_get_mail(self):
+        mail = MailTemplate.get_mail(
             "join_confirmation",
             "de",
             {"testvariable": "This is a test"},
-            ["max@example.com", "clara@example.com"],
+            "max@example.com",
         )
-        self.assertEqual(len(mails), 2)
-
-    def test_send_mails(self):
-        count = MailTemplate.send_mails(
-            "join_confirmation",
-            "de",
-            {"testvariable": "This is a test"},
-            ["max@example.com", "clara@example.com"],
-        )
-        self.assertEqual(count, 2)
-        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.subject, "Event beigetreten")
