@@ -181,3 +181,9 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # APP SETTINGS
 # ------------------------------------------------------------------------------
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Default',
+    }
+}
