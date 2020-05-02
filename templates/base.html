@@ -10,7 +10,7 @@
     <meta property="og:url"           content="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="CoronaCircles" />
-    <meta property="og:description"   content="Online sharing circles to counter social distancing" />
+    <meta property="og:description"   content="{% trans "CoronaCircles is a non-profit platform for self-organized listening circles. Experience deep social encounter in times of physical distancing!" %}" />
     <meta property="og:image"         content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/coronacircles.png' %}" />
     
     <title>{% block title %}{% endblock title %} Corona Circles</title>
