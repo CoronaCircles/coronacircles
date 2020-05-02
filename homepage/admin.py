@@ -9,6 +9,7 @@ from ckeditor.widgets import CKEditorWidget
 
 
 class TestimonialAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.TextField: {"widget": CKEditorWidget}}
     pass
 
 
@@ -16,6 +17,7 @@ admin.site.register(Testimonial, TestimonialAdmin)
 
 
 class CarouselItemAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.TextField: {"widget": CKEditorWidget}}
     pass
 
 
