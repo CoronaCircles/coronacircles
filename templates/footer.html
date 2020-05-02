@@ -1,4 +1,5 @@
 {% load i18n %}
+{% get_flatpages as flatpages %}
 
 <footer class="footer">
   <div class="container">
@@ -35,10 +36,9 @@
       </div>
       <div class="col-md-2">
         <ul class="footermenu">
-          <li><a href="/about">{% trans "About us" %}</a></li>
-          <li><a href="/support">{% trans "Support us" %}</a></li>
-          <li><a href="/privacy">{% trans "Privacy" %}</a></li>
-          <li><a href="/terms">{% trans "Terms & Conditions" %}</a></li>
+          {% for page in flatpages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+          {% endfor %}i>
         </ul>
       </div>
     </div>
