@@ -2,6 +2,7 @@ import uuid
 import datetime
 
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core.mail import send_mass_mail
@@ -75,9 +76,18 @@ class Event(models.Model):
     def mail_participants(self):
         """Sends mails to all participants including host with the join url"""
         addrs = [p.email for p in self.participants.all()] + [self.host.email]
-        MailTemplate.send_mails(
-            type="join", language_code="en", context={"event": self}, to_emails=addrs
-        )  # TODO: take users language into consideration
+
+        with mail.get_connection() as connection:
+            for addr in addrs:
+                email = MailTemplate.get_mail(
+                    type="join",
+                    language_code="en",
+                    context={"event": self},
+                    to_email=addr,
+                    connection=connection,
+                )
+                email.send(fail_silently=True)
+
         self.mails_sent = True
         self.save()
 
@@ -122,7 +132,7 @@ class MailTemplate(models.Model):
         return self.type
 
     def render(
-        self, context: dict, to_email: [str], connection=None
+        self, context: dict, to_email: str, connection=None
     ) -> mail.EmailMessage:
         """render this email template to email message"""
         from_email = settings.DEFAULT_FROM_EMAIL
@@ -137,50 +147,20 @@ class MailTemplate(models.Model):
         )
 
     @classmethod
-    def get_mails(
+    def get_mail(
         cls,
         type: str,
         language_code: str,
         context: dict,
-        to_emails: [str],
+        to_email: str,
         connection=None,
-    ) -> [mail.EmailMessage]:
-        """get multiple emails from template for type and language to all to_emails"""
-        try:
-            template = cls.objects.get(type=type, language_code=language_code)
-        except cls.DoesNotExist:
-            try:
-                # fallback to en language
-                template = cls.objects.get(type=type, language_code="en")
-            except cls.DoesNotExist:
-                return []
-
-        emails = []
-        for to_email in to_emails:
-            emails.append(
-                template.render(
-                    context=context, to_email=to_email, connection=connection
-                )
-            )
-
-        return emails
-
-    @classmethod
-    def send_mails(
-        cls, type: str, language_code: str, context: dict, to_emails: [str]
-    ) -> int:
-        """send multiple emails using one connection
-        
-        returns: Number of messages sent
-        """
-        counter = 0
-        with mail.get_connection() as connection:
-            for email in cls.get_mails(
-                type=type,
-                language_code=language_code,
-                context=context,
-                to_emails=to_emails,
-                connection=connection,
-            ):
-                counter += email.send(fail_silently=True)
-        return counter
+    ) -> mail.EmailMessage:
+        """get template and render to email"""
+        templates = cls.objects.filter(type=type).filter(
+            Q(language_code=language_code) | Q(language_code="en")
+        )
+        if not templates:
+            return None
+        return templates[0].render(
+            context=context, to_email=to_email, connection=connection
+        )

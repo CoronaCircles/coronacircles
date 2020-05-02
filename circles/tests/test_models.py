@@ -72,21 +72,11 @@ class MailTemplateTestCase(TestCase):
         self.assertEqual(mail.subject, "Event beigetreten")
         self.assertEqual(mail.to, ["max@example.com"])
 
-    def test_get_mails(self):
-        mails = MailTemplate.get_mails(
+    def test_get_mail(self):
+        mail = MailTemplate.get_mail(
             "join_confirmation",
             "de",
             {"testvariable": "This is a test"},
-            ["max@example.com", "clara@example.com"],
+            "max@example.com",
         )
-        self.assertEqual(len(mails), 2)
-
-    def test_send_mails(self):
-        count = MailTemplate.send_mails(
-            "join_confirmation",
-            "de",
-            {"testvariable": "This is a test"},
-            ["max@example.com", "clara@example.com"],
-        )
-        self.assertEqual(count, 2)
-        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.subject, "Event beigetreten")

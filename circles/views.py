@@ -43,12 +43,13 @@ class EventHost(CreateView):
         event.host = user
         event.save()
 
-        MailTemplate.send_mails(
+        email = MailTemplate.get_mail(
             type="host_confirmation",
             language_code="en",
             context={"event": event},
-            to_emails=[email],
-        )  # TODO: take request language into consideration
+            to_email=email,
+        )
+        email.send(fail_silently=True)
 
         return render(self.request, "circles/hosted.html", {"event": event})
 
@@ -88,11 +89,12 @@ class EventJoin(FormView):
         if user not in event.participants.all():
             event.participants.add(user)
 
-        MailTemplate.send_mails(
+        mail = MailTemplate.get_mail(
             type="join_confirmation",
             language_code="en",
             context={"event": event},
-            to_emails=[email],
-        )  # TODO: take request language into consideration
+            to_email=email,
+        )
+        mail.send(fail_silently=True)
 
         return render(self.request, "circles/participated.html", {"event": event})
