@@ -114,8 +114,9 @@ a {
 .btn-secondary:hover {
   color: #502900;
 }
-.btn-secondary:focus, .btn-secondary:active {
-  color: #F27C00;
+.btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active {
+  background-color: #F27C00;
+  border: none;
 }
 
 .btn-third {
@@ -449,9 +450,13 @@ body#form .input-group input {
 }
 
 body#form .input-group.date .input-group-text {
-  background-color: #F27C00;
-  color: #502900;
+  background-color: #502900;
+  color: #FFFFFF;
   border-color: #502900;
+}
+
+.bootstrap-datetimepicker-widget {
+  color: #502900;
 }
 
 .form-group input {
