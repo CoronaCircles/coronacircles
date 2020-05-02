@@ -201,7 +201,7 @@ body#form main {
 }
 .carousel.slide .carousel-control-next-icon:focus,
 .carousel.slide .carousel-control-prev-icon:focus {
-  background-image: url("/static/img/arrow_active.png");
+  background-image: url("/static/img/arrow_pressed.png");
 }
 .carousel.slide .carousel-control-next-icon {
   transform: rotate(180deg);
