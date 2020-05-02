@@ -102,10 +102,21 @@ class MailTemplate(models.Model):
             ("join", _("Join")),
         ),
     )
-    language_code = models.CharField(_("Language Code"), max_length=255)
+    language_code = models.CharField(_("Language Code"), max_length=255, default="en")
 
-    subject_template = models.CharField(_("Subject Template"), max_length=255)
-    body_template = models.TextField(_("Body Template"))
+    subject_template = models.CharField(
+        _("Subject Template"),
+        max_length=255,
+        help_text=_(
+            "Subject of the email to be sent. The Variable {{ event }} and its children {{ event.start }} etc. can be used."
+        ),
+    )
+    body_template = models.TextField(
+        _("Body Template"),
+        help_text=_(
+            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }} etc. can be used."
+        ),
+    )
 
     def __str__(self) -> str:
         return self.type
