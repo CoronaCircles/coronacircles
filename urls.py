@@ -9,7 +9,7 @@ urlpatterns = (
         path("admin/", admin.site.urls),
         path("circles/", include("circles.urls")),
         path("", include("homepage.urls")),
+        path("/", include("django.contrib.flatpages.urls")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    + [path("", include("django.contrib.flatpages.urls")),]
 )
