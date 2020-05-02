@@ -1,11 +1,7 @@
 {
     "_meta": {
         "hash": {
-<<<<<<< HEAD
-            "sha256": "ecb3062e79c7b4f6a3477c5331adb4ceafe925ce5ec88d97100ef8a80498bcf8"
-=======
-            "sha256": "21988c2ac3cb8db240649d09f859f9f4acccc7b7b622cfc73478c18584a9b0a9"
->>>>>>> 15f9b37efa08b6f8f0a76adfa26e218ee5e5c614
+            "sha256": "f81706e2521a0b5543c0e8ca6b8f9183d26f5874b4b0f273f52298fc0e3d88fd"
         },
         "pipfile-spec": 6,
         "requires": {
