@@ -19,6 +19,7 @@ pillow = "*"
 django-crispy-forms = "*"
 django-bootstrap-datepicker-plus = "*"
 django-ckeditor = "*"
+django-columns = "*"
 
 [requires]
 python_version = "3.8"
