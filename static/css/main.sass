@@ -88,6 +88,13 @@ a
     background-color: $third
     border-color: $third
 
+.btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:not(:disabled):not(.disabled):active, 
+.show > .btn-primary.dropdown-toggle
+  background-color: transparent
+  border-color: $secondary
+  color: $secondary
+
 .btn-primary
   background-color: $primary
   border-color: $primary
@@ -96,6 +103,9 @@ a
   &:hover
     background-color: $secondary
     border-color: $secondary
+
+  &:active
+    background-color: $primary
 
 .btn-secondary
   background-color: $secondary

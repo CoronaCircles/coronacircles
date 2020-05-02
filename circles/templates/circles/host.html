@@ -5,6 +5,32 @@
 {% block body %}form{% endblock body %}
 
 {% block content %}
+
+<div class="modal fade terms in" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Terms" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% trans "Terms & Conditions" %}</h5>
+      </div>
+      <div class="modal-body">
+        {% blocktrans %}
+          <p>CoronaCircles (CC) is a free service, using open-source software.  Our intention is to create a platform that brings people together, so that they can share what moves them and listen to others.</p> 
+          <p><b>Always remember: CC cannot take the responsibility for the security of its users. </br>
+          You and Only You are responsible for your security.</b></p>
+          <p>We can all help each other by paying attention to some basic rules. Opening up and showing oneself needs respect. Be kind, helpful and respectful with everyone and don’t interrupt. We strongly recommend you not to exchange personal data. Don’t click on any links and never share your screen. Don’t record what is being said, as it is forbidden by law.  Don’t hesitate to kick out inappropriate users and report us what happened.  Leave the call, if you notice you do not feel comfortable.</p>
+          <p>Taking into account that you will be responsible for your own experience and security as mentioned above, Ideen hoch drei e.V., which is registered in Germany, is legally responsible for hosting this website. Send us feedback or report, if something disturbed you. Do that as soon as possible. CoronaCircles saves names and emails only to inform you about events you have registered for.</p>
+          <p>Yes, long legal texts are boring, but we must protect ourselves – and by extension, you and your data- against unfriendly folks. Registration is only possible for persons with a minimum age of 18 and who are of full legal capacity. We have a Terms of Service & Privacy Policy describing your (and our) behaviour and rights related to content, privacy, and laws. To use this CC service, you must agree with the Terms of Service & Privacy Policy in full before you start using CC. When you agree with them, we will presume that you have gone through the whole by giving it some critical considerations. On breach we will take appropriate steps as mentioned in Terms of Service & Privacy Policy. Furthermore the conditions of the video platform Jitsi apply.</p>
+          <p>Thanks for reading this introduction! Now you're ready to dive in. We hope you will enjoy and benefit from your experience in joining CoronaCircles.</p>
+        {% endblocktrans %}
+      </div>
+      <div class="modal-footer">
+        <a href="/"><button type="button" class="btn btn-outline-secondary">{% trans "Disagree" %}</button></a>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans "Agree" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row">
 		<div class="col-sm-12 col-md-6">
@@ -21,10 +47,17 @@
     </div>
   </div>
 </div>
+
 {% endblock content %}
 
 {% block extrafooter %}
 
 {{ form.media }}
+
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('.terms').modal('show');
+    });
+</script>
   
 {% endblock extrafooter %}
