@@ -10,7 +10,7 @@ admin.site.register(Event, EventAdmin)
 
 
 class MailTemplateAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('type','language_code')
 
 
 admin.site.register(MailTemplate, MailTemplateAdmin)

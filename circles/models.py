@@ -127,7 +127,7 @@ class MailTemplate(models.Model):
             ("join", _("Join")),
         ),
     )
-    language_code = models.CharField(_("Language Code"), max_length=255, default="en")
+    language_code = models.CharField(_("Language"), choices=settings.LANGUAGES, max_length=2, default="en")
 
     subject_template = models.CharField(
         _("Subject Template"),
