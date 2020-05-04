@@ -10,10 +10,7 @@
   <div class="row">
 		<div class="col-sm-12">
 
-      <h2>{% blocktrans with date=event.start %}
-            Participate in circle at {{ date }}
-          {% endblocktrans %}
-      </h2>
+      <h2>{% blocktrans with date=event.start %}Participate in circle at {{ date }}{% endblocktrans %}</h2>
 
       {% if event.is_full %}
         <p>{% trans "Sorry, this circle is already full" %}</p>
