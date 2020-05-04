@@ -60,6 +60,10 @@ class Event(models.Model):
     objects = EventManager()
 
     @property
+    def language_label(self):
+        return dict(self.LANGUAGES)[self.language]
+
+    @property
     def is_full(self) -> bool:
         """determines wether event is already full (6 participants, 7 including host)"""
         return self.participant_count >= 7

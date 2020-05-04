@@ -291,6 +291,14 @@ body#event-list main
         background: $primary
         border-color: $primary
 
+    .info .btn.disabled
+      background-color: $primary
+      border-color: transparent
+
+    &:nth-child(even)  .info .btn.disabled
+      background-color: $secondary
+      border-color: transparent
+
     > time >
       span
         display: none

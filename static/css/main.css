@@ -288,6 +288,14 @@ body#event-list main {
   background: #F27C00;
   border-color: #F27C00;
 }
+.event-list > li .info .btn.disabled {
+  background-color: #F27C00;
+  border-color: transparent;
+}
+.event-list > li:nth-child(even) .info .btn.disabled {
+  background-color: #502900;
+  border-color: transparent;
+}
 .event-list > li > time > span {
   display: none;
 }

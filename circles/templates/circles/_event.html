@@ -10,8 +10,11 @@
   <div class="info">
     <h2 class="title">{% trans "Circle at" %} {{ event.start|date:"H:i" }}</h2>
     <p class="desc">{% blocktrans count participants=event.participant_count %}only {{ participants }} participant, yet{% plural %}{{ participants }} participants{% endblocktrans %}</p>
+    <p class="desc">{% trans "Language" %}: {{ event.language_label }}</p>
     {% if not event.is_full %}
-      <a class="btn btn-primary pull-right" href="{% url 'circles:participate' event.id %}">{% trans "Participate" %}</a>
+      <a class="btn btn-primary pull-right" tabindex="-1" role="button" aria-disabled="true" href="{% url 'circles:participate' event.id %}">{% trans "Participate" %}</a>
+    {% else %}
+      <a class="btn btn-primary disabled pull-right" href="#">{% trans "Full Circle" %}</a>
     {% endif %}
   </div>
 </li>

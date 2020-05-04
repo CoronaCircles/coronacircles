@@ -46,7 +46,7 @@ class EventHost(CreateView):
         # send mail
         mail = MailTemplate.get_mail(
             type="host_confirmation",
-            language_code="en",
+            language_code=event.language,
             context={"event": event},
             to_email=email,
         )
