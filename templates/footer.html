@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-5 newsletter">
-        <form action="YOUR_MAILCHIMP_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <form action="https://coronacircles.us8.list-manage.com/subscribe/post?u=523ef0882d4c7a185ecf5105a&amp;id=9e53921fb4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <div style="position: absolute; left: -5000px;" aria-hidden="true">
             <input type="text" name="b_f7fcffd059cde2df667ed71e0_b59497a580" tabindex="-1" value="">
           </div>
@@ -64,3 +64,7 @@
     </div>
   </div>
 </footer>
+
+{% block extrafooter %}
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+{% endblock extrafooter %}

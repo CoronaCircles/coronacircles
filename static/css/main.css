@@ -514,6 +514,12 @@ footer input#mce-EMAIL {
 footer input#mce-EMAIL::placeholder {
   color: #502900;
 }
+footer form#mc-embedded-subscribe-form .text-success {
+  color: #502900 !important;
+}
+footer form#mc-embedded-subscribe-form .text-warning {
+  color: #F27C00 !important;
+}
 footer .input-group {
   border: #502900 1px solid;
 }
