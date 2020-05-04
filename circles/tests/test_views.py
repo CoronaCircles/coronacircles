@@ -51,7 +51,8 @@ class EventHostTestCase(TestCase):
     def test_post(self):
         tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
         response = self.client.post(
-            self.url, {"start": tomorrow, "email": "max@mustermann.com",},
+            self.url,
+            {"start": tomorrow, "email": "max@mustermann.com", "language": "en"},
         )
         self.assertContains(response, "was created", status_code=200)
 
