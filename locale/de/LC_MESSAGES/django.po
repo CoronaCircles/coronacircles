@@ -45,7 +45,7 @@ msgstr "Ob E-Mail schon verschickt wurden"
 #: circles/models.py:47 circles/templates/circles/host.html:21
 #: templates/navbar.html:13 templates/start.html:181
 msgid "Host"
-msgstr "Gastgeber"
+msgstr "Anbieten"
 
 #: circles/models.py:50
 msgid "Participants"

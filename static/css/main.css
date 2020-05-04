@@ -652,4 +652,7 @@ body#form footer {
   }
 }
 
+.invalid-feedback {
+  display: block;
+}
 /*# sourceMappingURL=main.css.map */
