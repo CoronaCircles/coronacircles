@@ -564,6 +564,11 @@ body#form footer {
 @media (max-height: 800px) {
   body#form footer {
     position: static;
+    margin-top: 100px;
+  }
+
+  main {
+    padding: 100px 0 0 0;
   }
 }
 @media (max-width: 768px) {
