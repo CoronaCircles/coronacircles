@@ -10,6 +10,11 @@ from .models import Event
 
 class Host(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail address"))
+    LANGUAGES = (
+        ("en", "English"),
+        ("de", "German"),
+    )
+    language = forms.ChoiceField(label=_("Language"), choices=LANGUAGES, widget=forms.Select(), required=True)
 
     def clean_start(self):
         start = self.cleaned_data["start"]
@@ -26,7 +31,7 @@ class Host(forms.ModelForm):
         )
 
     class Meta:
-        fields = ["start", "email"]
+        fields = ["start", "language", "email"]
         model = Event
 
 

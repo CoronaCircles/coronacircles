@@ -46,11 +46,11 @@ msgstr "Datum und Uhrzeit"
 
 #: circles/models.py:42 settings/base.py:33
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: circles/models.py:43 settings/base.py:32
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 #: circles/models.py:48
 msgid "If e-mail has been sent"

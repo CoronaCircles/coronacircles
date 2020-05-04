@@ -3,7 +3,7 @@ from .models import Event, MailTemplate
 
 
 class EventAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('uuid', 'start', 'language', 'host')
 
 
 admin.site.register(Event, EventAdmin)

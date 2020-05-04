@@ -38,6 +38,13 @@ class Event(models.Model):
     created_at = models.DateTimeField(_("Creation Date"), default=timezone.now)
     start = models.DateTimeField(_("Date and Time"))
 
+    LANGUAGES = (
+        ('en', _('English')),
+        ('de', _('German')),
+    )
+
+    language = models.CharField(_("Language"), max_length=2, choices=LANGUAGES, default="en")
+
     mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
 
     host = models.ForeignKey(
