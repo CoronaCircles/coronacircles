@@ -416,15 +416,16 @@ body#event-list main {
 body#form .input-group input {
   border-color: #502900;
 }
-
 body#form .input-group.date .input-group-text {
   background-color: #502900;
   color: #FFFFFF;
   border-color: #502900;
 }
-
 body#form .input-group input.is-invalid {
   border: 2px solid #F27C00;
+}
+body#form .input-group .invalid-feedback {
+  display: block;
 }
 
 .bootstrap-datetimepicker-widget {
@@ -555,11 +556,16 @@ footer .social-bar a:hover {
 }
 
 body#form footer {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
 }
 
 /* Responsive */
+@media (max-height: 800px) {
+  body#form footer {
+    position: static;
+  }
+}
 @media (max-width: 768px) {
   .carousel.slide a.carousel-control-next,
 .carousel.slide a.carousel-control-prev {
@@ -652,7 +658,4 @@ body#form footer {
   }
 }
 
-.invalid-feedback {
-  display: block;
-}
 /*# sourceMappingURL=main.css.map */

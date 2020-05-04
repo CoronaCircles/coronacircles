@@ -409,16 +409,20 @@ body#event-list main
     &::marker
       font-size: 32px
 
-body#form .input-group input
-  border-color: $secondary
+body#form .input-group 
+  input
+    border-color: $secondary
 
-body#form .input-group.date .input-group-text
-  background-color: $secondary
-  color: $third
-  border-color: $secondary
+  &.date .input-group-text
+    background-color: $secondary
+    color: $third
+    border-color: $secondary
 
-body#form .input-group input.is-invalid
-  border: 2px solid $primary
+  input.is-invalid
+    border: 2px solid $primary
+  
+  .invalid-feedback
+    display: block
 
 .bootstrap-datetimepicker-widget
   color: $secondary
@@ -547,10 +551,14 @@ footer
         text-decoration: none
 
 body#form footer
-  position: absolute
+  position: fixed
   bottom: 0px
 
 /* Responsive */
+
+@media (max-height: 800px)
+  body#form footer
+    position: static
 
 @media (max-width: 768px)
   
@@ -642,7 +650,3 @@ body#form footer
               display: block
               width: 40px
               padding: 10px 0px 9px
-
-.invalid-feedback {
-  display: block;
-}
