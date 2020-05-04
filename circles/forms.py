@@ -11,8 +11,8 @@ from .models import Event
 class Host(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail address"))
     LANGUAGES = (
-        ("en", "English"),
-        ("de", "German"),
+        ("en", _("English")),
+        ("de", _("German")),
     )
     language = forms.ChoiceField(label=_("Language"), choices=LANGUAGES, widget=forms.Select(), required=True)
 

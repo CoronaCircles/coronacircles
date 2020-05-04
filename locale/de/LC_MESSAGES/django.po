@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 23:39+0200\n"
+"POT-Creation-Date: 2020-05-04 23:59+0200\n"
 "PO-Revision-Date: 2020-05-04 17:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,11 +22,17 @@ msgstr ""
 msgid "E-mail address"
 msgstr "E-Mail-Adresse"
 
+#: circles/forms.py:14 circles/models.py:42 settings/base.py:33
+msgid "English"
+msgstr "Englisch"
+
+#: circles/forms.py:15 circles/models.py:43 settings/base.py:32
+msgid "German"
+msgstr "Deutsch"
+
 #: circles/forms.py:17 circles/models.py:46
-#, fuzzy
-#| msgid "Language Code"
 msgid "Language"
-msgstr "Sprachcode"
+msgstr "Sprache"
 
 #: circles/forms.py:22
 msgid "Has to be in the future"
@@ -43,14 +49,6 @@ msgstr "Erstell-Datum"
 #: circles/models.py:39
 msgid "Date and Time"
 msgstr "Datum und Uhrzeit"
-
-#: circles/models.py:42 settings/base.py:33
-msgid "English"
-msgstr "Englisch"
-
-#: circles/models.py:43 settings/base.py:32
-msgid "German"
-msgstr "Deutsch"
 
 #: circles/models.py:48
 msgid "If e-mail has been sent"
