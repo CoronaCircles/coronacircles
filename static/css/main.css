@@ -553,6 +553,10 @@ footer .social-bar p {
   vertical-align: middle;
   display: inline;
 }
+footer .social-bar ul {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
 footer .social-bar a {
   color: #FFFFFF;
 }
