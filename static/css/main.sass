@@ -193,6 +193,9 @@ body#event-list main
     width: 60px
     height: 60px
 
+    &:active,&:focus
+      background-image: url("/static/img/arrow_pressed.png")
+
   .carousel-control-next-icon
     transform: rotate(180deg)
 
@@ -441,35 +444,31 @@ body#form .input-group
 
 /* Testimonials */
 
-#testimonials
-  background: $third
+#Testimonials
 
-  h1
-    margin-top: 40px
-    margin-bottom: 40px
+  &.carousel.slide .carousel-inner
+    background-color: $third
+    color: $secondary
+    text-align: center
+    height: 500px
 
   .author
     font-weight: bold
     display: block
-
-  li.media
-    font-size: 14px
-    border-bottom: 1px solid $secondary
-    padding-bottom: 20px
-    height: 150px
-    overflow: hidden
-    color: $secondary
-    margin-bottom: 30px
-
-    &:last-child
-      border-bottom: none
-    
-    .media-body p
-      margin-bottom: 0px
+    margin-top: 10px
 
   img
-    border-radius: 30px
-    height: 60px
+    border-radius: 80px
+    height: 160px
+    display: block
+    margin-bottom: 40px
+
+  .carousel-indicators li
+    background-color: $secondary
+
+    &.active
+      background-color: $primary
+
 
 /* Contact */
 
