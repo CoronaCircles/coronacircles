@@ -60,3 +60,11 @@
 </div>
 
 {% endblock content %}
+
+{% block extrafooter %}
+  <script type="text/javascript">
+      $('.carousel').carousel({
+        interval: 20000
+      });
+  </script>  
+{% endblock extrafooter %}

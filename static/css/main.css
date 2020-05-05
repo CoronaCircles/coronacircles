@@ -455,7 +455,9 @@ body#form .input-group .invalid-feedback {
   background-color: #FFFFFF;
   color: #502900;
   text-align: center;
-  height: 500px;
+  height: 600px;
+  padding-top: 100px;
+  padding-bottom: 80px;
 }
 #Testimonials .author {
   font-weight: bold;
