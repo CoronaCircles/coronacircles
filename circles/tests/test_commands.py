@@ -35,12 +35,7 @@ class CheckSeminarsTestCase(TestCase):
         ).save()
 
         # mail template
-        MailTemplate(
-            type="join",
-            language_code="en",
-            subject_template="test",
-            body_template="test",
-        ).save()
+        MailTemplate(type="join", subject_template="test", body_template="test",).save()
 
     def test_check_mails_sent(self):
         call_command("mail_participants")
@@ -52,15 +47,3 @@ class CheckSeminarsTestCase(TestCase):
         call_command("mail_participants")
         call_command("mail_participants")
         self.assertEqual(len(mail.outbox), 2)
-
-    def test_language(self):
-        # mail template
-        MailTemplate(
-            type="join",
-            language_code="de",
-            subject_template="deutsch",
-            body_template="deutsch",
-        ).save()
-
-        call_command("mail_participants")
-        self.assertEqual(mail.outbox[0].subject, "deutsch")

@@ -5,11 +5,11 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from django.core.mail import send_mass_mail
+from django.core import mail
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.template import Template, Context
-from django.core import mail
+from django.utils import translation
 
 from icalendar import Calendar, Event as IEvent
 
@@ -31,10 +31,7 @@ class EventManager(models.Manager.from_queryset(EventQuerySet)):
 
 
 class Event(models.Model):
-    uuid = models.UUIDField(
-        _("UUID for meeting-URL"), default=uuid.uuid4,  # editable=False
-    )
-
+    uuid = models.UUIDField(_("UUID for meeting-URL"), default=uuid.uuid4)
     created_at = models.DateTimeField(_("Creation Date"), default=timezone.now)
     start = models.DateTimeField(_("Date and Time"))
     language = models.CharField(
@@ -89,25 +86,30 @@ class Event(models.Model):
         return str(self.start)
 
     def mail_participants(self):
-        """Sends mails to all participants including host with the join url"""
+        """Sends mails to all participants including host with the join url
+        
+        uses the events language for the mail templates"""
         addrs = [p.email for p in self.participants.all()] + [self.host.email]
 
         with mail.get_connection() as connection:
-            for addr in addrs:
-                email = MailTemplate.get_mail(
-                    type="join",
-                    language_code=self.language,
-                    context={"event": self},
-                    to_email=addr,
-                    connection=connection,
-                )
-                email.send(fail_silently=True)
+            with translation.override(self.language):
+                for addr in addrs:
+                    email = MailTemplate.get_mail(
+                        type="join",
+                        context={"event": self},
+                        to_email=addr,
+                        connection=connection,
+                    )
+                    if email:
+                        email.send(fail_silently=True)
 
         self.mails_sent = True
         self.save()
 
     class Meta:
         ordering = ("start",)
+        verbose_name = _("Circle")
+        verbose_name_plural = _("Circles")
 
 
 def render_template(template: str, context: dict) -> str:
@@ -127,10 +129,6 @@ class MailTemplate(models.Model):
             ("join", _("Join")),
         ),
     )
-    language_code = models.CharField(
-        _("Language"), choices=settings.LANGUAGES, max_length=2, default="en"
-    )
-
     subject_template = models.CharField(
         _("Subject Template"),
         max_length=255,
@@ -146,7 +144,7 @@ class MailTemplate(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.get_type_display()} ({self.get_language_code_display()})"
+        return self.get_type_display()
 
     def render(
         self, context: dict, to_email: str, connection=None
@@ -165,24 +163,18 @@ class MailTemplate(models.Model):
 
     @classmethod
     def get_mail(
-        cls,
-        type: str,
-        language_code: str,
-        context: dict,
-        to_email: str,
-        connection=None,
+        cls, type: str, context: dict, to_email: str, connection=None,
     ) -> mail.EmailMessage:
-        """get template and render to email
-        
-        fallback to english language"""
-        try:
-            template = cls.objects.get(type=type, language_code=language_code)
-        except cls.DoesNotExist:
-            try:
-                template = cls.objects.get(type=type, language_code="en")
-            except cls.DoesNotExist:
-                return None
+        """get template and render to email"""
+        templates = cls.objects.filter(type=type)
+        if not templates:
+            return None
 
-        return template.render(
+        return templates[0].render(
             context=context, to_email=to_email, connection=connection
         )
+
+    class Meta:
+        ordering = ("type",)
+        verbose_name = _("MailTemplate")
+        verbose_name_plural = _("MailTemplates")

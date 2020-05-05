@@ -44,10 +44,7 @@ class EventHost(CreateView):
 
         # send mail
         mail = MailTemplate.get_mail(
-            type="host_confirmation",
-            language_code=event.language,
-            context={"event": event},
-            to_email=email,
+            type="host_confirmation", context={"event": event}, to_email=email,
         )
         if mail:
             mail.attach(
@@ -95,10 +92,7 @@ class EventJoin(FormView):
 
         # send mail
         mail = MailTemplate.get_mail(
-            type="join_confirmation",
-            language_code=event.language,
-            context={"event": event},
-            to_email=email,
+            type="join_confirmation", context={"event": event}, to_email=email,
         )
         if mail:
             mail.attach(

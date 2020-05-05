@@ -4,6 +4,7 @@ import pytz
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core import mail
+from django.utils import translation
 
 from circles.models import Event, MailTemplate
 
@@ -43,6 +44,25 @@ class EventTestCase(TestCase):
             b"BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Corona Circle\r\nDTSTART;VALUE=DATE-TIME:20200501T200000Z\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
         )
 
+    def test_mail_participants(self):
+        event = Event(
+            host=self.host,
+            start=datetime.datetime(2020, 5, 1, 20, 0, tzinfo=pytz.UTC),
+            language="de",
+        )
+        event.save()
+        MailTemplate(
+            type="join",
+            subject_template_en="english",
+            body_template_en="english",
+            subject_template_de="deutsch",
+            body_template_de="deutsch",
+        ).save()
+        event.mail_participants()
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, "deutsch")
+
 
 class EventQuerySetTestCase(TestCase):
     def test_upcoming(self):
@@ -58,16 +78,13 @@ class EventQuerySetTestCase(TestCase):
 
 
 class MailTemplateTestCase(TestCase):
-    def setUp(self):
+    def test_render(self):
         self.template = MailTemplate(
             type="join_confirmation",
-            language_code="de",
             subject_template="Event beigetreten",
             body_template="{{ testvariable }}",
         )
         self.template.save()
-
-    def test_render(self):
         mail = self.template.render(
             {"testvariable": "This is a test"}, "max@example.com"
         )
@@ -76,20 +93,30 @@ class MailTemplateTestCase(TestCase):
         self.assertEqual(mail.to, ["max@example.com"])
 
     def test_get_mail(self):
+        self.template = MailTemplate(
+            type="join_confirmation",
+            subject_template="Event beigetreten",
+            body_template="{{ testvariable }}",
+        )
+        self.template.save()
         mail = MailTemplate.get_mail(
-            "join_confirmation",
-            "de",
-            {"testvariable": "This is a test"},
-            "max@example.com",
+            "join_confirmation", {"testvariable": "This is a test"}, "max@example.com",
         )
         self.assertEqual(mail.subject, "Event beigetreten")
 
     def test_get_right_language(self):
         MailTemplate(
             type="join_confirmation",
-            language_code="en",
-            subject_template="english",
-            body_template="english",
+            subject_template_en="english",
+            body_template_en="english",
+            subject_template_de="deutsch",
+            body_template_de="deutsch",
         ).save()
-        mail = MailTemplate.get_mail("join_confirmation", "en", {}, "max@example.com",)
+
+        translation.activate("de")
+        mail = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
+        self.assertEqual(mail.subject, "deutsch")
+
+        translation.activate("en")
+        mail = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
         self.assertEqual(mail.subject, "english")
