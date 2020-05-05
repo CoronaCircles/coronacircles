@@ -49,6 +49,7 @@ WSGI_APPLICATION = "wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    "modeltranslation",  # must be put before admin
     "django.contrib.admin",
     "django.contrib.sites",
     "django.contrib.flatpages",
@@ -195,3 +196,6 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 CKEDITOR_CONFIGS = {"default": {"toolbar": "Default",}}
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+
