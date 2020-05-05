@@ -96,7 +96,7 @@ class Event(models.Model):
             for addr in addrs:
                 email = MailTemplate.get_mail(
                     type="join",
-                    language_code="en",
+                    language_code=self.language,
                     context={"event": self},
                     to_email=addr,
                     connection=connection,
@@ -127,7 +127,9 @@ class MailTemplate(models.Model):
             ("join", _("Join")),
         ),
     )
-    language_code = models.CharField(_("Language"), choices=settings.LANGUAGES, max_length=2, default="en")
+    language_code = models.CharField(
+        _("Language"), choices=settings.LANGUAGES, max_length=2, default="en"
+    )
 
     subject_template = models.CharField(
         _("Subject Template"),
@@ -144,7 +146,7 @@ class MailTemplate(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.type
+        return f"{self.get_type_display()} ({self.get_language_code_display()})"
 
     def render(
         self, context: dict, to_email: str, connection=None
@@ -170,12 +172,17 @@ class MailTemplate(models.Model):
         to_email: str,
         connection=None,
     ) -> mail.EmailMessage:
-        """get template and render to email"""
-        templates = cls.objects.filter(type=type).filter(
-            Q(language_code=language_code) | Q(language_code="en")
-        )
-        if not templates:
-            return None
-        return templates[0].render(
+        """get template and render to email
+        
+        fallback to english language"""
+        try:
+            template = cls.objects.get(type=type, language_code=language_code)
+        except cls.DoesNotExist:
+            try:
+                template = cls.objects.get(type=type, language_code="en")
+            except cls.DoesNotExist:
+                return None
+
+        return template.render(
             context=context, to_email=to_email, connection=connection
         )

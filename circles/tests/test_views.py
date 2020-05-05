@@ -43,16 +43,16 @@ class EventHostTestCase(TestCase):
             subject_template="test",
             body_template="test",
         ).save()
+        self.tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
 
     def test_get(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Host a circle", status_code=200)
 
     def test_post(self):
-        tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
         response = self.client.post(
             self.url,
-            {"start": tomorrow, "email": "max@mustermann.com", "language": "en"},
+            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
         )
         self.assertContains(response, "was created", status_code=200)
 
@@ -69,6 +69,22 @@ class EventHostTestCase(TestCase):
 
     # TODO: Test for existing user
 
+    def test_email_language(self):
+        # mail template
+        MailTemplate(
+            type="host_confirmation",
+            language_code="de",
+            subject_template="deutsch",
+            body_template="deutsch",
+        ).save()
+
+        self.client.post(
+            self.url,
+            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "de"},
+        )
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, "deutsch")
+
     def test_post_past_date(self):
         yesterday = datetime.date.today() - datetime.timedelta(days=1)
         response = self.client.post(
@@ -81,8 +97,8 @@ class EventJoinTestCase(TestCase):
     def setUp(self):
         self.host = User(email="host@example.com", username="host@example.com")
         self.host.save()
-        tomorrow = timezone.now() + datetime.timedelta(days=1)
-        self.event = Event(host=self.host, start=tomorrow)
+        self.tomorrow = timezone.now() + datetime.timedelta(days=1)
+        self.event = Event(host=self.host, start=self.tomorrow)
         self.event.save()
         self.url = reverse("circles:participate", args=[self.event.pk])
 
@@ -108,6 +124,23 @@ class EventJoinTestCase(TestCase):
 
         # email is sent
         self.assertEqual(len(mail.outbox), 1)
+
+    def test_email_language(self):
+        event_de = Event(host=self.host, start=self.tomorrow, language="de")
+        event_de.save()
+        url = reverse("circles:participate", args=[event_de.pk])
+
+        # mail template
+        MailTemplate(
+            type="join_confirmation",
+            language_code="de",
+            subject_template="deutsch",
+            body_template="deutsch",
+        ).save()
+
+        self.client.post(url, {"email": "max@mustermann.com"})
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, "deutsch")
 
     def test_post_event_past(self):
         yesterday = timezone.now() - datetime.timedelta(days=1)

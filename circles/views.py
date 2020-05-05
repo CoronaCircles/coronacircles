@@ -13,7 +13,6 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 
-
 from .models import Event, MailTemplate
 from .forms import Host, Participate
 
@@ -97,7 +96,7 @@ class EventJoin(FormView):
         # send mail
         mail = MailTemplate.get_mail(
             type="join_confirmation",
-            language_code="en",
+            language_code=event.language,
             context={"event": event},
             to_email=email,
         )

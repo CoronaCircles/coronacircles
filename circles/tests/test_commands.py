@@ -23,12 +23,15 @@ class CheckSeminarsTestCase(TestCase):
 
         # events
         past_event = Event(
-            host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
+            host=self.host,
+            start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC),
+            language="de",
         )
         past_event.save()
         past_event.participants.add(self.participant)
+
         Event(
-            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC)
+            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC),
         ).save()
 
         # mail template
@@ -49,3 +52,15 @@ class CheckSeminarsTestCase(TestCase):
         call_command("mail_participants")
         call_command("mail_participants")
         self.assertEqual(len(mail.outbox), 2)
+
+    def test_language(self):
+        # mail template
+        MailTemplate(
+            type="join",
+            language_code="de",
+            subject_template="deutsch",
+            body_template="deutsch",
+        ).save()
+
+        call_command("mail_participants")
+        self.assertEqual(mail.outbox[0].subject, "deutsch")

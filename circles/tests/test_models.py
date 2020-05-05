@@ -83,3 +83,13 @@ class MailTemplateTestCase(TestCase):
             "max@example.com",
         )
         self.assertEqual(mail.subject, "Event beigetreten")
+
+    def test_get_right_language(self):
+        MailTemplate(
+            type="join_confirmation",
+            language_code="en",
+            subject_template="english",
+            body_template="english",
+        ).save()
+        mail = MailTemplate.get_mail("join_confirmation", "en", {}, "max@example.com",)
+        self.assertEqual(mail.subject, "english")
