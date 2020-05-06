@@ -12,7 +12,7 @@
         <p>{% blocktrans with datetime=event.start %}Are you sure you want to delete the Circle starting at {{ datetime }}?{% endblocktrans %}</p>
         
         <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
-        <button type="submit" class="btn btn-primary">{% trans "Löschen" %}</button>
+        <button type="submit" class="btn btn-primary">{% trans "Delete" %}</button>
       </form>
 
     </div>
