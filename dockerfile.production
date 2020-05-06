@@ -5,6 +5,9 @@ FROM python:3.8
 RUN mkdir -p /opt/services/coronacircles
 WORKDIR /opt/services/coronacircles
 
+# Configure cron
+COPY crontab /etc/cron/crontab
+
 # copy our project code
 COPY ./ /opt/services/coronacircles/
 
