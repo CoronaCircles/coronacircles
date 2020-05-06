@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.template import Template, Context
 from django.utils import translation
+from django.urls import reverse
 
 from icalendar import Calendar, Event as IEvent
 
@@ -73,6 +74,18 @@ class Event(models.Model):
         return f"https://meet.allmende.io/coronacircles-{self.uuid}"
 
     @property
+    def delete_url(self) -> str:
+        """url for host to delete the event
+        
+        uses ALLOWED_HOSTS to generate absolute url"""
+        path = reverse("circles:delete", args=[self.uuid])
+        try:
+            domain = settings.ALLOWED_HOSTS[0]
+            return "https://{domain}{path}".format(domain=domain, path=path)
+        except KeyError:
+            return path
+
+    @property
     def ical(self) -> Calendar:
         """Get ical representation of event"""
         cal = Calendar()
@@ -85,7 +98,7 @@ class Event(models.Model):
     def __str__(self) -> str:
         return str(self.start)
 
-    def mail_participants(self):
+    def mail_participants(self, template_type="join"):
         """Sends mails to all participants including host with the join url
         
         uses the events language for the mail templates"""
@@ -95,7 +108,7 @@ class Event(models.Model):
             with translation.override(self.language):
                 for addr in addrs:
                     email = MailTemplate.get_mail(
-                        type="join",
+                        type=template_type,
                         context={"event": self},
                         to_email=addr,
                         connection=connection,
@@ -127,6 +140,7 @@ class MailTemplate(models.Model):
             ("join_confirmation", _("Join Confirmation")),
             ("host_confirmation", _("Host Confirmation")),
             ("join", _("Join")),
+            ("deleted", _("Circle deleted Notification")),
         ),
     )
 
@@ -140,7 +154,7 @@ class MailTemplate(models.Model):
     body_template = models.TextField(
         _("Body Template"),
         help_text=_(
-            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }} etc. can be used."
+            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be used."
         ),
     )
 

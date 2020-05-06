@@ -36,10 +36,6 @@ class EventHostTestCase(TestCase):
     url = reverse("circles:host")
 
     def setUp(self):
-        # mail template
-        MailTemplate(
-            type="host_confirmation", subject_template="test", body_template="test",
-        ).save()
         self.tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
 
     def test_get(self):
@@ -47,6 +43,11 @@ class EventHostTestCase(TestCase):
         self.assertContains(response, "Host a circle", status_code=200)
 
     def test_post(self):
+        # mail template
+        MailTemplate(
+            type="host_confirmation", subject_template="test", body_template="test",
+        ).save()
+
         response = self.client.post(
             self.url,
             {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
@@ -72,6 +73,21 @@ class EventHostTestCase(TestCase):
             self.url, {"start": yesterday, "email": "max@mustermann.com",},
         )
         self.assertContains(response, "Has to be in the future", status_code=200)
+
+    def test_can_get_delete_url(self):
+        MailTemplate(
+            type="host_confirmation",
+            subject_template="test",
+            body_template="{{ event.delete_url }}",
+        ).save()
+
+        self.client.post(
+            self.url,
+            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
+        )
+        event = Event.objects.get()
+
+        self.assertEqual(mail.outbox[0].body, event.delete_url)
 
 
 class EventJoinTestCase(TestCase):
@@ -117,3 +133,41 @@ class EventJoinTestCase(TestCase):
         self.client.post(self.url, {"email": "max@mustermann.com"})
         self.client.post(self.url, {"email": "max@mustermann.com"})
         self.assertEqual(self.event.participants.count(), 1)
+
+
+class EventDeleteTestCase(TestCase):
+    def setUp(self):
+        self.host = User(email="host@example.com", username="host@example.com")
+        self.host.save()
+        self.tomorrow = timezone.now() + datetime.timedelta(days=1)
+        self.event = Event(host=self.host, start=self.tomorrow)
+        self.event.save()
+
+        # add participant
+        user, _ = User.objects.get_or_create(
+            email="max@mustermann.com", username="max@mustermann.com"
+        )
+        self.event.participants.add(user)
+        self.event.save()
+
+        self.url = reverse("circles:delete", args=[self.event.uuid])
+
+        # mail template
+        MailTemplate(
+            type="deleted", subject_template="test", body_template="test",
+        ).save()
+
+    def test_get(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Delete circle", status_code=200)
+
+    def test_post(self):
+        response = self.client.post(self.url)
+        self.assertRedirects(response, "/", target_status_code=302)
+
+        # event was deleted
+        self.assertEqual(Event.objects.all().count(), 0)
+
+        # mail sent to participants and host
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[0].to, ["max@mustermann.com"])

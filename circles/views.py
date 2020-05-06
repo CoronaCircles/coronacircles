@@ -56,10 +56,21 @@ class EventHost(CreateView):
 
 
 class EventDeleteView(DeleteView):
-    """Allows the host to delete the event. Secret Link"""
+    """Allows the host to delete the event."""
 
-    # TODO: This is only an idea
     model = Event
+    success_url = "/"
+    context_object_name = "event"
+
+    def get_object(self):
+        return Event.objects.get(uuid=self.kwargs["uuid"])
+
+    def delete(self, request, *args, **kwargs):
+        # mail participants
+        event = self.get_object()
+        event.mail_participants(template_type="deleted")
+
+        return super().delete(request, *args, **kwargs)
 
 
 class EventJoin(FormView):

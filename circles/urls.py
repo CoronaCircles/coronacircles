@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.EventList.as_view(), name="list"),
     path("host", views.EventHost.as_view(), name="host"),
     path("participate/<int:id>", views.EventJoin.as_view(), name="participate"),
+    path("delete/<uuid:uuid>", views.EventDeleteView.as_view(), name="delete"),
 ]
