@@ -571,14 +571,16 @@ footer
         color: $primary
         text-decoration: none
 
-body#form footer
+body#form footer,
+body#event-list footer
   position: fixed
   bottom: 0px
 
 /* Responsive */
 
 @media (max-height: 800px)
-  body#form footer
+  body#form footer,
+  body#event-list footer
     position: static
     margin-top: 100px
 
