@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 
-from .models import Event, MailTemplate
+from .models import Event, MailTemplate, Participation
 from .forms import Host, Participate
 
 
@@ -97,13 +97,13 @@ class EventJoin(FormView):
 
         email = form.cleaned_data["email"]
         user, _ = User.objects.get_or_create(email=email, username=email)
-
-        if user not in event.participants.all():
-            event.participants.add(user)
+        participation, _ = Participation.objects.get_or_create(event=event, user=user)
 
         # send mail
         mail = MailTemplate.get_mail(
-            type="join_confirmation", context={"event": event}, to_email=email,
+            type="join_confirmation",
+            context={"event": event, "leave_url": participation.leave_url},
+            to_email=email,
         )
         if mail:
             mail.attach(
@@ -112,3 +112,14 @@ class EventJoin(FormView):
             mail.send(fail_silently=True)
 
         return render(self.request, "circles/participated.html", {"event": event})
+
+
+class EventLeaveView(DeleteView):
+    """Allows a participant to leave an event, freeing their seat"""
+
+    model = Participation
+    success_url = "/"
+    context_object_name = "participation"
+
+    def get_object(self):
+        return Participation.objects.get(uuid=self.kwargs["uuid"])

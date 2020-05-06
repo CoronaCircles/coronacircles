@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.core import mail
 
-from circles.models import Event, MailTemplate
+from circles.models import Event, MailTemplate, Participation
 
 User = get_user_model()
 
@@ -134,6 +134,18 @@ class EventJoinTestCase(TestCase):
         self.client.post(self.url, {"email": "max@mustermann.com"})
         self.assertEqual(self.event.participants.count(), 1)
 
+    def test_can_get_leave_url(self):
+        template = MailTemplate.objects.get()
+        template.body_template = "{{ leave_url }}"
+        template.save()
+
+        self.client.post(
+            self.url, {"start": self.tomorrow, "email": "max@mustermann.com"},
+        )
+        participation = Participation.objects.get()
+
+        self.assertEqual(mail.outbox[0].body, participation.leave_url)
+
 
 class EventDeleteTestCase(TestCase):
     def setUp(self):
@@ -171,3 +183,31 @@ class EventDeleteTestCase(TestCase):
         # mail sent to participants and host
         self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, ["max@mustermann.com"])
+
+
+class EventLeaveViewTestCase(TestCase):
+    def setUp(self):
+        self.host = User(email="host@example.com", username="host@example.com")
+        self.host.save()
+        self.tomorrow = timezone.now() + datetime.timedelta(days=1)
+        self.event = Event(host=self.host, start=self.tomorrow)
+        self.event.save()
+
+        # add participant
+        user, _ = User.objects.get_or_create(
+            email="max@mustermann.com", username="max@mustermann.com"
+        )
+        self.participation = Participation.objects.create(event=self.event, user=user)
+
+        self.url = reverse("circles:leave", args=[self.participation.uuid])
+
+    def test_get(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Leave circle", status_code=200)
+
+    def test_post(self):
+        response = self.client.post(self.url)
+        self.assertRedirects(response, "/", target_status_code=302)
+
+        # Participation was deleted
+        self.assertEqual(Participation.objects.all().count(), 0)

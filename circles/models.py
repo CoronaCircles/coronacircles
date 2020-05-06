@@ -15,6 +15,15 @@ from django.urls import reverse
 from icalendar import Calendar, Event as IEvent
 
 
+User = get_user_model()
+
+
+def create_absolute_url(path: str) -> str:
+    """generates an absolute url from a path using settings.ALLOWED_HOSTS"""
+    domain = settings.ALLOWED_HOSTS[0]
+    return "https://{domain}{path}".format(domain=domain, path=path)
+
+
 class EventQuerySet(models.QuerySet):
     def upcoming(self):
         """events that are in the future"""
@@ -42,13 +51,16 @@ class Event(models.Model):
     mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
 
     host = models.ForeignKey(
-        get_user_model(),
+        User,
         related_name="hosted_events",
         on_delete=models.CASCADE,
         verbose_name=_("Host"),
     )
     participants = models.ManyToManyField(
-        get_user_model(), related_name="events", verbose_name=_("Participants")
+        User,
+        related_name="events",
+        verbose_name=_("Participants"),
+        through="Participation",
     )
 
     objects = EventManager()
@@ -75,15 +87,8 @@ class Event(models.Model):
 
     @property
     def delete_url(self) -> str:
-        """url for host to delete the event
-        
-        uses ALLOWED_HOSTS to generate absolute url"""
-        path = reverse("circles:delete", args=[self.uuid])
-        try:
-            domain = settings.ALLOWED_HOSTS[0]
-            return "https://{domain}{path}".format(domain=domain, path=path)
-        except KeyError:
-            return path
+        """url for the host to delete the event"""
+        return create_absolute_url(reverse("circles:delete", args=[self.uuid]))
 
     @property
     def ical(self) -> Calendar:
@@ -125,6 +130,26 @@ class Event(models.Model):
         verbose_name_plural = _("Circles")
 
 
+class Participation(models.Model):
+    """Saves the participation of a user on an event"""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    uuid = models.UUIDField(default=uuid.uuid4)
+
+    @property
+    def leave_url(self):
+        """get url to leave the event"""
+        return create_absolute_url(reverse("circles:leave", args=[self.uuid]))
+
+    def __str__(self):
+        return f"{self.user} {self.event}"
+
+    class Meta:
+        verbose_name = _("Participation")
+        verbose_name_plural = _("Participations")
+
+
 def render_template(template: str, context: dict) -> str:
     """helper to render a template str with context"""
     if template is None:
@@ -154,7 +179,7 @@ class MailTemplate(models.Model):
     body_template = models.TextField(
         _("Body Template"),
         help_text=_(
-            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be used."
+            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be used. Also: {{ leave_url }} for join template only."
         ),
     )
 
