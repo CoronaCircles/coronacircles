@@ -437,7 +437,8 @@ body#form .input-group.date .input-group-text {
 body#form .input-group input.is-invalid {
   border: 2px solid #F27C00;
 }
-body#form .input-group .invalid-feedback {
+
+.invalid-feedback {
   display: block;
 }
 
