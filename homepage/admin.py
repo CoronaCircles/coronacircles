@@ -1,27 +1,23 @@
 from django.contrib import admin
-from .models import Testimonial, CarouselItem
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from modeltranslation.admin import TranslationAdmin
 from ckeditor.widgets import CKEditorWidget
 
+from .models import Testimonial, CarouselItem
 
-class TestimonialAdmin(admin.ModelAdmin):
+
+@admin.register(Testimonial)
+class TestimonialAdmin(TranslationAdmin):
     formfield_overrides = {models.TextField: {"widget": CKEditorWidget}}
-    pass
 
 
-admin.site.register(Testimonial, TestimonialAdmin)
-
-
-class CarouselItemAdmin(admin.ModelAdmin):
+@admin.register(CarouselItem)
+class CarouselItemAdmin(TranslationAdmin):
     formfield_overrides = {models.TextField: {"widget": CKEditorWidget}}
-    pass
-
-
-admin.site.register(CarouselItem, CarouselItemAdmin)
 
 
 class FlatPageCustom(FlatPageAdmin):

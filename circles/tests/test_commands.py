@@ -23,21 +23,19 @@ class CheckSeminarsTestCase(TestCase):
 
         # events
         past_event = Event(
-            host=self.host, start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC)
+            host=self.host,
+            start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC),
+            language="de",
         )
         past_event.save()
         past_event.participants.add(self.participant)
+
         Event(
-            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC)
+            host=self.host, start=datetime.datetime(2222, 5, 1, 20, 0, tzinfo=pytz.UTC),
         ).save()
 
         # mail template
-        MailTemplate(
-            type="join",
-            language_code="en",
-            subject_template="test",
-            body_template="test",
-        ).save()
+        MailTemplate(type="join", subject_template="test", body_template="test",).save()
 
     def test_check_mails_sent(self):
         call_command("mail_participants")

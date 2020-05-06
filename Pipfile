@@ -21,6 +21,7 @@ django-bootstrap-datepicker-plus = "*"
 django-ckeditor = "*"
 django-columns = "*"
 icalendar = "*"
+django-modeltranslation = "*"
 
 [requires]
 python_version = "3.8"

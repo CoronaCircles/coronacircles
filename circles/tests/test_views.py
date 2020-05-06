@@ -38,21 +38,18 @@ class EventHostTestCase(TestCase):
     def setUp(self):
         # mail template
         MailTemplate(
-            type="host_confirmation",
-            language_code="en",
-            subject_template="test",
-            body_template="test",
+            type="host_confirmation", subject_template="test", body_template="test",
         ).save()
+        self.tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
 
     def test_get(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Host a circle", status_code=200)
 
     def test_post(self):
-        tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
         response = self.client.post(
             self.url,
-            {"start": tomorrow, "email": "max@mustermann.com", "language": "en"},
+            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
         )
         self.assertContains(response, "was created", status_code=200)
 
@@ -81,17 +78,14 @@ class EventJoinTestCase(TestCase):
     def setUp(self):
         self.host = User(email="host@example.com", username="host@example.com")
         self.host.save()
-        tomorrow = timezone.now() + datetime.timedelta(days=1)
-        self.event = Event(host=self.host, start=tomorrow)
+        self.tomorrow = timezone.now() + datetime.timedelta(days=1)
+        self.event = Event(host=self.host, start=self.tomorrow)
         self.event.save()
         self.url = reverse("circles:participate", args=[self.event.pk])
 
         # mail template
         MailTemplate(
-            type="join_confirmation",
-            language_code="en",
-            subject_template="test",
-            body_template="test",
+            type="join_confirmation", subject_template="test", body_template="test",
         ).save()
 
     def test_get(self):

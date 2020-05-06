@@ -4,17 +4,13 @@ from django.utils.translation import gettext_lazy as _
 from bootstrap_datepicker_plus import DateTimePickerInput
 from django.utils.translation import get_language
 from django.utils import formats
+from django.conf import settings
 
 from .models import Event
 
 
 class Host(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail address"))
-    LANGUAGES = (
-        ("en", _("English")),
-        ("de", _("German")),
-    )
-    language = forms.ChoiceField(label=_("Language"), choices=LANGUAGES, widget=forms.Select(), required=True)
 
     def clean_start(self):
         start = self.cleaned_data["start"]
@@ -24,6 +20,10 @@ class Host(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # default to current language
+        self.fields["language"].initial = get_language()
+
+        # localize datepicker
         locale_formats = formats.get_format("DATETIME_INPUT_FORMATS")
         self.fields["start"].widget = DateTimePickerInput(
             format=locale_formats[2],  # format without seconds
