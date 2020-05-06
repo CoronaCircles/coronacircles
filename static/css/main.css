@@ -179,9 +179,12 @@ main {
 body#start main,
 body#event-list main {
   padding-top: 0px;
-  padding-bottom: 266px;
   position: relative;
   clear: both;
+}
+
+body#start main {
+  padding-bottom: 266px;
 }
 
 /*  Slider  */
@@ -574,16 +577,14 @@ footer .social-bar a:hover {
   text-decoration: none;
 }
 
-body#form footer,
-body#event-list footer {
+body#form footer {
   position: fixed;
   bottom: 0px;
 }
 
 /* Responsive */
 @media (max-height: 800px) {
-  body#form footer,
-body#event-list footer {
+  body#form footer {
     position: static;
     margin-top: 100px;
   }
