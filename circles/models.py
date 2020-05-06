@@ -130,8 +130,6 @@ class MailTemplate(models.Model):
         ),
     )
 
-    language_code = models.CharField(_("Language"), choices=settings.LANGUAGES, max_length=2, default="en")
-
     subject_template = models.CharField(
         _("Subject Template"),
         max_length=255,
