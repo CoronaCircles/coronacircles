@@ -32,7 +32,7 @@ class EventQuerySet(models.QuerySet):
     def to_be_mailed(self):
         """events that are to be mailed, because they start very soon"""
         return self.filter(
-            mails_sent=False, start__lte=timezone.now() + datetime.timedelta(minutes=10)
+            mails_sent=False, start__lte=timezone.now() + datetime.timedelta(hours=1)
         )
 
 
