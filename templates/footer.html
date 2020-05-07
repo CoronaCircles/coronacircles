@@ -1,6 +1,4 @@
-{% load i18n flatpages %}
-
-{% get_flatpages as flatpages %}
+{% load i18n simple_pages %}
 
 <footer class="footer">
   <div class="container">
@@ -36,7 +34,8 @@
       </div>
       <div class="col-md-2">
         <ul class="footermenu">
-          {% for page in flatpages %}
+          {% get_pages as pages %}
+          {% for page in pages %}
             <li><a href="{{ page.url }}">{{ page.title }}</a></li>
           {% endfor %}
         </ul>

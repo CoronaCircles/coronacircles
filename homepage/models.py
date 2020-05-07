@@ -29,3 +29,30 @@ class CarouselItem(models.Model):
         verbose_name = _("Carousel Item")
         verbose_name_plural = _("Carousel Items")
         ordering = ("order",)
+
+
+class SimplePage(models.Model):
+    url = models.CharField(_("URL Path"), max_length=255, unique=True)
+    title = models.CharField(_("Title"), max_length=255)
+    text = models.TextField(_("Text"))
+    template_name = models.CharField(_("Template Name"), max_length=255, blank=True)
+
+    def __str__(self) -> str:
+        return "%s -- %s" % (self.url, self.title)
+
+    def get_absolute_url(self):
+        return self.url
+
+    def get_template_names(self):
+        templates = ["homepage/simple_page.html"]
+        if self.template_name:
+            templates = [
+                self.template_name,
+                f"homepage/{self.template_name}",
+            ] + templates
+        return templates
+
+    class Meta:
+        verbose_name = _("Simple Page")
+        verbose_name_plural = _("Simple Pages")
+        ordering = ("url",)

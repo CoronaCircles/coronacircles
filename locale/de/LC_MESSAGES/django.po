@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 17:59+0200\n"
+"POT-Creation-Date: 2020-05-07 19:50+0200\n"
 "PO-Revision-Date: 2020-05-07 18:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: circles/apps.py:7 circles/models.py:139
+#: circles/apps.py:7 circles/models.py:144
 msgid "Circles"
 msgstr "Circles"
 
@@ -63,52 +63,52 @@ msgstr "Anbieten"
 msgid "Participants"
 msgstr "Teilnehmende"
 
-#: circles/models.py:111
+#: circles/models.py:116
 #, python-format
 msgid "Circle at %(start_date)s"
 msgstr "Circle um %(start_date)s"
 
-#: circles/models.py:138
+#: circles/models.py:143
 msgid "Circle"
 msgstr "Circle"
 
-#: circles/models.py:158
+#: circles/models.py:163
 #, fuzzy
 #| msgid "Participate"
 msgid "Participation"
 msgstr "Teilnehmen"
 
-#: circles/models.py:159
+#: circles/models.py:164
 #, fuzzy
 #| msgid "Participants"
 msgid "Participations"
 msgstr "Teilnehmende"
 
-#: circles/models.py:171
+#: circles/models.py:176
 msgid "Type"
 msgstr "Typ"
 
-#: circles/models.py:174
+#: circles/models.py:179
 msgid "Join Confirmation"
 msgstr "Teilnahme-Bestätigung"
 
-#: circles/models.py:175
+#: circles/models.py:180
 msgid "Host Confirmation"
 msgstr "Gastgeber-Bestätigung"
 
-#: circles/models.py:176
+#: circles/models.py:181
 msgid "Join"
 msgstr "Teilnehmen"
 
-#: circles/models.py:177
+#: circles/models.py:182
 msgid "Circle deleted Notification"
 msgstr "Circle-Lösch-Benachrichtigung"
 
-#: circles/models.py:182
+#: circles/models.py:187
 msgid "Subject Template"
 msgstr "Betreff-Vorlage"
 
-#: circles/models.py:185
+#: circles/models.py:190
 msgid ""
 "Subject of the email to be sent. The Variable {{ event }} and its children "
 "{{ event.start }} etc. can be used."
@@ -116,11 +116,11 @@ msgstr ""
 "Betreff der E-Mail. Die Variable {{ event }} and ihre Untervariablen "
 "{{ event.start }} usw. können benutzt werden."
 
-#: circles/models.py:189
+#: circles/models.py:194
 msgid "Body Template"
 msgstr "Text-Vorlage"
 
-#: circles/models.py:191
+#: circles/models.py:196
 msgid ""
 "Body text of the email to be sent. The Variable {{ event }} and its children "
 "{{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be "
@@ -132,11 +132,11 @@ msgstr ""
 "werden. Außerdem: {{ leave_url }} aber nur für Teilnahme-Bestätigung. "
 "Beachte dass alle Zeiten in der Zeitzone des Circles ausgewertet werden."
 
-#: circles/models.py:242
+#: circles/models.py:247
 msgid "MailTemplate"
 msgstr "E-Mail-Vorlage"
 
-#: circles/models.py:243
+#: circles/models.py:248
 msgid "MailTemplates"
 msgstr "E-Mail-Vorlagen"
 
@@ -406,7 +406,7 @@ msgstr "Homepage"
 msgid "Image"
 msgstr "Bild"
 
-#: homepage/models.py:7 homepage/models.py:22
+#: homepage/models.py:7 homepage/models.py:22 homepage/models.py:37
 msgid "Text"
 msgstr "Text"
 
@@ -442,6 +442,26 @@ msgstr "Slider-Eintrag"
 #: homepage/models.py:30
 msgid "Carousel Items"
 msgstr "Slider-Einträge"
+
+#: homepage/models.py:35
+msgid "URL Path"
+msgstr "URL-Pfas"
+
+#: homepage/models.py:36
+msgid "Title"
+msgstr "Titel"
+
+#: homepage/models.py:38
+msgid "Template Name"
+msgstr "Vorlagenname"
+
+#: homepage/models.py:56
+msgid "Simple Page"
+msgstr "Einfache Seite"
+
+#: homepage/models.py:57
+msgid "Simple Pages"
+msgstr "Einfache Seiten"
 
 #: homepage/templates/homepage/homepage.html:13
 msgid "Participate in a  CoronaCircle"

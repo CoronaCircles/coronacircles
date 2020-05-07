@@ -51,8 +51,6 @@ WSGI_APPLICATION = "wsgi.application"
 DJANGO_APPS = [
     "modeltranslation",  # must be put before admin
     "django.contrib.admin",
-    "django.contrib.sites",
-    "django.contrib.flatpages",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -193,11 +191,35 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # ------------------------------------------------------------------------------
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-CKEDITOR_CONFIGS = {"default": { 'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
-                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
-                 'JustifyRight', 'JustifyBlock'],
-                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
-                ["Maximize"]],}}
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": [
+            ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+            [
+                "NumberedList",
+                "BulletedList",
+                "Indent",
+                "Outdent",
+                "JustifyLeft",
+                "JustifyCenter",
+                "JustifyRight",
+                "JustifyBlock",
+            ],
+            [
+                "Image",
+                "Table",
+                "Link",
+                "Unlink",
+                "Anchor",
+                "SectionLink",
+                "Subscript",
+                "Superscript",
+            ],
+            ["Undo", "Redo"],
+            ["Source"],
+            ["Maximize"],
+        ],
+    }
+}
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
-

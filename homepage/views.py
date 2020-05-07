@@ -1,7 +1,8 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
+from django.shortcuts import get_object_or_404
 
 from circles.models import Event
-from .models import Testimonial, CarouselItem
+from .models import Testimonial, CarouselItem, SimplePage
 
 
 class Homepage(TemplateView):
@@ -13,3 +14,15 @@ class Homepage(TemplateView):
         data["testimonials"] = Testimonial.objects.all()
         data["carousel_items"] = CarouselItem.objects.all()
         return data
+
+
+class SimplePageView(DetailView):
+    model = SimplePage
+    context_object_name = "page"
+
+    def get_template_names(self):
+        page = self.get_object()
+        return page.get_template_names()
+
+    def get_object(self):
+        return get_object_or_404(SimplePage, url=self.kwargs["url"])

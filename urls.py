@@ -10,6 +10,5 @@ urlpatterns = i18n_patterns(
     path("admin/", admin.site.urls),
     path("circles/", include("circles.urls")),
     path("", include("homepage.urls")),
-    path("/", include("django.contrib.flatpages.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

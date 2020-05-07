@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-  <h2>{{ flatpage.title }}</h2>
-  {{ flatpage.content }}
+  <h2>{{ page.title }}</h2>
+  {{ page.text|safe|escape }}
 </div>
 {% endblock content %}

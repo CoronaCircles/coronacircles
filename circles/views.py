@@ -1,17 +1,11 @@
 from django.views.generic import (
     ListView,
     CreateView,
-    TemplateView,
     DeleteView,
     FormView,
 )
-from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
-from django.core.mail import send_mail
-from django.conf import settings
 
 from .models import Event, MailTemplate, Participation
 from .forms import Host, Participate
@@ -75,7 +69,7 @@ class EventDeleteView(DeleteView):
 
 class EventJoin(FormView):
     """Allows to join the event
-    
+
     Asks user for mail. Sends mail with details for event"""
 
     template_name = "circles/participate.html"
