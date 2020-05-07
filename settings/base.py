@@ -193,7 +193,11 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # ------------------------------------------------------------------------------
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-CKEDITOR_CONFIGS = {"default": {"toolbar": "Default",}}
+CKEDITOR_CONFIGS = {"default": { 'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                ["Maximize"]],}}
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
