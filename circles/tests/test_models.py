@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core import mail
 from django.utils import translation
+from django.urls import reverse
 
 from circles.models import Event, MailTemplate
 
@@ -37,6 +38,12 @@ class EventTestCase(TestCase):
             self.event.participants.add(user)
         self.event.save()
         self.assertTrue(self.event.is_full)
+
+    def test_participate_url(self):
+        self.assertIn(
+            reverse("circles:participate", args=[self.event.pk]),
+            self.event.participate_url,
+        )
 
     def test_ical(self):
         self.assertEqual(

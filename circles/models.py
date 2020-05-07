@@ -97,6 +97,11 @@ class Event(models.Model):
         return create_absolute_url(reverse("circles:delete", args=[self.uuid]))
 
     @property
+    def participate_url(self) -> str:
+        """url to register as participant"""
+        return create_absolute_url(reverse("circles:participate", args=[self.pk]))
+
+    @property
     def ical(self) -> Calendar:
         """Get ical representation of event"""
         cal = Calendar()
