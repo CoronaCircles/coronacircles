@@ -1,7 +1,4 @@
-import datetime
-
 from django.core.management.base import BaseCommand
-from django.utils import timezone
 
 from circles.models import Event
 
@@ -13,5 +10,10 @@ class Command(BaseCommand):
         for event in Event.objects.to_be_mailed():
             event.mail_participants()
 
+    def delete_old_events(self):
+        for event in Event.objects.to_be_deleted():
+            event.delete()
+
     def handle(self, *args, **options):
         self.mail_participants()
+        self.delete_old_events()

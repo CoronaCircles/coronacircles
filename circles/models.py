@@ -38,6 +38,10 @@ class EventQuerySet(models.QuerySet):
             mails_sent=False, start__lte=timezone.now() + datetime.timedelta(hours=1)
         )
 
+    def to_be_deleted(self):
+        """events that are to be deleted, because they are old"""
+        return self.filter(start__lte=timezone.now() - datetime.timedelta(days=1))
+
 
 class EventManager(models.Manager.from_queryset(EventQuerySet)):
     pass

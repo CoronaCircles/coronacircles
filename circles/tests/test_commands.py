@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.core import mail
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 from circles.models import Event, MailTemplate
 
@@ -47,3 +48,29 @@ class CheckSeminarsTestCase(TestCase):
         call_command("mail_participants")
         call_command("mail_participants")
         self.assertEqual(len(mail.outbox), 2)
+
+
+class CheckSeminarsDeletedTestCase(TestCase):
+    def setUp(self):
+        self.host = User(email="host@example.com", username="host@example.com")
+        self.host.save()
+
+    def test_check_old_are_deleted(self):
+        past_event = Event(
+            host=self.host,
+            start=datetime.datetime(1999, 5, 1, 20, 0, tzinfo=pytz.UTC),
+            language="de",
+        )
+        past_event.save()
+
+        self.assertEqual(Event.objects.all().count(), 1)
+        call_command("mail_participants")
+        self.assertEqual(Event.objects.all().count(), 0)
+
+    def test_check_current_not_deleted(self):
+        past_event = Event(host=self.host, start=timezone.now(), language="de")
+        past_event.save()
+
+        self.assertEqual(Event.objects.all().count(), 1)
+        call_command("mail_participants")
+        self.assertEqual(Event.objects.all().count(), 1)
