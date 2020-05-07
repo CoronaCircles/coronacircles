@@ -1,16 +1,24 @@
 from django import forms
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from bootstrap_datepicker_plus import DateTimePickerInput
 from django.utils.translation import get_language
 from django.utils import formats
-from django.conf import settings
+
+from bootstrap_datepicker_plus import DateTimePickerInput
 
 from .models import Event
 
 
 class Host(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail address"))
+
+    def full_clean(self):
+        # activate timezone to make dateparsing aware of it
+        if "tzname" in self.data:
+            tzname = self.data["tzname"]
+            timezone.activate(tzname)
+
+        super().full_clean()
 
     def clean_start(self):
         start = self.cleaned_data["start"]
@@ -20,6 +28,7 @@ class Host(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # default to current language
         self.fields["language"].initial = get_language()
 
@@ -31,7 +40,7 @@ class Host(forms.ModelForm):
         )
 
     class Meta:
-        fields = ["start", "language", "email"]
+        fields = ["start", "tzname", "language", "email"]
         model = Event
 
 

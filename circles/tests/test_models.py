@@ -85,12 +85,12 @@ class MailTemplateTestCase(TestCase):
             body_template="{{ testvariable }}",
         )
         self.template.save()
-        mail = self.template.render(
+        email = self.template.render(
             {"testvariable": "This is a test"}, "max@example.com"
         )
-        self.assertEqual(mail.body, "This is a test")
-        self.assertEqual(mail.subject, "Event beigetreten")
-        self.assertEqual(mail.to, ["max@example.com"])
+        self.assertEqual(email.body, "This is a test")
+        self.assertEqual(email.subject, "Event beigetreten")
+        self.assertEqual(email.to, ["max@example.com"])
 
     def test_get_mail(self):
         self.template = MailTemplate(
@@ -99,10 +99,10 @@ class MailTemplateTestCase(TestCase):
             body_template="{{ testvariable }}",
         )
         self.template.save()
-        mail = MailTemplate.get_mail(
+        email = MailTemplate.get_mail(
             "join_confirmation", {"testvariable": "This is a test"}, "max@example.com",
         )
-        self.assertEqual(mail.subject, "Event beigetreten")
+        self.assertEqual(email.subject, "Event beigetreten")
 
     def test_get_right_language(self):
         MailTemplate(
@@ -114,9 +114,9 @@ class MailTemplateTestCase(TestCase):
         ).save()
 
         translation.activate("de")
-        mail = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
-        self.assertEqual(mail.subject, "deutsch")
+        email = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
+        self.assertEqual(email.subject, "deutsch")
 
         translation.activate("en")
-        mail = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
-        self.assertEqual(mail.subject, "english")
+        email = MailTemplate.get_mail("join_confirmation", {}, "max@example.com",)
+        self.assertEqual(email.subject, "english")

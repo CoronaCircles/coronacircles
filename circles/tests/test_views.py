@@ -50,7 +50,12 @@ class EventHostTestCase(TestCase):
 
         response = self.client.post(
             self.url,
-            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
+            {
+                "start": self.tomorrow,
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "Europe/Berlin",
+            },
         )
         self.assertContains(response, "was created", status_code=200)
 
@@ -68,9 +73,14 @@ class EventHostTestCase(TestCase):
     # TODO: Test for existing user
 
     def test_post_past_date(self):
-        yesterday = datetime.date.today() - datetime.timedelta(days=1)
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
         response = self.client.post(
-            self.url, {"start": yesterday, "email": "max@mustermann.com",},
+            self.url,
+            {
+                "start": yesterday,
+                "email": "max@mustermann.com",
+                "tzname": "Europe/Berlin",
+            },
         )
         self.assertContains(response, "Has to be in the future", status_code=200)
 
@@ -83,11 +93,48 @@ class EventHostTestCase(TestCase):
 
         self.client.post(
             self.url,
-            {"start": self.tomorrow, "email": "max@mustermann.com", "language": "en"},
+            {
+                "start": self.tomorrow,
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "Europe/Berlin",
+            },
         )
         event = Event.objects.get()
 
         self.assertEqual(mail.outbox[0].body, event.delete_url)
+
+    def test_timezone(self):
+        self.client.post(
+            self.url,
+            {
+                "start": datetime.datetime(2030, 1, 1, 10, 0),
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "UTC",
+            },
+        )
+        event = Event.objects.get()
+        # 10:00 in UTC is 10:00 in UTC
+        self.assertEqual(
+            event.start, datetime.datetime(2030, 1, 1, 10, 0, tzinfo=pytz.UTC)
+        )
+        event.delete()
+
+        self.client.post(
+            self.url,
+            {
+                "start": datetime.datetime(2030, 5, 10, 10, 0),
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "US/Pacific",
+            },
+        )
+        # 10:00 in Pacific is 17:00 in UTC
+        event = Event.objects.get()
+        self.assertEqual(
+            event.start, datetime.datetime(2030, 5, 10, 17, 0, tzinfo=pytz.UTC),
+        )
 
 
 class EventJoinTestCase(TestCase):

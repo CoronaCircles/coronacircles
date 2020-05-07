@@ -1,8 +1,9 @@
 import uuid
 import datetime
+import logging
+import pytz
 
 from django.db import models
-from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core import mail
@@ -11,10 +12,12 @@ from django.conf import settings
 from django.template import Template, Context
 from django.utils import translation
 from django.urls import reverse
+from django.template import TemplateSyntaxError
 
 from icalendar import Calendar, Event as IEvent
 
-
+logger = logging.getLogger(__name__)
+TIMEZONES = tuple(zip(pytz.common_timezones, pytz.common_timezones))
 User = get_user_model()
 
 
@@ -46,6 +49,9 @@ class Event(models.Model):
     start = models.DateTimeField(_("Date and Time"))
     language = models.CharField(
         _("Language"), max_length=2, choices=settings.LANGUAGES, default="en"
+    )
+    tzname = models.CharField(
+        _("Timezone"), choices=TIMEZONES, max_length=255, default=settings.TIME_ZONE
     )
 
     mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
@@ -101,11 +107,14 @@ class Event(models.Model):
         return cal.to_ical()
 
     def __str__(self) -> str:
-        return str(self.start)
+        timezone.activate(self.tzname)
+        return _("Circle at %(start_date)s") % {
+            "start_date": self.start.strftime("%x %X")
+        }
 
     def mail_participants(self, template_type="join"):
         """Sends mails to all participants including host with the join url
-        
+
         uses the events language for the mail templates"""
         addrs = [p.email for p in self.participants.all()] + [self.host.email]
 
@@ -179,7 +188,7 @@ class MailTemplate(models.Model):
     body_template = models.TextField(
         _("Body Template"),
         help_text=_(
-            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be used. Also: {{ leave_url }} for join template only."
+            "Body text of the email to be sent. The Variable {{ event }} and its children {{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be used. Also: {{ leave_url }} for join template only. Note that all datetimes are evaluated in the timezone of the event."
         ),
     )
 
@@ -189,17 +198,31 @@ class MailTemplate(models.Model):
     def render(
         self, context: dict, to_email: str, connection=None
     ) -> mail.EmailMessage:
-        """render this email template to email message"""
+        """render this email template to an email message
+
+        try to use event.timezone"""
         from_email = settings.DEFAULT_FROM_EMAIL
-        subject = render_template(self.subject_template, context)
-        body = render_template(self.body_template, context)
-        return mail.EmailMessage(
-            subject=subject,
-            body=body,
-            from_email=from_email,
-            to=to_email.split(","),
-            connection=connection,
-        )
+        # get timezone
+        try:
+            tzname = context["event"].tzname
+        except KeyError:
+            tzname = None
+
+        try:
+            # render templates using timezone
+            with timezone.override(tzname):
+                subject = render_template(self.subject_template, context)
+                body = render_template(self.body_template, context)
+            return mail.EmailMessage(
+                subject=subject,
+                body=body,
+                from_email=from_email,
+                to=to_email.split(","),
+                connection=connection,
+            )
+        except TemplateSyntaxError as e:
+            logger.error("Could not render mail template '%s': %s", self.type, e)
+            return None
 
     @classmethod
     def get_mail(

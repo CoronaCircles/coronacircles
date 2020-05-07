@@ -1,21 +1,23 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n tz %}
 
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
+{% timezone participation.event.tzname %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
 
-      <h2>{% trans "Leave circle" %}</h2>
-      <form method="post">{% csrf_token %}
-        <p>{% blocktrans with datetime=participation.event.start %}Are you sure you want to leave the Circle starting at {{ datetime }}?{% endblocktrans %}</p>
-        
-        <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
-        <button type="submit" class="btn btn-primary">{% trans "Leave" %}</button>
-      </form>
+        <h2>{% trans "Leave circle" %}</h2>
+        <form method="post">{% csrf_token %}
+          <p>{% blocktrans with datetime=participation.event.start timezone=participation.event.start|date:"e" %}Are you sure you want to leave the Circle starting at {{ datetime }} ({{ timezone }})?{% endblocktrans %}</p>
+          
+          <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
+          <button type="submit" class="btn btn-primary">{% trans "Leave" %}</button>
+        </form>
 
+      </div>
     </div>
   </div>
-</div>
+{% endtimezone %}
 {% endblock %}
