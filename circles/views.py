@@ -3,9 +3,11 @@ from django.views.generic import (
     CreateView,
     DeleteView,
     FormView,
+    DetailView,
 )
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from .models import Event, MailTemplate, Participation
 from .forms import Host, Participate
@@ -29,6 +31,9 @@ class EventHost(CreateView):
     template_name = "circles/host.html"
     form_class = Host
 
+    def get_success_url(self):
+        return reverse("circles:hosted", args=[self.object.pk])
+
     def form_valid(self, form):
         email = form.cleaned_data["email"]
         user, _ = User.objects.get_or_create(email=email, username=email)
@@ -46,7 +51,15 @@ class EventHost(CreateView):
             )
             mail.send(fail_silently=True)
 
-        return render(self.request, "circles/hosted.html", {"event": event})
+        return super().form_valid(form)
+
+
+class EventHostConfirmation(DetailView):
+    """Show a confirmation message for having hosted an event"""
+
+    model = Event
+    template_name = "circles/hosted.html"
+    context_object_name = "event"
 
 
 class EventDeleteView(DeleteView):
@@ -75,14 +88,19 @@ class EventJoin(FormView):
     template_name = "circles/participate.html"
     form_class = Participate
 
+    def get_success_url(self):
+        return reverse("circles:participated", args=[self.get_object().pk])
+
+    def get_object(self):
+        return get_object_or_404(Event, pk=self.kwargs["pk"])
+
     def get_context_data(self, **kwargs):
-        event = get_object_or_404(Event, pk=self.kwargs["id"])
         data = super().get_context_data(**kwargs)
-        data["event"] = event
+        data["event"] = self.get_object()
         return data
 
     def form_valid(self, form):
-        event = Event.objects.get(pk=self.kwargs["id"])
+        event = self.get_object()
 
         if event.is_full or event.is_past:
             return render(
@@ -105,7 +123,15 @@ class EventJoin(FormView):
             )
             mail.send(fail_silently=True)
 
-        return render(self.request, "circles/participated.html", {"event": event})
+        return super().form_valid(form)
+
+
+class EventJoinConfirmation(DetailView):
+    """Show a confirmation message for having joined an event"""
+
+    model = Event
+    template_name = "circles/participated.html"
+    context_object_name = "event"
 
 
 class EventLeaveView(DeleteView):

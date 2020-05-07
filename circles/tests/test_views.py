@@ -56,6 +56,7 @@ class EventHostTestCase(TestCase):
                 "language": "en",
                 "tzname": "Europe/Berlin",
             },
+            follow=True,
         )
         self.assertContains(response, "was created", status_code=200)
 
@@ -156,7 +157,9 @@ class EventJoinTestCase(TestCase):
         self.assertContains(response, "Participate in circle", status_code=200)
 
     def test_post(self):
-        response = self.client.post(self.url, {"email": "max@mustermann.com",})
+        response = self.client.post(
+            self.url, {"email": "max@mustermann.com"}, follow=True
+        )
         self.assertContains(response, "You are participating", status_code=200)
 
         # user is added as participant
