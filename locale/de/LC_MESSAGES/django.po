@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 17:01+0200\n"
+"POT-Creation-Date: 2020-05-07 17:59+0200\n"
 "PO-Revision-Date: 2020-05-04 17:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
+
+#: circles/apps.py:7 circles/models.py:139
+msgid "Circles"
+msgstr "Circles"
 
 #: circles/forms.py:13 circles/forms.py:48
 msgid "E-mail address"
@@ -67,12 +71,6 @@ msgstr "Circle um %(start_date)s"
 #: circles/models.py:138
 msgid "Circle"
 msgstr "Circle"
-
-#: circles/models.py:139
-#, fuzzy
-#| msgid "Circle at"
-msgid "Circles"
-msgstr "Circle um"
 
 #: circles/models.py:158
 #, fuzzy
@@ -218,10 +216,13 @@ msgid "Delete circle"
 msgstr "Circle löschen"
 
 #: circles/templates/circles/event_confirm_delete.html:13
+#, python-format
 msgid ""
 "Are you sure you want to delete the Circle starting at %(datetime)s "
 "(%(timezone)s)?"
-msgstr "Bist du sicher, dass du den Circle am %(datetime)s (%(timezone)s) löschen willst?"
+msgstr ""
+"Bist du sicher, dass du den Circle am %(datetime)s (%(timezone)s) löschen "
+"willst?"
 
 #: circles/templates/circles/event_confirm_delete.html:15
 #: circles/templates/circles/host.html:20
@@ -262,6 +263,7 @@ msgid "Thank you for hosting a Circle!"
 msgstr "Danke für das Anbieten eines Circles!"
 
 #: circles/templates/circles/hosted.html:11
+#, python-format
 msgid "Your circle at <b>%(date)s (%(timezone)s)</b> was created."
 msgstr "Dein Circle am <b>%(date)s (%(timezone)s)</b> wurde erstellt."
 
@@ -292,6 +294,7 @@ msgid "Host a Circle"
 msgstr "Circle anbieten"
 
 #: circles/templates/circles/participate.html:12
+#, python-format
 msgid "Participate in circle at %(date)s (%(timezone)s)"
 msgstr "Teilnehmen an Circle am %(date)s (%(timezone)s)"
 
@@ -316,6 +319,7 @@ msgid "You are participating"
 msgstr "Du nimmst teil"
 
 #: circles/templates/circles/participated.html:12
+#, python-format
 msgid "In the circle happening at <b>%(date)s</b> (%(timezone)s)"
 msgstr "Beim Circle, der am <b>%(date)s</b> (%(timezone)s) stattfindet"
 
@@ -332,18 +336,21 @@ msgid "Leave circle"
 msgstr "Circle verlassen"
 
 #: circles/templates/circles/participation_confirm_delete.html:13
+#, python-format
 msgid ""
 "Are you sure you want to leave the Circle starting at %(datetime)s "
 "(%(timezone)s)?"
-msgstr "Bist du sicher, dass du den Circle um %(datetime)s (%(timezone)s) verlassen willst?"
+msgstr ""
+"Bist du sicher, dass du den Circle um %(datetime)s (%(timezone)s) verlassen "
+"willst?"
 
 #: circles/templates/circles/participation_confirm_delete.html:16
 msgid "Leave"
 msgstr "Verlassen"
 
-#: homepage/admin.py:28
-msgid "Advanced options"
-msgstr "Erweiterte Optionen"
+#: homepage/apps.py:7
+msgid "Homepage"
+msgstr "Homepage"
 
 #: homepage/models.py:6
 msgid "Image"
@@ -453,15 +460,15 @@ msgstr ""
 "CoronaCircles ist eine gemeinnützige Platform für selbst organisierte Zuhör-"
 "Circle. Erfahre tiefe soziale Begegnungen in Zeiten von physischer Distanz."
 
-#: templates/footer.html:15
+#: templates/footer.html:13
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
 
-#: templates/footer.html:19
+#: templates/footer.html:17
 msgid "Subscribe"
 msgstr "Abonnieren"
 
-#: templates/footer.html:32
+#: templates/footer.html:30
 msgid "CONTACT US"
 msgstr "KONTAKTIER UNS"
 
@@ -484,6 +491,9 @@ msgstr "Nächstes"
 #: templates/start.html:169
 msgid "Show Circles"
 msgstr "Circles anzeigen"
+
+#~ msgid "Advanced options"
+#~ msgstr "Erweiterte Optionen"
 
 #~ msgid "Language Code"
 #~ msgstr "Sprachcode"
