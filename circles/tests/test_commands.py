@@ -39,14 +39,14 @@ class CheckSeminarsTestCase(TestCase):
         MailTemplate(type="join", subject_template="test", body_template="test",).save()
 
     def test_check_mails_sent(self):
-        call_command("mail_participants")
+        call_command("cron")
         self.assertEqual(len(mail.outbox), 2)
 
     def test_not_sent_twice(self):
-        call_command("mail_participants")
-        call_command("mail_participants")
-        call_command("mail_participants")
-        call_command("mail_participants")
+        call_command("cron")
+        call_command("cron")
+        call_command("cron")
+        call_command("cron")
         self.assertEqual(len(mail.outbox), 2)
 
 
@@ -64,7 +64,7 @@ class CheckSeminarsDeletedTestCase(TestCase):
         past_event.save()
 
         self.assertEqual(Event.objects.all().count(), 1)
-        call_command("mail_participants")
+        call_command("cron")
         self.assertEqual(Event.objects.all().count(), 0)
 
     def test_check_current_not_deleted(self):
@@ -72,5 +72,5 @@ class CheckSeminarsDeletedTestCase(TestCase):
         past_event.save()
 
         self.assertEqual(Event.objects.all().count(), 1)
-        call_command("mail_participants")
+        call_command("cron")
         self.assertEqual(Event.objects.all().count(), 1)
