@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block title %}{% trans "A list of all CoronaCircles" %}{% endblock title %}
+
 {% block body %}event-list{% if events|length < 4 %}-empty{% endif %}{% endblock body %}
 
 {% block content %}

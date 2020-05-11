@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n crispy_forms_tags tz %}
 
+{% block title %}{% blocktrans with date=event.start timezone=event.start|date:"e" %}Participate in circle at {{ date }} ({{ timezone }}){% endblocktrans %}{% endblock title %}
+
 {% block body %}form{% endblock body %}
 
 {% block content %}

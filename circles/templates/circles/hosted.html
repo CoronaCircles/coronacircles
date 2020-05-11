@@ -12,7 +12,7 @@
           <h1>{% trans "Thank you for hosting a Circle!" %}</h1>
           <p>{% blocktrans with date=event.start timezone=event.start|date:"e" %}Your circle at <b>{{ date }} ({{ timezone }})</b> was created.{% endblocktrans %}
           <br>
-          {% trans "We have sent a confirmation email to the adress you just provided" %}</p>
+          {% trans "We have sent a confirmation email with detailed instructions on how to host a CoronaCircle to the adress you just provided" %}</p>
           <a href="mailto:?subject=Invitation to join my CoronaCircle!&body=Hey, I am hosting a CoronaCircle on {{ request.META.HTTP_HOST }}. It is basically an online meeting, where we share our thoughts and feelings and I would like to invite you to join us here: {{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}" class="btn btn-secondary">{% trans "Invite people by email" %}</a>
           <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}&amp;src=sdkpreparse" class="btn btn-primary" class="btn btn-primary">{% trans "Invite people on Facebook" %}</a>
         
