@@ -1,1 +1,2 @@
-*/5 * * * * /opt/services/coronacircles/manage.py mail_participants
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+*/5 * * * * /opt/services/coronacircles/manage.py cron 2>&1 | tee -a /var/log/cron.log

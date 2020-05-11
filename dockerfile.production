@@ -8,8 +8,6 @@ COPY crontab /etc/cron.d/crontab
 RUN chmod 0644 /etc/cron.d/crontab
 # Init cron
 RUN crontab /etc/cron.d/crontab
-CMD ["crond", "-f"]
-RUN cron
 
 # arbitrary location choice: you can change the directory
 RUN mkdir -p /opt/services/coronacircles
