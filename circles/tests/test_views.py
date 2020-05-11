@@ -104,6 +104,23 @@ class EventHostTestCase(TestCase):
         # email is sent in language of event (german)
         self.assertEqual(mail.outbox[1].body, "german test")
 
+    def test_email_timezone(self):
+        MailTemplate(
+            type="host_confirmation",
+            subject_template="test",
+            body_template="{{ event.start }} {{ event.start|date:'e' }}",
+        ).save()
+        self.client.post(
+            self.url,
+            {
+                "start": datetime.datetime(2030, 5, 1, 10, 0),
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "US/Pacific",
+            },
+        )
+        self.assertEqual(mail.outbox[0].body, "May 1, 2030, 10 a.m. PDT")
+
     def test_post_past_date(self):
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
         response = self.client.post(

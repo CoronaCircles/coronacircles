@@ -56,6 +56,7 @@ class EventTestCase(TestCase):
             host=self.host,
             start=datetime.datetime(2020, 5, 1, 20, 0, tzinfo=pytz.UTC),
             language="de",
+            tzname="US/Pacific",
         )
         event.save()
         MailTemplate(
@@ -63,12 +64,16 @@ class EventTestCase(TestCase):
             subject_template_en="english",
             body_template_en="english",
             subject_template_de="deutsch",
-            body_template_de="deutsch",
+            body_template_de="{{ event.start }}",
         ).save()
         event.mail_participants()
 
+        # mail is sent
         self.assertEqual(len(mail.outbox), 1)
+        # mail is on right language
         self.assertEqual(mail.outbox[0].subject, "deutsch")
+        # mail is in right timezone (20:00 UTC is 13:00 PDT)
+        self.assertEqual(mail.outbox[0].body, "1. Mai 2020 13:00")
 
 
 class EventQuerySetTestCase(TestCase):
