@@ -174,7 +174,7 @@ ul.navbar-nav
 /* Main */
 
 main
-  padding: 100px 0px 360px 0px
+  padding-top: 100px
   min-height: 100%
 
 body#start main,
@@ -183,8 +183,8 @@ body#event-list main
   position: relative
   clear: both
 
-body#start main
-  padding-bottom: 266px
+body#start footer
+  margin-top: 0px
 
 
 /*  Slider  */
@@ -247,11 +247,11 @@ body#start main
 
 /* Event List */
 
-#participate
+body#start #participate
   padding-top: 100px
   padding-bottom: 100px
-  background: $fourth
 
+#participate
   .right
     text-align: center
     background-image: url("/static/img/ccircle.png")
@@ -262,7 +262,6 @@ body#start main
 
     h4
       margin-bottom: 20px
-
 
 .event-list
   list-style: none
@@ -500,9 +499,7 @@ body#form .input-group
 
 footer
   background: $fifth
-  position: absolute
-  bottom: 0px
-  width: 100%
+  margin-top: 100px
 
   a
     color: $secondary
@@ -578,16 +575,20 @@ footer
 body#form footer
   position: fixed
   bottom: 0px
+  width: 100%
 
 /* Responsive */
 
-@media (max-height: 800px)
+@media (max-height: 950px)
   body#form footer
     position: static
     margin-top: 100px
 
-  main
-    padding: 100px 0 0 0
+@media (min-height: 950px)
+  body#event-list-empty footer
+    position: fixed
+    bottom: 0px
+    width: 100%
 
 @media (max-width: 768px)
   
@@ -603,9 +604,6 @@ body#form footer
     .carousel-control-prev-icon
       width: 40px
       height: 40px
-
-  .main
-    padding-bottom: 530px
 
   .event-list > li .info 
     height: 150px

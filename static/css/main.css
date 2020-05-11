@@ -176,7 +176,7 @@ ul.navbar-nav li a:hover {
 
 /* Main */
 main {
-  padding: 100px 0px 360px 0px;
+  padding-top: 100px;
   min-height: 100%;
 }
 
@@ -187,8 +187,8 @@ body#event-list main {
   clear: both;
 }
 
-body#start main {
-  padding-bottom: 266px;
+body#start footer {
+  margin-top: 0px;
 }
 
 /*  Slider  */
@@ -249,11 +249,11 @@ body#start main {
 }
 
 /* Event List */
-#participate {
+body#start #participate {
   padding-top: 100px;
   padding-bottom: 100px;
-  background: #F4B93D;
 }
+
 #participate .right {
   text-align: center;
   background-image: url("/static/img/ccircle.png");
@@ -507,9 +507,7 @@ body#form .input-group input.is-invalid {
 /* Footer */
 footer {
   background: #F9DB9D;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
+  margin-top: 100px;
 }
 footer a {
   color: #502900;
@@ -584,17 +582,21 @@ footer .social-bar a:hover {
 body#form footer {
   position: fixed;
   bottom: 0px;
+  width: 100%;
 }
 
 /* Responsive */
-@media (max-height: 800px) {
+@media (max-height: 950px) {
   body#form footer {
     position: static;
     margin-top: 100px;
   }
-
-  main {
-    padding: 100px 0 0 0;
+}
+@media (min-height: 950px) {
+  body#event-list-empty footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
   }
 }
 @media (max-width: 768px) {
@@ -610,10 +612,6 @@ body#form footer {
 .carousel.slide .carousel-control-prev-icon {
     width: 40px;
     height: 40px;
-  }
-
-  .main {
-    padding-bottom: 530px;
   }
 
   .event-list > li .info {

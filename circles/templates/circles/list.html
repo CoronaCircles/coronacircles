@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block body %}event-list{% endblock body %}
+{% block body %}event-list{% if events|length < 4 %}-empty{% endif %}{% endblock body %}
 
 {% block content %}
 <div id="participate">
