@@ -73,6 +73,37 @@ class EventHostTestCase(TestCase):
 
     # TODO: Test for existing user
 
+    def test_post_email_language(self):
+        MailTemplate(
+            type="host_confirmation",
+            subject_template="test",
+            body_template="test",
+            body_template_de="german test",
+        ).save()
+        self.client.post(
+            self.url,
+            {
+                "start": self.tomorrow,
+                "email": "max@mustermann.com",
+                "language": "en",
+                "tzname": "Europe/Berlin",
+            },
+        )
+        # email is sent in language of event (english)
+        self.assertEqual(mail.outbox[0].body, "test")
+
+        self.client.post(
+            self.url,
+            {
+                "start": self.tomorrow,
+                "email": "max@mustermann.com",
+                "language": "de",
+                "tzname": "Europe/Berlin",
+            },
+        )
+        # email is sent in language of event (german)
+        self.assertEqual(mail.outbox[1].body, "german test")
+
     def test_post_past_date(self):
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
         response = self.client.post(
@@ -149,7 +180,10 @@ class EventJoinTestCase(TestCase):
 
         # mail template
         MailTemplate(
-            type="join_confirmation", subject_template="test", body_template="test",
+            type="join_confirmation",
+            subject_template="test",
+            body_template="test",
+            body_template_de="german test",
         ).save()
 
     def test_get(self):
@@ -168,6 +202,16 @@ class EventJoinTestCase(TestCase):
 
         # email is sent
         self.assertEqual(len(mail.outbox), 1)
+
+    def test_post_email_language(self):
+        self.client.post(self.url, {"email": "max@mustermann.com"}, follow=True)
+        # email is sent in language of event (english)
+        self.assertEqual(mail.outbox[0].body, "test")
+        self.event.language = "de"
+        self.event.save()
+        self.client.post(self.url, {"email": "max@mustermann.com"}, follow=True)
+        # email is sent in language of event (german)
+        self.assertEqual(mail.outbox[1].body, "german test")
 
     def test_post_event_past(self):
         yesterday = timezone.now() - datetime.timedelta(days=1)

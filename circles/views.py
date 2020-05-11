@@ -8,6 +8,7 @@ from django.views.generic import (
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.utils import translation
 
 from .models import Event, MailTemplate, Participation
 from .forms import Host, Participate
@@ -42,14 +43,15 @@ class EventHost(CreateView):
         event.save()
 
         # send mail
-        mail = MailTemplate.get_mail(
-            type="host_confirmation", context={"event": event}, to_email=email,
-        )
-        if mail:
-            mail.attach(
-                filename="event.ical", content=event.ical, mimetype="text/calendar"
+        with translation.override(event.language):
+            mail = MailTemplate.get_mail(
+                type="host_confirmation", context={"event": event}, to_email=email,
             )
-            mail.send(fail_silently=True)
+            if mail:
+                mail.attach(
+                    filename="event.ical", content=event.ical, mimetype="text/calendar"
+                )
+                mail.send(fail_silently=True)
 
         return super().form_valid(form)
 
@@ -112,16 +114,17 @@ class EventJoin(FormView):
         participation, _ = Participation.objects.get_or_create(event=event, user=user)
 
         # send mail
-        mail = MailTemplate.get_mail(
-            type="join_confirmation",
-            context={"event": event, "leave_url": participation.leave_url},
-            to_email=email,
-        )
-        if mail:
-            mail.attach(
-                filename="event.ical", content=event.ical, mimetype="text/calendar"
+        with translation.override(event.language):
+            mail = MailTemplate.get_mail(
+                type="join_confirmation",
+                context={"event": event, "leave_url": participation.leave_url},
+                to_email=email,
             )
-            mail.send(fail_silently=True)
+            if mail:
+                mail.attach(
+                    filename="event.ical", content=event.ical, mimetype="text/calendar"
+                )
+                mail.send(fail_silently=True)
 
         return super().form_valid(form)
 
