@@ -141,21 +141,11 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        "info": {                                                                                                                                                                              │··············································································
-            "level": "INFO",                                                                                                                                                                   │··············································································
-            "class": "logging.StreamHandler",                                                                                                                                                  │··············································································
-            "formatter": "verbose",                                                                                                                                                            │··············································································
-        },
     },
     "loggers": {
         "django.request": {
             "handlers": ["console", "mail_admins"],
             "level": "ERROR",
-            "propagate": True,
-        },
-        "django.request": {
-            "handlers": ["console", "mail_admins"],
-            "level": "INFO",
             "propagate": True,
         },
         "django.security.DisallowedHost": {
