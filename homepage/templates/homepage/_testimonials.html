@@ -2,7 +2,7 @@
 {% load columns %}
 
 {% if testimonials %}
-    <div id="Testimonials" class="carousel slide" data-ride="carousel">
+    <div id="testimonials" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         {% for testimonial in testimonials %}
           <li data-target="#Testimonials" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
