@@ -5,7 +5,7 @@
     <div id="testimonials" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         {% for testimonial in testimonials %}
-          <li data-target="#Testimonials" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
+          <li data-target="#testimonials" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
         {% endfor %}
       </ol>
 
@@ -27,11 +27,11 @@
         {% endfor %}
       </div>
 
-      <a class="carousel-control-prev" href="#Testimonials" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#testimonials" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Zurück</span>
       </a>
-      <a class="carousel-control-next" href="#Testimonials" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#testimonials" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Weiter</span>
       </a>
