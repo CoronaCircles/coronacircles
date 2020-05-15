@@ -223,8 +223,10 @@ body#start footer {
   background-color: #F27C00;
   color: #FFFFFF;
   font-size: 24px;
-  padding-top: 30px;
+  padding-top: 80px;
   padding-bottom: 30px;
+}
+.carousel.slide .carousel-inner .row {
   height: 600px;
 }
 .carousel.slide .carousel-inner .left {
@@ -235,6 +237,7 @@ body#start footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 }
 .carousel.slide .carousel-inner .left h1 {
   font-size: 64px;
@@ -598,7 +601,7 @@ body#form footer {
   }
 }
 @media (max-width: 768px) {
-  body#start .carousel.slide .carousel-inner {
+  body#start .carousel.slide .carousel-inner .row {
     height: 900px;
   }
 
