@@ -460,7 +460,7 @@ body#form .input-group input.is-invalid {
 }
 
 /* Testimonials */
-#Testimonials.carousel.slide .carousel-inner {
+#testimonials.carousel.slide .carousel-inner {
   background-color: #FFFFFF;
   color: #502900;
   text-align: center;
@@ -468,21 +468,21 @@ body#form .input-group input.is-invalid {
   padding-top: 100px;
   padding-bottom: 80px;
 }
-#Testimonials .author {
+#testimonials .author {
   font-weight: bold;
   display: block;
   margin-top: 10px;
 }
-#Testimonials img {
+#testimonials img {
   border-radius: 80px;
   height: 160px;
   display: block;
   margin-bottom: 40px;
 }
-#Testimonials .carousel-indicators li {
+#testimonials .carousel-indicators li {
   background-color: #502900;
 }
-#Testimonials .carousel-indicators li.active {
+#testimonials .carousel-indicators li.active {
   background-color: #F27C00;
 }
 
