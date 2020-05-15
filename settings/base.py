@@ -64,7 +64,6 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "crispy_forms",
     "bootstrap_datepicker_plus",
-    "columns",
 ]
 
 LOCAL_APPS = ["circles", "homepage"]

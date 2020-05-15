@@ -20,7 +20,6 @@ pillow = "*"
 django-crispy-forms = "*"
 django-bootstrap-datepicker-plus = "*"
 django-ckeditor = "*"
-django-columns = "*"
 icalendar = "*"
 django-modeltranslation = "*"
 
