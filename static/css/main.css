@@ -225,8 +225,6 @@ body#start footer {
   font-size: 24px;
   padding-top: 30px;
   padding-bottom: 30px;
-}
-.carousel.slide .carousel-inner .row {
   height: 600px;
 }
 .carousel.slide .carousel-inner .left {
@@ -600,6 +598,10 @@ body#form footer {
   }
 }
 @media (max-width: 768px) {
+  body#start .carousel.slide .carousel-inner {
+    height: 900px;
+  }
+
   .carousel.slide a.carousel-control-next,
 .carousel.slide a.carousel-control-prev {
     opacity: 0.4;

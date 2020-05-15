@@ -13,11 +13,15 @@
         {% for testimonial in testimonials %}
           <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
           	<div class="container">
-	            <img class="mx-auto" src="{{ testimonial.image.url }}">
-	            <span class="testimonial">
-					{{ testimonial.text|safe|escape|truncatewords:60 }}
-					<span class="author">{{ testimonial.author }}</span>
-				</span>
+              <div class="row">
+                <div class="col">
+    	            <img class="mx-auto" src="{{ testimonial.image.url }}">
+    	            <span class="testimonial">
+          					{{ testimonial.text|safe|escape|truncatewords:60 }}
+          					<span class="author">{{ testimonial.author }}</span>
+          				</span>
+                </div>
+              </div>
           	</div>
           </div>
         {% endfor %}
