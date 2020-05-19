@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 19:50+0200\n"
+"POT-Creation-Date: 2020-05-19 09:13+0200\n"
 "PO-Revision-Date: 2020-05-07 18:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: circles/apps.py:7 circles/models.py:144
+#: circles/apps.py:7 circles/models.py:148
 msgid "Circles"
 msgstr "Circles"
 
@@ -30,85 +30,85 @@ msgstr "E-Mail-Adresse"
 msgid "Has to be in the future"
 msgstr "Muss in der Zukunft liegen"
 
-#: circles/models.py:47
+#: circles/models.py:51
 msgid "UUID for meeting-URL"
 msgstr "UUID für Meeting-URL"
 
-#: circles/models.py:48
+#: circles/models.py:52
 msgid "Creation Date"
 msgstr "Erstell-Datum"
 
-#: circles/models.py:49
+#: circles/models.py:53
 msgid "Date and Time"
 msgstr "Datum und Uhrzeit"
 
-#: circles/models.py:51 circles/templates/circles/_event.html:15
+#: circles/models.py:55 circles/templates/circles/_event.html:15
 msgid "Language"
 msgstr "Sprache"
 
-#: circles/models.py:54
+#: circles/models.py:58
 msgid "Timezone"
 msgstr "Zeitzone"
 
-#: circles/models.py:57
+#: circles/models.py:61
 msgid "If e-mail has been sent"
 msgstr "Ob E-Mail schon verschickt wurden"
 
-#: circles/models.py:63 circles/templates/circles/host.html:21
+#: circles/models.py:67 circles/templates/circles/host.html:21
 #: templates/navbar.html:13 templates/start.html:181
 msgid "Host"
 msgstr "Anbieten"
 
-#: circles/models.py:68
+#: circles/models.py:72
 msgid "Participants"
 msgstr "Teilnehmende"
 
-#: circles/models.py:116
+#: circles/models.py:120
 #, python-format
 msgid "Circle at %(start_date)s"
 msgstr "Circle um %(start_date)s"
 
-#: circles/models.py:143
+#: circles/models.py:147
 msgid "Circle"
 msgstr "Circle"
 
-#: circles/models.py:163
+#: circles/models.py:167
 #, fuzzy
 #| msgid "Participate"
 msgid "Participation"
 msgstr "Teilnehmen"
 
-#: circles/models.py:164
+#: circles/models.py:168
 #, fuzzy
 #| msgid "Participants"
 msgid "Participations"
 msgstr "Teilnehmende"
 
-#: circles/models.py:176
+#: circles/models.py:180
 msgid "Type"
 msgstr "Typ"
 
-#: circles/models.py:179
+#: circles/models.py:183
 msgid "Join Confirmation"
 msgstr "Teilnahme-Bestätigung"
 
-#: circles/models.py:180
+#: circles/models.py:184
 msgid "Host Confirmation"
 msgstr "Gastgeber-Bestätigung"
 
-#: circles/models.py:181
+#: circles/models.py:185
 msgid "Join"
 msgstr "Teilnehmen"
 
-#: circles/models.py:182
+#: circles/models.py:186
 msgid "Circle deleted Notification"
 msgstr "Circle-Lösch-Benachrichtigung"
 
-#: circles/models.py:187
+#: circles/models.py:191
 msgid "Subject Template"
 msgstr "Betreff-Vorlage"
 
-#: circles/models.py:190
+#: circles/models.py:194
 msgid ""
 "Subject of the email to be sent. The Variable {{ event }} and its children "
 "{{ event.start }} etc. can be used."
@@ -116,11 +116,11 @@ msgstr ""
 "Betreff der E-Mail. Die Variable {{ event }} and ihre Untervariablen "
 "{{ event.start }} usw. können benutzt werden."
 
-#: circles/models.py:194
+#: circles/models.py:198
 msgid "Body Template"
 msgstr "Text-Vorlage"
 
-#: circles/models.py:196
+#: circles/models.py:200
 msgid ""
 "Body text of the email to be sent. The Variable {{ event }} and its children "
 "{{ event.start }}, {{ event.join_url }}, {{ event.delete_url }} etc. can be "
@@ -132,11 +132,11 @@ msgstr ""
 "werden. Außerdem: {{ leave_url }} aber nur für Teilnahme-Bestätigung. "
 "Beachte dass alle Zeiten in der Zeitzone des Circles ausgewertet werden."
 
-#: circles/models.py:247
+#: circles/models.py:251
 msgid "MailTemplate"
 msgstr "E-Mail-Vorlage"
 
-#: circles/models.py:248
+#: circles/models.py:252
 msgid "MailTemplates"
 msgstr "E-Mail-Vorlagen"
 
@@ -152,7 +152,7 @@ msgstr[0] "Nur %(participants)s Teilnehmer bis jetzt"
 msgstr[1] "%(participants)s Teilnehmer"
 
 #: circles/templates/circles/_event.html:17
-#: circles/templates/circles/participate.html:32 templates/navbar.html:12
+#: circles/templates/circles/participate.html:34 templates/navbar.html:12
 msgid "Participate"
 msgstr "Teilnehmen"
 
@@ -276,7 +276,7 @@ msgstr ""
 
 #: circles/templates/circles/event_confirm_delete.html:15
 #: circles/templates/circles/host.html:20
-#: circles/templates/circles/participate.html:31
+#: circles/templates/circles/participate.html:33
 #: circles/templates/circles/participation_confirm_delete.html:15
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -286,7 +286,7 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: circles/templates/circles/full_or_past.html:10
-#: circles/templates/circles/participate.html:15
+#: circles/templates/circles/participate.html:17
 msgid "Sorry, this circle is already full"
 msgstr "Sorry, dieser Circle ist bereits voll"
 
@@ -299,8 +299,8 @@ msgid "You can not join"
 msgstr "Du kannst nicht teilnehmen"
 
 #: circles/templates/circles/full_or_past.html:17
-#: circles/templates/circles/participate.html:16
-#: circles/templates/circles/participate.html:19
+#: circles/templates/circles/participate.html:18
+#: circles/templates/circles/participate.html:21
 msgid "Back"
 msgstr "Zurück"
 
@@ -308,55 +308,66 @@ msgstr "Zurück"
 msgid "Host a circle"
 msgstr "Einen Circle anbieten"
 
-#: circles/templates/circles/hosted.html:10
+#: circles/templates/circles/hosted.html:12
 msgid "Thank you for hosting a Circle!"
 msgstr "Danke für das Anbieten eines Circles!"
 
-#: circles/templates/circles/hosted.html:11
+#: circles/templates/circles/hosted.html:13
 #, python-format
 msgid "Your circle at <b>%(date)s (%(timezone)s)</b> was created."
 msgstr "Dein Circle am <b>%(date)s (%(timezone)s)</b> wurde erstellt."
 
-#: circles/templates/circles/hosted.html:13
-msgid "We have sent a confirmation email to the adress you just provided"
+#: circles/templates/circles/hosted.html:15
+#, fuzzy
+#| msgid "We have sent a confirmation email to the adress you just provided"
+msgid ""
+"We have sent a confirmation email with detailed instructions on how to host "
+"a CoronaCircle to the adress you just provided"
 msgstr ""
 "Wir haben eine Bestätigungs-E-Mail an die E-Mail-Adresse gesendet, die du "
 "gerade angegeben hast"
 
-#: circles/templates/circles/hosted.html:14
+#: circles/templates/circles/hosted.html:16
 msgid "Invite people by email"
 msgstr "Lade Leute per E-Mail ein"
 
-#: circles/templates/circles/hosted.html:15
+#: circles/templates/circles/hosted.html:17
 msgid "Invite people on Facebook"
 msgstr "Lade Leute per Facebook ein"
 
-#: circles/templates/circles/list.html:10
+#: circles/templates/circles/list.html:4
+#, fuzzy
+#| msgid "Host a Corona Circle"
+msgid "A list of all CoronaCircles"
+msgstr "Einen CoronaCircle anbieten"
+
+#: circles/templates/circles/list.html:12
 msgid "Upcoming Circles"
 msgstr "Kommende Circles"
 
-#: circles/templates/circles/list.html:20
+#: circles/templates/circles/list.html:22
 msgid "No circles at the moment, would you like to host one?"
 msgstr "Keine Circle zur Zeit, hast du Lust einen anzubieten?"
 
-#: circles/templates/circles/list.html:25
+#: circles/templates/circles/list.html:27
 msgid "Host a Circle"
 msgstr "Circle anbieten"
 
-#: circles/templates/circles/participate.html:12
+#: circles/templates/circles/participate.html:4
+#: circles/templates/circles/participate.html:14
 #, python-format
 msgid "Participate in circle at %(date)s (%(timezone)s)"
 msgstr "Teilnehmen an Circle am %(date)s (%(timezone)s)"
 
-#: circles/templates/circles/participate.html:18
+#: circles/templates/circles/participate.html:20
 msgid "Sorry, this circle already happened"
 msgstr "Sorry, dieser Circle hat bereits stattgefunden"
 
-#: circles/templates/circles/participate.html:24
+#: circles/templates/circles/participate.html:26
 msgid "Please provide your E-Mail Address."
 msgstr "Bitte gib deine E-Mail-Adresse an."
 
-#: circles/templates/circles/participate.html:25
+#: circles/templates/circles/participate.html:27
 msgid ""
 "You will receive an e-mail containing a link to join the circle, before the "
 "circle is starting"
@@ -364,20 +375,20 @@ msgstr ""
 "Bevor der Circle anfängt, bekommst du eine E-Mail mit einem Link, um am "
 "Circle teilzunehmen"
 
-#: circles/templates/circles/participated.html:10
+#: circles/templates/circles/participated.html:12
 msgid "You are participating"
 msgstr "Du nimmst teil"
 
-#: circles/templates/circles/participated.html:12
+#: circles/templates/circles/participated.html:14
 #, python-format
 msgid "In the circle happening at <b>%(date)s</b> (%(timezone)s)"
 msgstr "Beim Circle, der am <b>%(date)s</b> (%(timezone)s) stattfindet"
 
-#: circles/templates/circles/participated.html:14
+#: circles/templates/circles/participated.html:16
 msgid "Invite people to join this Circle by email"
 msgstr "Lade Leute per E-Mail ein, am Circle teilzunehmen"
 
-#: circles/templates/circles/participated.html:15
+#: circles/templates/circles/participated.html:17
 msgid "Invite people to join the Circle on Facebook"
 msgstr "Lade Leute per Facebook ein, an deinem Circle teilzunehmen"
 
@@ -463,11 +474,15 @@ msgstr "Einfache Seite"
 msgid "Simple Pages"
 msgstr "Einfache Seiten"
 
-#: homepage/templates/homepage/homepage.html:13
+#: homepage/templates/homepage/homepage.html:9
+msgid "https://www.youtube-nocookie.com/embed/U0X1yGd9juw"
+msgstr "https://www.youtube-nocookie.com/embed/n-Jwi04FRy8"
+
+#: homepage/templates/homepage/homepage.html:17
 msgid "Participate in a  CoronaCircle"
 msgstr "An einem CoronaCircle teilnehmen"
 
-#: homepage/templates/homepage/homepage.html:23
+#: homepage/templates/homepage/homepage.html:27
 msgid ""
 "No circles at the moment, would you like to <b><a href='#host'>host one</a></"
 "b>?"
@@ -475,19 +490,19 @@ msgstr ""
 "Keine Circles zur Zeit, hättest du Lust <b><a href='#host'>einen zu hosten</"
 "a></b>?"
 
-#: homepage/templates/homepage/homepage.html:28
+#: homepage/templates/homepage/homepage.html:32
 msgid "show more"
 msgstr "Mehr anzeigen"
 
-#: homepage/templates/homepage/homepage.html:29
+#: homepage/templates/homepage/homepage.html:33
 msgid "Show All Circles"
 msgstr "Alle Circle anzeigen"
 
-#: homepage/templates/homepage/homepage.html:39
+#: homepage/templates/homepage/homepage.html:43
 msgid "Host a Corona Circle"
 msgstr "Einen CoronaCircle anbieten"
 
-#: homepage/templates/homepage/homepage.html:40
+#: homepage/templates/homepage/homepage.html:44
 msgid ""
 "<p>Inviting to a CoronaCircle is easy</p><p>You should have good experience "
 "with talking circles such as the Corona Circles.<br />As a host your tasts "
@@ -505,20 +520,20 @@ msgstr ""
 "</li><li>den Beginn jeder Runde einleiten</li><li>auf die Zeit achten\n"
 "</li></ul>"
 
-#: homepage/templates/homepage/homepage.html:43
+#: homepage/templates/homepage/homepage.html:47
 msgid "Be a Host"
 msgstr "Gastgeber sein"
 
-#: homepage/templates/homepage/homepage.html:53
-#: homepage/templates/homepage/homepage.html:54 templates/navbar.html:15
+#: homepage/templates/homepage/homepage.html:57
+#: homepage/templates/homepage/homepage.html:58 templates/navbar.html:15
 msgid "Contact"
 msgstr "Kontakt"
 
-#: homepage/templates/homepage/homepage.html:54
+#: homepage/templates/homepage/homepage.html:58
 msgid "the CoronaCircle Team"
 msgstr "das CoronaCircle-Team"
 
-#: homepage/templates/homepage/homepage.html:56
+#: homepage/templates/homepage/homepage.html:60
 msgid "Share your experiences, questions, and ideas with us!"
 msgstr "Teil deine Erfahrungen, Fragen und Ideen mit uns!"
 
