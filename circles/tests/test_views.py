@@ -284,6 +284,11 @@ class EventDeleteTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, "Delete circle", status_code=200)
 
+    def test_get_404(self):
+        url = reverse("circles:delete", args=["8511c737-4498-40ce-8657-9057e8d2cef2"])
+        response = self.client.get(url)
+        self.assertContains(response, "Not Found", status_code=404)
+
     def test_post(self):
         response = self.client.post(self.url)
         self.assertRedirects(response, "/", target_status_code=302)
@@ -315,6 +320,11 @@ class EventLeaveViewTestCase(TestCase):
     def test_get(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Leave circle", status_code=200)
+
+    def test_get_404(self):
+        url = reverse("circles:leave", args=["8511c737-4498-40ce-8657-9057e8d2cef2"])
+        response = self.client.get(url)
+        self.assertContains(response, "Not Found", status_code=404)
 
     def test_post(self):
         response = self.client.post(self.url)

@@ -72,7 +72,7 @@ class EventDeleteView(DeleteView):
     context_object_name = "event"
 
     def get_object(self):
-        return Event.objects.get(uuid=self.kwargs["uuid"])
+        return get_object_or_404(Event, uuid=self.kwargs["uuid"])
 
     def delete(self, request, *args, **kwargs):
         # mail participants
@@ -145,4 +145,4 @@ class EventLeaveView(DeleteView):
     context_object_name = "participation"
 
     def get_object(self):
-        return Participation.objects.get(uuid=self.kwargs["uuid"])
+        return get_object_or_404(Participation, uuid=self.kwargs["uuid"])
