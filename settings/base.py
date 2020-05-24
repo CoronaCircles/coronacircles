@@ -33,6 +33,8 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 
+TIME_ZONES_BY_LANG = {"de": "Europe/Berlin", "en": "UTC"}
+
 LOCALE_PATHS = ["locale"]
 
 # DATABASES
@@ -122,6 +124,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "circles.middleware.TimezoneMiddleware",
 ]
 
 # STATIC

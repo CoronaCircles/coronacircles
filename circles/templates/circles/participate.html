@@ -1,44 +1,42 @@
 {% extends "base.html" %}
-{% load i18n crispy_forms_tags tz %}
+{% load i18n crispy_forms_tags %}
 
 {% block title %}{% blocktrans with date=event.start timezone=event.start|date:"e" %}Participate in circle at {{ date }} ({{ timezone }}){% endblocktrans %}{% endblock title %}
 
 {% block body %}form{% endblock body %}
 
 {% block content %}
-{% timezone event.tzname %}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-        <h2>{% blocktrans with date=event.start timezone=event.start|date:"e" %}Participate in circle at {{ date }} ({{ timezone }}){% endblocktrans %}</h2>
+      <h2>{% blocktrans with date=event.start timezone=event.start|date:"e" %}Participate in circle at {{ date }} ({{ timezone }}){% endblocktrans %}</h2>
 
-        {% if event.is_full %}
-          <p>{% trans "Sorry, this circle is already full" %}</p>
-          <a href="{% url 'circles:list' %}">{% trans "Back" %}</a>
-        {% elif event.is_past %}
-          <p>{% trans "Sorry, this circle already happened" %}</p>
-          <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Back" %}</a>
-        {% else %}
-          {% include "./_terms_modal.html" %}
+      {% if event.is_full %}
+        <p>{% trans "Sorry, this circle is already full" %}</p>
+        <a href="{% url 'circles:list' %}">{% trans "Back" %}</a>
+      {% elif event.is_past %}
+        <p>{% trans "Sorry, this circle already happened" %}</p>
+        <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Back" %}</a>
+      {% else %}
+        {% include "./_terms_modal.html" %}
 
-          <p>
-            {% trans "Please provide your E-Mail Address." %}<br>
-            {% trans "You will receive an e-mail containing a link to join the circle, before the circle is starting" %}
-          </p>
+        <p>
+          {% trans "Please provide your E-Mail Address." %}<br>
+          {% trans "You will receive an e-mail containing a link to join the circle, before the circle is starting" %}
+        </p>
 
-          <form target="{% url 'circles:participate' event.id %}" method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
-            <button type="submit" class="btn btn-primary">{% trans "Participate" %}</button>
-          </form>
-        {% endif %}
-        
-      </div>
+        <form target="{% url 'circles:participate' event.id %}" method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <a class="btn btn-outline-secondary" href="{% url 'circles:list' %}">{% trans "Cancel" %}</a>
+          <button type="submit" class="btn btn-primary">{% trans "Participate" %}</button>
+        </form>
+      {% endif %}
+      
     </div>
   </div>
-{% endtimezone %}
+</div>
 {% endblock content %}
 
 {% block extrafooter %}

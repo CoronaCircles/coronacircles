@@ -72,8 +72,8 @@ class EventTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         # mail is on right language
         self.assertEqual(mail.outbox[0].subject, "deutsch")
-        # mail is in right timezone (20:00 UTC is 13:00 PDT)
-        self.assertEqual(mail.outbox[0].body, "1. Mai 2020 13:00")
+        # mail is in right timezone (20:00 UTC is 22:00 CEST)
+        self.assertEqual(mail.outbox[0].body, "1. Mai 2020 22:00")
 
 
 class EventQuerySetTestCase(TestCase):

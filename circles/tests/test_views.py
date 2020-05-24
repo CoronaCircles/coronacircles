@@ -119,7 +119,7 @@ class EventHostTestCase(TestCase):
                 "tzname": "US/Pacific",
             },
         )
-        self.assertEqual(mail.outbox[0].body, "May 1, 2030, 10 a.m. PDT")
+        self.assertEqual(mail.outbox[0].body, "May 1, 2030, 5 p.m. UTC")
 
     def test_post_past_date(self):
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)

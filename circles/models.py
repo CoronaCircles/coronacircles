@@ -55,7 +55,7 @@ class Event(models.Model):
         _("Language"), max_length=2, choices=settings.LANGUAGES, default="en"
     )
     tzname = models.CharField(
-        _("Timezone"), choices=TIMEZONES, max_length=255, default=settings.TIME_ZONE
+        _("Timezone"), choices=TIMEZONES, max_length=255, default=settings.TIME_ZONE,
     )
 
     mails_sent = models.BooleanField(_("If e-mail has been sent"), default=False)
@@ -114,6 +114,11 @@ class Event(models.Model):
         event.add("dtstart", self.start)
         cal.add_component(event)
         return cal.to_ical()
+
+    @property
+    def display_tzname(self):
+        """get the timezone to be used for display in e.g. mails"""
+        return settings.TIME_ZONES_BY_LANG.get(self.language, settings.TIME_ZONE)
 
     def __str__(self) -> str:
         timezone.activate(self.tzname)
@@ -213,7 +218,7 @@ class MailTemplate(models.Model):
         from_email = settings.DEFAULT_FROM_EMAIL
         # get timezone
         try:
-            tzname = context["event"].tzname
+            tzname = context["event"].display_tzname
         except KeyError:
             tzname = None
 

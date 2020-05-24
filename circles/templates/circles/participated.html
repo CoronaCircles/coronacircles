@@ -1,23 +1,21 @@
 {% extends "base.html" %}
-{% load i18n tz %}
+{% load i18n %}
 
 {% block body %}form{% endblock body %}
 
 {% block content %}
-{% timezone event.tzname %}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-        <h2>{% trans "You are participating" %}</h2>
-        <p>
-          {% blocktrans with date=event.start timezone=event.start|date:"e" %}In the circle happening at <b>{{ date }}</b> ({{ timezone }}){% endblocktrans %}
-        </p>
-        <a href="mailto:?subject=Invitation to join my CoronaCircle!&body=Hey, I am participating in a CoronaCircle on {{ request.scheme }}://{{ request.get_host }}. It is basically an online meeting, where we share our thoughts and feelings and I would like to invite you to join us here: {{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}" class="btn btn-secondary">{% trans "Invite people to join this Circle by email" %}</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}&amp;src=sdkpreparse" class="btn btn-primary" class="btn btn-primary">{% trans "Invite people to join the Circle on Facebook" %}</a>
+      <h2>{% trans "You are participating" %}</h2>
+      <p>
+        {% blocktrans with date=event.start timezone=event.start|date:"e" %}In the circle happening at <b>{{ date }}</b> ({{ timezone }}){% endblocktrans %}
+      </p>
+      <a href="mailto:?subject=Invitation to join my CoronaCircle!&body=Hey, I am participating in a CoronaCircle on {{ request.scheme }}://{{ request.get_host }}. It is basically an online meeting, where we share our thoughts and feelings and I would like to invite you to join us here: {{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}" class="btn btn-secondary">{% trans "Invite people to join this Circle by email" %}</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.scheme }}://{{ request.get_host }}{% url 'circles:participate' event.id %}&amp;src=sdkpreparse" class="btn btn-primary" class="btn btn-primary">{% trans "Invite people to join the Circle on Facebook" %}</a>
 
-      </div>
     </div>
   </div>
-{% endtimezone %}
+</div>
 {% endblock content %}

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 from django.utils import formats
+from django.conf import settings
 
 from bootstrap_datepicker_plus import DateTimePickerInput
 
@@ -31,6 +32,11 @@ class Host(forms.ModelForm):
 
         # default to current language
         self.fields["language"].initial = get_language()
+
+        # default to current timezone
+        self.fields["tzname"].initial = settings.TIME_ZONES_BY_LANG.get(
+            get_language(), settings.TIME_ZONE
+        )
 
         # localize datepicker
         locale_formats = formats.get_format("DATETIME_INPUT_FORMATS")
