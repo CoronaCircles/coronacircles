@@ -77,8 +77,8 @@ class Event(models.Model):
 
     @property
     def is_full(self) -> bool:
-        """determines wether event is already full (6 participants, 7 including host)"""
-        return self.participant_count >= 7
+        """determines wether event is already full (4 participants, 5 including host)"""
+        return self.participant_count >= 5
 
     @property
     def is_past(self) -> bool:
