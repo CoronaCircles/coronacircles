@@ -36,7 +36,7 @@
         <ul class="footermenu">
           {% get_pages as pages %}
           {% for page in pages %}
-            <li><a href="/{{LANGUAGE_CODE}}/{{ page.url }}">{{ page.title }}</a></li>
+            <li><a href="/{{ page.url }}">{{ page.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
